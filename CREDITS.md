@@ -96,6 +96,7 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
   * [CaverNES](https://opengameart.org/content/cavernes). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [NESmup](https://opengameart.org/content/nesmup). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [More NES-like Tiles](https://opengameart.org/content/more-nes-like-tiles). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Platshrooms](https://opengameart.org/content/platshrooms). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [Simple broad-purpose tileset](https://opengameart.org/content/simple-broad-purpose-tileset). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 * Files by [Buch](https://opengameart.org/users/buch):
