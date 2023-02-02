@@ -50,6 +50,7 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
 * [Simples Pimples in Space](https://opengameart.org/content/simples-pimples-in-space-0) by [Zwonky](https://opengameart.org/users/zwonky). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
  * [Swapshot unused tiles](https://opengameart.org/content/swapshot-unused-tiles) by [Gelatinousfox](https://opengameart.org/users/gelatinousfox). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
  * [Swapshot Animation tiles set 1](https://opengameart.org/content/swapshot-animation-tiles-set-1) by [Gelatinousfox](https://opengameart.org/users/gelatinousfox). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+ * [A lot of Metroid-like blocks [16x16]](https://opengameart.org/content/a-lot-of-metroid-like-blocks-16x16) by [KnoblePersona](https://opengameart.org/users/knoblepersona). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
 
 * Files by [Emcee Flesher](https://opengameart.org/users/emcee-flesher):
   * [Super Dead Gunner: Platform Shmup Enemies](https://opengameart.org/content/super-dead-gunner-platform-shmup-enemies). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
