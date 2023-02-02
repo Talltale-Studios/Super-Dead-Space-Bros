@@ -45,6 +45,11 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
 * [DENZI's SciFi tilesets](https://opengameart.org/content/denzis-scifi-tilesets) by [Denzi](http://www3.wind.ne.jp/DENZI/diary/). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
 * [Abandonauts 8x8 tile assets](https://opengameart.org/content/abandonauts-8x8-tile-assets) by [Adam Atomic](https://adamatomic.com/). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 * [Heads retro](https://opengameart.org/content/heads-retro) by [Jerom](https://opengameart.org/users/jerom). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+* [Pixel Art Loading Icon 2](https://opengameart.org/content/pixel-art-loading-icon-2) by [Qubodup](https://opengameart.org/users/qubodup). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+* [Golden UI - Arne16 Edition](https://opengameart.org/content/golden-ui-arne16-edition) by [Zwonky](https://opengameart.org/users/zwonky). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+* [Simples Pimples in Space](https://opengameart.org/content/simples-pimples-in-space-0) by [Zwonky](https://opengameart.org/users/zwonky). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+ * [Swapshot unused tiles](https://opengameart.org/content/swapshot-unused-tiles) by [Gelatinousfox](https://opengameart.org/users/gelatinousfox). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+ * [Swapshot Animation tiles set 1](https://opengameart.org/content/swapshot-animation-tiles-set-1) by [Gelatinousfox](https://opengameart.org/users/gelatinousfox). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 * Files by [Emcee Flesher](https://opengameart.org/users/emcee-flesher):
   * [Super Dead Gunner: Platform Shmup Enemies](https://opengameart.org/content/super-dead-gunner-platform-shmup-enemies). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
@@ -90,6 +95,7 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
   * [CaverNES](https://opengameart.org/content/cavernes). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [NESmup](https://opengameart.org/content/nesmup). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [More NES-like Tiles](https://opengameart.org/content/more-nes-like-tiles). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Simple broad-purpose tileset](https://opengameart.org/content/simple-broad-purpose-tileset). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 * Files by [Buch](https://opengameart.org/users/buch):
   * [UI pieces](https://opengameart.org/content/ui-pieces). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
