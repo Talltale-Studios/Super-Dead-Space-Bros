@@ -42,9 +42,9 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
 * [Pixel Art GUI Elements](https://mounirtohami.itch.io/pixel-art-gui-elements) by [Mounir Tohami](https://mounirtohami.itch.io/). It is not marked as being licensed under any official license, but the author has stated that everyone is free to use the assets in any product.
 * [Godot Logo Pack: Splash Screens & Banners](https://zacksly.itch.io/godot-logo-pack) by [Zacksly](https://zacksly.itch.io/). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 * [Free Celestial Objects Pixel Art Pack](https://norma-2d.itch.io/celestial-objects-pixel-art-pack) by [N2D](https://norma-2d.itch.io/). It is not marked as being licensed under any official license, but the author has stated that the asset pack may be used in both free and commercial products, and that the assets may be adapted to better suit our needs.
-
-* Files by [DENZI](http://www3.wind.ne.jp/DENZI/diary/):
-  * [DENZI's SciFi tilesets](https://opengameart.org/content/denzis-scifi-tilesets). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+* [DENZI's SciFi tilesets](https://opengameart.org/content/denzis-scifi-tilesets) by [Denzi](http://www3.wind.ne.jp/DENZI/diary/). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+* [Abandonauts 8x8 tile assets](https://opengameart.org/content/abandonauts-8x8-tile-assets) by [Adam Atomic](https://adamatomic.com/). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+* [Heads retro](https://opengameart.org/content/heads-retro) by [Jerom](https://opengameart.org/users/jerom). It is licenced under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
 
 * Files by [Emcee Flesher](https://opengameart.org/users/emcee-flesher):
   * [Super Dead Gunner: Platform Shmup Enemies](https://opengameart.org/content/super-dead-gunner-platform-shmup-enemies). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
@@ -80,18 +80,33 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
   * [CC0 Scraps](https://opengameart.org/forumtopic/cc0-scraps). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [Space Merc](https://opengameart.org/content/space-merc). It is licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
   * [Omega Team](https://opengameart.org/content/omega-team). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
-  * [Dead Gunner](https://opengameart.org/content/dead-gunner) by [Surt](https://opengameart.org/users/surt). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Beast Soldier](https://opengameart.org/content/beast-soldier) by [Surt](https://opengameart.org/users/surt). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Dead Gunner](https://opengameart.org/content/dead-gunner). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Beast Soldier](https://opengameart.org/content/beast-soldier). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Mines of Sharega](https://opengameart.org/content/mines-of-sharega). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [DarkNES](https://opengameart.org/content/darknes). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Void Blaster](https://opengameart.org/content/void-blaster). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Omega Team](https://opengameart.org/content/omega-team). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Psygen](https://opengameart.org/content/psygen). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [CaverNES](https://opengameart.org/content/cavernes). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [NESmup](https://opengameart.org/content/nesmup). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [More NES-like Tiles](https://opengameart.org/content/more-nes-like-tiles). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 * Files by [Buch](https://opengameart.org/users/buch):
+  * [UI pieces](https://opengameart.org/content/ui-pieces). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [Golden UI](https://opengameart.org/content/golden-ui). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [Golden UI - Bigger Than Ever edition](https://opengameart.org/content/golden-ui-bigger-than-ever-edition). It is licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+  * [Shiny HUD](https://opengameart.org/content/shiny-hud). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Shmup HUD](https://opengameart.org/content/shmup-hud). It is licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+  * [Sci-fi User Interface Elements](https://opengameart.org/content/sci-fi-user-interface-elements). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [Unfinished user interfaces](https://opengameart.org/content/unfinished-user-interfaces). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+  * [2-bit Doodle People](https://opengameart.org/content/2-bit-doodle-people). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 
 # Fonts
 * [Pixel Fonts](https://opengameart.org/content/pixel-fonts-by-pix3m) by [Pix3M](https://www.deviantart.com/pix3m).
 It is liscensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 * [MinimalPixel Font](https://mounirtohami.itch.io/minimalpixel-font) by [Mounir Tohami](https://mounirtohami.itch.io/).
+* [Three Little Bitmap Fonts](https://opengameart.org/content/three-little-bitmap-fonts) by [Buch](https://opengameart.org/users/buch). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 
 # Applications
