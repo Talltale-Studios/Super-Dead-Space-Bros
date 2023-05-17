@@ -11,7 +11,6 @@ export_presets.cfg
 # Project-specific ignores
 text_editor/
 *.text_editor_state.json
-hidden_files/
 
 # Mono-specific ignores
 .mono/

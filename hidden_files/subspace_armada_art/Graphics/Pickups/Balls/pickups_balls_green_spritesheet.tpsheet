@@ -1,0 +1,828 @@
+{
+	"textures": [
+		{
+			"image": "pickups_balls_green_spritesheet.png",
+			"size": {
+				"w": 326,
+				"h": 56
+			},
+			"sprites": [
+				{
+					"filename": "pickup_ball_green_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_02.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_03.png",
+					"region": {
+						"x": 2,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_04.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_05.png",
+					"region": {
+						"x": 20,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_06.png",
+					"region": {
+						"x": 20,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_07.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_08.png",
+					"region": {
+						"x": 38,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_09.png",
+					"region": {
+						"x": 38,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_10.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_11.png",
+					"region": {
+						"x": 56,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_12.png",
+					"region": {
+						"x": 56,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_13.png",
+					"region": {
+						"x": 74,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_14.png",
+					"region": {
+						"x": 74,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_15.png",
+					"region": {
+						"x": 74,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_16.png",
+					"region": {
+						"x": 92,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_17.png",
+					"region": {
+						"x": 92,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_18.png",
+					"region": {
+						"x": 92,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_19.png",
+					"region": {
+						"x": 110,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_20.png",
+					"region": {
+						"x": 110,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_21.png",
+					"region": {
+						"x": 110,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_22.png",
+					"region": {
+						"x": 128,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_23.png",
+					"region": {
+						"x": 128,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_24.png",
+					"region": {
+						"x": 128,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_25.png",
+					"region": {
+						"x": 146,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_26.png",
+					"region": {
+						"x": 146,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_27.png",
+					"region": {
+						"x": 146,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_28.png",
+					"region": {
+						"x": 164,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_29.png",
+					"region": {
+						"x": 164,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_30.png",
+					"region": {
+						"x": 164,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_31.png",
+					"region": {
+						"x": 182,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_32.png",
+					"region": {
+						"x": 182,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_33.png",
+					"region": {
+						"x": 182,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_34.png",
+					"region": {
+						"x": 200,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_35.png",
+					"region": {
+						"x": 200,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_36.png",
+					"region": {
+						"x": 200,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_37.png",
+					"region": {
+						"x": 218,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_38.png",
+					"region": {
+						"x": 218,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_39.png",
+					"region": {
+						"x": 218,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_40.png",
+					"region": {
+						"x": 236,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_41.png",
+					"region": {
+						"x": 236,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_42.png",
+					"region": {
+						"x": 236,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_43.png",
+					"region": {
+						"x": 254,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_44.png",
+					"region": {
+						"x": 254,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_45.png",
+					"region": {
+						"x": 254,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_46.png",
+					"region": {
+						"x": 272,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_47.png",
+					"region": {
+						"x": 272,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_48.png",
+					"region": {
+						"x": 272,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_49.png",
+					"region": {
+						"x": 290,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_50.png",
+					"region": {
+						"x": 290,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_51.png",
+					"region": {
+						"x": 290,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_52.png",
+					"region": {
+						"x": 308,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_53.png",
+					"region": {
+						"x": 308,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_green_54.png",
+					"region": {
+						"x": 308,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3e8d50cb47075382259f30c3fcae4510:87a1ee63f5406e8e38ecf1259ad9a0c9:ededd10c330a6ce1c9e817526885be0f$"
+	}
+}

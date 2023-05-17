@@ -1,0 +1,108 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_legs_jump_spritesheet.png",
+			"size": {
+				"w": 70,
+				"h": 104
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_legs_jump_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_jump_02.png",
+					"region": {
+						"x": 2,
+						"y": 36,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_jump_03.png",
+					"region": {
+						"x": 2,
+						"y": 70,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_jump_04.png",
+					"region": {
+						"x": 36,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_jump_05.png",
+					"region": {
+						"x": 36,
+						"y": 36,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_jump_06.png",
+					"region": {
+						"x": 36,
+						"y": 70,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:02d461575f775c836530e8845ca05227:1a21dd8845713cddcee61f7a599a7add:bb2a11165fe3be4bae30a1cdb513e4da$"
+	}
+}

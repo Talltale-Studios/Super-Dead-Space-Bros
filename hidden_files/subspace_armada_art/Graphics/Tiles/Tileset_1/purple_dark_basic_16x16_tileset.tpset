@@ -1,0 +1,828 @@
+{
+	"textures": [
+		{
+			"image": "purple_dark_basic_16x16_tileset.png",
+			"size": {
+				"w": 74,
+				"h": 128
+			},
+			"sprites": [
+				{
+					"filename": "purple_dark_basic_16x16_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_02.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_03.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_04.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_05.png",
+					"region": {
+						"x": 2,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_06.png",
+					"region": {
+						"x": 2,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_07.png",
+					"region": {
+						"x": 2,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_08.png",
+					"region": {
+						"x": 2,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_09.png",
+					"region": {
+						"x": 2,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_10.png",
+					"region": {
+						"x": 2,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_11.png",
+					"region": {
+						"x": 2,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_12.png",
+					"region": {
+						"x": 2,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_13.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_14.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_15.png",
+					"region": {
+						"x": 20,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_16.png",
+					"region": {
+						"x": 20,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_17.png",
+					"region": {
+						"x": 20,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_18.png",
+					"region": {
+						"x": 20,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_19.png",
+					"region": {
+						"x": 20,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_20.png",
+					"region": {
+						"x": 20,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_21.png",
+					"region": {
+						"x": 20,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_22.png",
+					"region": {
+						"x": 20,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_23.png",
+					"region": {
+						"x": 20,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_24.png",
+					"region": {
+						"x": 20,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_25.png",
+					"region": {
+						"x": 20,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_26.png",
+					"region": {
+						"x": 20,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_27.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_28.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_29.png",
+					"region": {
+						"x": 38,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_30.png",
+					"region": {
+						"x": 38,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_31.png",
+					"region": {
+						"x": 38,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_32.png",
+					"region": {
+						"x": 38,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_33.png",
+					"region": {
+						"x": 38,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_34.png",
+					"region": {
+						"x": 38,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_35.png",
+					"region": {
+						"x": 38,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_36.png",
+					"region": {
+						"x": 38,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_37.png",
+					"region": {
+						"x": 38,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_38.png",
+					"region": {
+						"x": 38,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_39.png",
+					"region": {
+						"x": 38,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_40.png",
+					"region": {
+						"x": 38,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_41.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_42.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_43.png",
+					"region": {
+						"x": 56,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_44.png",
+					"region": {
+						"x": 56,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_45.png",
+					"region": {
+						"x": 56,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_46.png",
+					"region": {
+						"x": 56,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_47.png",
+					"region": {
+						"x": 56,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_48.png",
+					"region": {
+						"x": 56,
+						"y": 56,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_49.png",
+					"region": {
+						"x": 56,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_50.png",
+					"region": {
+						"x": 56,
+						"y": 74,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_51.png",
+					"region": {
+						"x": 56,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_52.png",
+					"region": {
+						"x": 56,
+						"y": 92,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_53.png",
+					"region": {
+						"x": 56,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_dark_basic_16x16_54.png",
+					"region": {
+						"x": 56,
+						"y": 110,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9e8a11e4052b9337e742e5527ac5bf24:84e258b69f148795df7f087dd1561ee0:156d4dd1a077575c70b5a9a6e77ccc85$"
+	}
+}

@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_torso_idle_spritesheet.png",
+			"size": {
+				"w": 138,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_torso_idle_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_torso_idle_02.png",
+					"region": {
+						"x": 36,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_torso_idle_03.png",
+					"region": {
+						"x": 70,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_torso_idle_04.png",
+					"region": {
+						"x": 104,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:7a213280c12c3ee4c2bd936bf94f6c01:d40b0119baea5ab9575dbf3df3e254fc:b08f9f84f037368dd3b638eafe1fa819$"
+	}
+}

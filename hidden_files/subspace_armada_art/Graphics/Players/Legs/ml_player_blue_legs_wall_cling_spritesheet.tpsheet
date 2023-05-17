@@ -1,0 +1,33 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_legs_wall_cling_spritesheet.png",
+			"size": {
+				"w": 36,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_legs_wall_cling_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:5e2bee7e31e5f97763df0e84a036cc23:97557001ad1f9048fc5c12b0e5288b98:3b73f851cff80b644cf195795a5f2949$"
+	}
+}

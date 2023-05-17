@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "purple_inactive_pipe_spawner_spritesheet.png",
+			"size": {
+				"w": 74,
+				"h": 20
+			},
+			"sprites": [
+				{
+					"filename": "purple_inactive_pipe_spawner_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_inactive_pipe_spawner_02.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_inactive_pipe_spawner_03.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_inactive_pipe_spawner_04.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e28f8426c91ea0c4d2358ea4fea73d81:0b2f0840dad0dfaeb1ed0180009c84f8:c732995fad544898b9164b615af599d2$"
+	}
+}

@@ -1,0 +1,228 @@
+{
+	"textures": [
+		{
+			"image": "pickups_orbs_blue_spritesheet.png",
+			"size": {
+				"w": 36,
+				"h": 448
+			},
+			"sprites": [
+				{
+					"filename": "pickup_orb_blue_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_02.png",
+					"region": {
+						"x": 2,
+						"y": 36,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_03.png",
+					"region": {
+						"x": 2,
+						"y": 70,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_04.png",
+					"region": {
+						"x": 2,
+						"y": 104,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_05.png",
+					"region": {
+						"x": 2,
+						"y": 138,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_06.png",
+					"region": {
+						"x": 2,
+						"y": 172,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_07.png",
+					"region": {
+						"x": 2,
+						"y": 206,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_08.png",
+					"region": {
+						"x": 2,
+						"y": 240,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_09.png",
+					"region": {
+						"x": 2,
+						"y": 274,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_10.png",
+					"region": {
+						"x": 2,
+						"y": 308,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_13.png",
+					"region": {
+						"x": 2,
+						"y": 342,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_14.png",
+					"region": {
+						"x": 2,
+						"y": 376,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_12.png",
+					"region": {
+						"x": 2,
+						"y": 410,
+						"w": 18,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 14,
+						"h": 14
+					}
+				},
+				{
+					"filename": "pickup_orb_blue_11.png",
+					"region": {
+						"x": 2,
+						"y": 430,
+						"w": 32,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:acd3ea44e6bbecc11ca8e3d53134022c:981868c4973f3a2d22da157dc7171f2b:f395bd791f0e61b38d9981e99c3b35a5$"
+	}
+}

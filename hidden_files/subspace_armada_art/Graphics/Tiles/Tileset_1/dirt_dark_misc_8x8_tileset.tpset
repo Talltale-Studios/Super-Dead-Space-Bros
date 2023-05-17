@@ -1,0 +1,408 @@
+{
+	"textures": [
+		{
+			"image": "dirt_dark_misc_8x8_tileset.png",
+			"size": {
+				"w": 92,
+				"h": 32
+			},
+			"sprites": [
+				{
+					"filename": "dirt_dark_misc_8x8_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_02.png",
+					"region": {
+						"x": 2,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_03.png",
+					"region": {
+						"x": 2,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_04.png",
+					"region": {
+						"x": 12,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_05.png",
+					"region": {
+						"x": 12,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_06.png",
+					"region": {
+						"x": 12,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_07.png",
+					"region": {
+						"x": 22,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_08.png",
+					"region": {
+						"x": 22,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_09.png",
+					"region": {
+						"x": 22,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_10.png",
+					"region": {
+						"x": 32,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_11.png",
+					"region": {
+						"x": 32,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_12.png",
+					"region": {
+						"x": 32,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_13.png",
+					"region": {
+						"x": 42,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_14.png",
+					"region": {
+						"x": 42,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_15.png",
+					"region": {
+						"x": 42,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_16.png",
+					"region": {
+						"x": 52,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_17.png",
+					"region": {
+						"x": 52,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_18.png",
+					"region": {
+						"x": 52,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_19.png",
+					"region": {
+						"x": 62,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_20.png",
+					"region": {
+						"x": 62,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_21.png",
+					"region": {
+						"x": 62,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_22.png",
+					"region": {
+						"x": 72,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_23.png",
+					"region": {
+						"x": 72,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_24.png",
+					"region": {
+						"x": 72,
+						"y": 22,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_25.png",
+					"region": {
+						"x": 82,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dirt_dark_misc_8x8_26.png",
+					"region": {
+						"x": 82,
+						"y": 12,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:32095bba2ad622044acbc8955817b1ad:73b59c8d03f9eee9960b0ca4206e4921:8e01c308c335831a63398dfecb4ea295$"
+	}
+}

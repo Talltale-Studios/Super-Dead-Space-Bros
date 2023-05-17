@@ -1,0 +1,168 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_legs_run_spritesheet.png",
+			"size": {
+				"w": 342,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_legs_run_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_02.png",
+					"region": {
+						"x": 36,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_03.png",
+					"region": {
+						"x": 70,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_04.png",
+					"region": {
+						"x": 104,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_05.png",
+					"region": {
+						"x": 138,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_06.png",
+					"region": {
+						"x": 172,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_07.png",
+					"region": {
+						"x": 206,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_08.png",
+					"region": {
+						"x": 240,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_09.png",
+					"region": {
+						"x": 274,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_run_10.png",
+					"region": {
+						"x": 308,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4c6329fd82158b1f2304f748ffe41cd8:db90c90b481103bf6e20dc0548123abe:237a732f66a04aa12e66317922dca3ac$"
+	}
+}

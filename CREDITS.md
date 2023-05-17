@@ -81,6 +81,8 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
   * [Stormy clouds: sidescroller background from skybox art](https://opengameart.org/content/stormy-clouds-sidescroller-background-from-skybox-art). It is licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
   * [Rocky desert landscape (layered, looping)](https://opengameart.org/content/rocky-desert-landscape-layered-looping). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
   * [Slanty Desert Rocks Background (looping)](https://opengameart.org/content/slanty-desert-rocks-background-looping). It is licensed under [OGA-BY 3.0](https://opengameart.org/content/oga-by-30-faq).
+  * [Desert moon background (layered, looping)](https://opengameart.org/content/desert-moon-background-layered-looping). It is licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+  * [Desert dunes background (looping, 8 colours, 16 bit)](https://opengameart.org/content/desert-dunes-background-looping-8-colours-16-bit). It is licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 * Files by [Surt](https://opengameart.org/users/surt):
   * [CC0 Scraps](https://opengameart.org/forumtopic/cc0-scraps). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).

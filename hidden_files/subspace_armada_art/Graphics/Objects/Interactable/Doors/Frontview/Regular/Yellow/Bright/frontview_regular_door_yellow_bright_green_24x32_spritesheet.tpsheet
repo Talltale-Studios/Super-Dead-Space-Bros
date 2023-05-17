@@ -1,0 +1,48 @@
+{
+	"textures": [
+		{
+			"image": "frontview_regular_door_yellow_bright_green_24x32_spritesheet.png",
+			"size": {
+				"w": 54,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "frontview_regular_door_yellow_bright_green_24x32_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 24,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "frontview_regular_door_yellow_bright_green_24x32_02.png",
+					"region": {
+						"x": 28,
+						"y": 2,
+						"w": 24,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:0db37fe24e27b900b88d1a6b0dc9b352:47322ce388125639fe7962ab17e2b4f6:49c1af13f9e486edd71f1d8fa4409a34$"
+	}
+}

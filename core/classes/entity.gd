@@ -1,3 +1,3 @@
 class_name GameEntity
-extends KinematicBody2D
+extends CharacterBody2D
 

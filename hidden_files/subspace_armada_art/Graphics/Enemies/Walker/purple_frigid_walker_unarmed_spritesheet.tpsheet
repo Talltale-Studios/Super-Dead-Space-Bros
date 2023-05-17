@@ -1,0 +1,198 @@
+{
+	"textures": [
+		{
+			"image": "purple_frigid_walker_unarmed_spritesheet.png",
+			"size": {
+				"w": 74,
+				"h": 56
+			},
+			"sprites": [
+				{
+					"filename": "purple_frigid_walker_unarmed_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_02.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_03.png",
+					"region": {
+						"x": 2,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_04.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_05.png",
+					"region": {
+						"x": 20,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_06.png",
+					"region": {
+						"x": 20,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_07.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_08.png",
+					"region": {
+						"x": 38,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_09.png",
+					"region": {
+						"x": 38,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_10.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_11.png",
+					"region": {
+						"x": 56,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_frigid_walker_unarmed_12.png",
+					"region": {
+						"x": 56,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e269065522a2725796846e23a8a93b09:2445574e4cb7b156f7940bd0c5eabffd:b5012be1126863d75c2ea8340be3adc7$"
+	}
+}

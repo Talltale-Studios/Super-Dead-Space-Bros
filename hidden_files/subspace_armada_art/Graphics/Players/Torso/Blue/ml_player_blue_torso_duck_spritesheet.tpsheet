@@ -1,0 +1,33 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_torso_duck_spritesheet.png",
+			"size": {
+				"w": 36,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_torso_duck_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:9b054997ec10e28925a939bbd5e4c07d:5a1462d8f5e3867da2c13e724d76c080:9cdf3d1ad34868b749d9546615f990d9$"
+	}
+}

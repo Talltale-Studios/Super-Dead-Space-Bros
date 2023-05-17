@@ -1,0 +1,48 @@
+{
+	"textures": [
+		{
+			"image": "pickups_balls_orange_spritesheet.png",
+			"size": {
+				"w": 38,
+				"h": 20
+			},
+			"sprites": [
+				{
+					"filename": "pickup_ball_orange_53.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pickup_ball_orange_54.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:005044e3da3d453d061e0d0faaee215a:246afb2ddfbb4f9a6c2c2698170bb551:23dbc5fc256642827b93a28fc6cdfac0$"
+	}
+}

@@ -1,0 +1,318 @@
+{
+	"textures": [
+		{
+			"image": "purple_unstable_flash_spider_spritesheet.png",
+			"size": {
+				"w": 128,
+				"h": 56
+			},
+			"sprites": [
+				{
+					"filename": "Attack/purple_unstable_flash_spider_attack_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack/purple_unstable_flash_spider_attack_02.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack_Prep/purple_unstable_flash_spider_attack_prep_01.png",
+					"region": {
+						"x": 2,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack_Prep/purple_unstable_flash_spider_attack_prep_02.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Attack_Prep/purple_unstable_flash_spider_attack_prep_03.png",
+					"region": {
+						"x": 20,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/purple_unstable_flash_spider_death_01.png",
+					"region": {
+						"x": 20,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/purple_unstable_flash_spider_death_02.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/purple_unstable_flash_spider_death_03.png",
+					"region": {
+						"x": 38,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/purple_unstable_flash_spider_death_04.png",
+					"region": {
+						"x": 38,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/purple_unstable_flash_spider_death_05.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Death/purple_unstable_flash_spider_death_06.png",
+					"region": {
+						"x": 56,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Hurt/purple_unstable_flash_spider_hurt_01.png",
+					"region": {
+						"x": 56,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/purple_unstable_flash_spider_walk_03.png",
+					"region": {
+						"x": 56,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Hurt/purple_unstable_flash_spider_hurt_02.png",
+					"region": {
+						"x": 74,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Sit/purple_unstable_flash_spider_sit_01.png",
+					"region": {
+						"x": 92,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/purple_unstable_flash_spider_walk_01.png",
+					"region": {
+						"x": 110,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/purple_unstable_flash_spider_walk_02.png",
+					"region": {
+						"x": 74,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/purple_unstable_flash_spider_walk_04.png",
+					"region": {
+						"x": 74,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/purple_unstable_flash_spider_walk_05.png",
+					"region": {
+						"x": 92,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "Walk/purple_unstable_flash_spider_walk_06.png",
+					"region": {
+						"x": 110,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:8644e82a01cd63e7b5a2ae1180b4681c:25d43bb93c26ef639809575fba4b014a:63f12c3171995072ed9fba672adac0b5$"
+	}
+}

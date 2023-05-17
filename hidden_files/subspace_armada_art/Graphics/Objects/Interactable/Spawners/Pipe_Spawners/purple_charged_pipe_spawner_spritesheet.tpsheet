@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "purple_charged_enemy_spawner_spritesheet.png",
+			"size": {
+				"w": 74,
+				"h": 20
+			},
+			"sprites": [
+				{
+					"filename": "purple_charged_enemy_spawner_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_charged_enemy_spawner_02.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_charged_enemy_spawner_03.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_charged_enemy_spawner_04.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d27af918b217802fd2913a44aa9dacd0:f8570c6985c5cfb6c433b498f43ec877:5e332a5dd31423b5d57e18ef68a37fb9$"
+	}
+}

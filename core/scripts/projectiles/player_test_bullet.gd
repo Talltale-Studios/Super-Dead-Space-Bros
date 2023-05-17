@@ -4,16 +4,18 @@ extends GamePlayerProjectile
 var can_move : bool = true
 
 
-onready var anim_player = $AnimationPlayer
+@onready var anim_player = $AnimationPlayer
 
 
 func _physics_process(delta: float) -> void:
 	var direction : Vector2 = Vector2.RIGHT.rotated(rotation)
 	if can_move:
 		velocity = direction * speed
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
+		velocity = velocity
 	
-	if position.distance_to(spawner.global_position) > 2 * ProjectSettings.get_setting("display/window/size/width") or position.distance_to(spawner.global_position) > 2 * ProjectSettings.get_setting("display/window/size/height"):
+	if position.distance_to(spawner.global_position) > 2 * ProjectSettings.get_setting("display/window/size/viewport_width") or position.distance_to(spawner.global_position) > 2 * ProjectSettings.get_setting("display/window/size/viewport_height"):
 		anim_player.play("despawn")
 	
 	

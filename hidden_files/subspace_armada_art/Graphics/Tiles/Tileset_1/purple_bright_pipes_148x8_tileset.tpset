@@ -1,0 +1,108 @@
+{
+	"textures": [
+		{
+			"image": "purple_bright_pipes_148x8_tileset.png",
+			"size": {
+				"w": 148,
+				"h": 62
+			},
+			"sprites": [
+				{
+					"filename": "purple_bright_pipes_144x8_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 144,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_bright_pipes_144x8_02.png",
+					"region": {
+						"x": 2,
+						"y": 12,
+						"w": 144,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_bright_pipes_144x8_03.png",
+					"region": {
+						"x": 2,
+						"y": 22,
+						"w": 144,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_bright_pipes_144x8_04.png",
+					"region": {
+						"x": 2,
+						"y": 32,
+						"w": 144,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_bright_pipes_144x8_05.png",
+					"region": {
+						"x": 2,
+						"y": 42,
+						"w": 144,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_bright_pipes_144x8_06.png",
+					"region": {
+						"x": 2,
+						"y": 52,
+						"w": 144,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:96e8633b9d04366d26a790ac504332e2:0b4c04b6e80adbcec39596ea7b5143c8:d13c156191542c2c548ed34ee9ac0524$"
+	}
+}

@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "yellow_toxic_enemy_spawner_spritesheet.png",
+			"size": {
+				"w": 74,
+				"h": 20
+			},
+			"sprites": [
+				{
+					"filename": "yellow_toxic_enemy_spawner_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_toxic_enemy_spawner_02.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_toxic_enemy_spawner_03.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_toxic_enemy_spawner_04.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:19f259cf8109dfaa146285c7fa88de58:9a790e6393d115cf1a8e15dea3b6599c:0ca09b7956b5f56cad5e3c46030c18d8$"
+	}
+}

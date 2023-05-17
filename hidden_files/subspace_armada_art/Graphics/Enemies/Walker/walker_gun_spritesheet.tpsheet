@@ -1,0 +1,108 @@
+{
+	"textures": [
+		{
+			"image": "walker_gun_spritesheet.png",
+			"size": {
+				"w": 38,
+				"h": 56
+			},
+			"sprites": [
+				{
+					"filename": "purple_walker_gun_01_left.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_walker_gun_01_right.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "walker_gun_wireframe_01_left.png",
+					"region": {
+						"x": 2,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "walker_gun_wireframe_01_right.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_walker_gun_01_left.png",
+					"region": {
+						"x": 20,
+						"y": 20,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_walker_gun_01_right.png",
+					"region": {
+						"x": 20,
+						"y": 38,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:28cc9c64730ac8a130f9e8b0bc04f408:1b551e574a7c3b4d7ec205d3d4ebff87:aee5ee7bcce9f5b6693f52710871957a$"
+	}
+}

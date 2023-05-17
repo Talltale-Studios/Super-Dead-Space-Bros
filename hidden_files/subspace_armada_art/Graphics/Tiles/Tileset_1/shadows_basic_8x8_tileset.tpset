@@ -1,0 +1,633 @@
+{
+	"textures": [
+		{
+			"image": "shadows_basic_8x8_tileset.png",
+			"size": {
+				"w": 412,
+				"h": 12
+			},
+			"sprites": [
+				{
+					"filename": "shadows_basic_8x8_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_02.png",
+					"region": {
+						"x": 12,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_03.png",
+					"region": {
+						"x": 22,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_04.png",
+					"region": {
+						"x": 32,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_05.png",
+					"region": {
+						"x": 42,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_06.png",
+					"region": {
+						"x": 52,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_07.png",
+					"region": {
+						"x": 62,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_08.png",
+					"region": {
+						"x": 72,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_09.png",
+					"region": {
+						"x": 82,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_10.png",
+					"region": {
+						"x": 92,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_11.png",
+					"region": {
+						"x": 102,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_12.png",
+					"region": {
+						"x": 112,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_13.png",
+					"region": {
+						"x": 122,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_14.png",
+					"region": {
+						"x": 132,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_15.png",
+					"region": {
+						"x": 142,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_16.png",
+					"region": {
+						"x": 152,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_17.png",
+					"region": {
+						"x": 162,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_18.png",
+					"region": {
+						"x": 172,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_19.png",
+					"region": {
+						"x": 182,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_20.png",
+					"region": {
+						"x": 192,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_21.png",
+					"region": {
+						"x": 202,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_22.png",
+					"region": {
+						"x": 212,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_23.png",
+					"region": {
+						"x": 222,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_24.png",
+					"region": {
+						"x": 232,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_25.png",
+					"region": {
+						"x": 242,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_26.png",
+					"region": {
+						"x": 252,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_27.png",
+					"region": {
+						"x": 262,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_28.png",
+					"region": {
+						"x": 272,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_29.png",
+					"region": {
+						"x": 282,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_30.png",
+					"region": {
+						"x": 292,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_31.png",
+					"region": {
+						"x": 302,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_32.png",
+					"region": {
+						"x": 312,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_33.png",
+					"region": {
+						"x": 322,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_34.png",
+					"region": {
+						"x": 332,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_35.png",
+					"region": {
+						"x": 342,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_36.png",
+					"region": {
+						"x": 352,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_37.png",
+					"region": {
+						"x": 362,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_38.png",
+					"region": {
+						"x": 372,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_39.png",
+					"region": {
+						"x": 382,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_40.png",
+					"region": {
+						"x": 392,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shadows_basic_8x8_41.png",
+					"region": {
+						"x": 402,
+						"y": 2,
+						"w": 8,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:1e91a00eeebe39152aea48fdbe22b6e0:c5f22123a0cf9d70c98907684421d0e8:86f1461cac2f1108a7df818b73e7733d$"
+	}
+}

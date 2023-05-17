@@ -1,0 +1,768 @@
+{
+	"textures": [
+		{
+			"image": "yellow_gloom_pipes_8x16_tileset.png",
+			"size": {
+				"w": 252,
+				"h": 38
+			},
+			"sprites": [
+				{
+					"filename": "yellow_gloom_pipes_8x16_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_02.png",
+					"region": {
+						"x": 12,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_03.png",
+					"region": {
+						"x": 22,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_04.png",
+					"region": {
+						"x": 32,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_05.png",
+					"region": {
+						"x": 42,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_06.png",
+					"region": {
+						"x": 52,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_07.png",
+					"region": {
+						"x": 62,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_08.png",
+					"region": {
+						"x": 72,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_09.png",
+					"region": {
+						"x": 82,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_10.png",
+					"region": {
+						"x": 92,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_11.png",
+					"region": {
+						"x": 102,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_12.png",
+					"region": {
+						"x": 112,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_13.png",
+					"region": {
+						"x": 122,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_14.png",
+					"region": {
+						"x": 132,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_15.png",
+					"region": {
+						"x": 142,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_16.png",
+					"region": {
+						"x": 152,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_17.png",
+					"region": {
+						"x": 162,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_18.png",
+					"region": {
+						"x": 172,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_19.png",
+					"region": {
+						"x": 182,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_20.png",
+					"region": {
+						"x": 192,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_21.png",
+					"region": {
+						"x": 202,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_22.png",
+					"region": {
+						"x": 212,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_23.png",
+					"region": {
+						"x": 222,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_24.png",
+					"region": {
+						"x": 232,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_25.png",
+					"region": {
+						"x": 242,
+						"y": 2,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_26.png",
+					"region": {
+						"x": 2,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_27.png",
+					"region": {
+						"x": 12,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_28.png",
+					"region": {
+						"x": 22,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_29.png",
+					"region": {
+						"x": 32,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_30.png",
+					"region": {
+						"x": 42,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_31.png",
+					"region": {
+						"x": 52,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_32.png",
+					"region": {
+						"x": 62,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_33.png",
+					"region": {
+						"x": 72,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_34.png",
+					"region": {
+						"x": 82,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_35.png",
+					"region": {
+						"x": 92,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_36.png",
+					"region": {
+						"x": 102,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_37.png",
+					"region": {
+						"x": 112,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_38.png",
+					"region": {
+						"x": 122,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_39.png",
+					"region": {
+						"x": 132,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_40.png",
+					"region": {
+						"x": 142,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_41.png",
+					"region": {
+						"x": 152,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_42.png",
+					"region": {
+						"x": 162,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_43.png",
+					"region": {
+						"x": 172,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_44.png",
+					"region": {
+						"x": 182,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_45.png",
+					"region": {
+						"x": 192,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_46.png",
+					"region": {
+						"x": 202,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_47.png",
+					"region": {
+						"x": 212,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_48.png",
+					"region": {
+						"x": 222,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_49.png",
+					"region": {
+						"x": 232,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "yellow_gloom_pipes_8x16_50.png",
+					"region": {
+						"x": 242,
+						"y": 20,
+						"w": 8,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:74a08b0a78b9cc13963e6498fe13cb5f:7c0c3b0715d9dbde3916ba8e0f3ec402:ddb7ffe2734ccdbd8dab5717b40aa1fc$"
+	}
+}

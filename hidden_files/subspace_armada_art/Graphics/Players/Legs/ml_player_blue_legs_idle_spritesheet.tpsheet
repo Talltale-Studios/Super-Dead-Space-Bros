@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_legs_idle_spritesheet.png",
+			"size": {
+				"w": 138,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_legs_idle_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_idle_02.png",
+					"region": {
+						"x": 36,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_idle_03.png",
+					"region": {
+						"x": 70,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ml_player_blue_legs_idle_04.png",
+					"region": {
+						"x": 104,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d8be44ae47aad73d34049375649ad9cd:e81280cf1f41a1903bc1a322baee5e1d:313e1f9c1864ae3ff618c5efd943c3ce$"
+	}
+}

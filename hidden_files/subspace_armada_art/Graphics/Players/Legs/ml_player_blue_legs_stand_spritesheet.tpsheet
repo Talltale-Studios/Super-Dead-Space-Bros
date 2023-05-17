@@ -1,0 +1,33 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_legs_stand_spritesheet.png",
+			"size": {
+				"w": 36,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_legs_stand_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:00a95d49d5040b9f9fae89d4ec0edb10:482648c135022ca9c97061fe88802c34:92067d7f58cf441b4da50c191931468b$"
+	}
+}

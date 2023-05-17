@@ -1,0 +1,78 @@
+{
+	"textures": [
+		{
+			"image": "purple_fiery_enemy_spawner_spritesheet.png",
+			"size": {
+				"w": 74,
+				"h": 20
+			},
+			"sprites": [
+				{
+					"filename": "purple_fiery_enemy_spawner_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_fiery_enemy_spawner_02.png",
+					"region": {
+						"x": 20,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_fiery_enemy_spawner_03.png",
+					"region": {
+						"x": 38,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "purple_fiery_enemy_spawner_04.png",
+					"region": {
+						"x": 56,
+						"y": 2,
+						"w": 16,
+						"h": 16
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4211a76d6398c6a61057c8c34a3a894a:42e299042f6ec6dc2ec768bb0d8f9c4f:890f4ff205a5d81dcc5c3c5304d51447$"
+	}
+}

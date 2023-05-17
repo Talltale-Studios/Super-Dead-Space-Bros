@@ -1,0 +1,33 @@
+{
+	"textures": [
+		{
+			"image": "ml_player_blue_torso_wall_cling_spritesheet.png",
+			"size": {
+				"w": 36,
+				"h": 36
+			},
+			"sprites": [
+				{
+					"filename": "ml_player_blue_torso_wall_cling_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:72414072eea79d97cc74fb63e68c8e07:581bc22187a52ad23746ed0f730beec9:579f47bd7600bb0b8e06f8e3bd22c27f$"
+	}
+}

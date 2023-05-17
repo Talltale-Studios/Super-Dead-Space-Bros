@@ -1,0 +1,183 @@
+{
+	"textures": [
+		{
+			"image": "space_station_top_spritesheet.png",
+			"size": {
+				"w": 254,
+				"h": 1080
+			},
+			"sprites": [
+				{
+					"filename": "space_station_top_01.png",
+					"region": {
+						"x": 2,
+						"y": 2,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_02.png",
+					"region": {
+						"x": 2,
+						"y": 100,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_03.png",
+					"region": {
+						"x": 2,
+						"y": 198,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_04.png",
+					"region": {
+						"x": 2,
+						"y": 296,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_05.png",
+					"region": {
+						"x": 2,
+						"y": 394,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_06.png",
+					"region": {
+						"x": 2,
+						"y": 492,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_07.png",
+					"region": {
+						"x": 2,
+						"y": 590,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_08.png",
+					"region": {
+						"x": 2,
+						"y": 688,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_09.png",
+					"region": {
+						"x": 2,
+						"y": 786,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_10.png",
+					"region": {
+						"x": 2,
+						"y": 884,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "space_station_top_11.png",
+					"region": {
+						"x": 2,
+						"y": 982,
+						"w": 250,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:16b1cadbc086a553a0c47e6e7dc5e672:f0da66bc08e545263304b234bbb60d1e:73c7b530ec7f47855a451db2adf4fbec$"
+	}
+}
