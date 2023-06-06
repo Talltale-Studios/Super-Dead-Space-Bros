@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bjd2xq1qwo7oq"]
-
-[ext_resource type="Texture2D" uid="uid://dxvbtvwcw5qbv" path="res://core/assets/textures/characters/enemies/bomber/bomber_sheet.png" id="1_uqxiu"]
-
-[resource]
-atlas = ExtResource("1_uqxiu")
-region = Rect2(0, 156, 180, 52)

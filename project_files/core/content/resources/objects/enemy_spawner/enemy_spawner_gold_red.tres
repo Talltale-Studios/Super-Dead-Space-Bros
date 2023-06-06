@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://deu062kqkbldf"]
+
+[ext_resource type="Texture2D" uid="uid://dm4hqx6r2wr2f" path="res://core/content/textures/objects/enemy_spawner_sheet.png" id="1_83du6"]
+
+[resource]
+atlas = ExtResource("1_83du6")
+region = Rect2(0, 96, 256, 32)

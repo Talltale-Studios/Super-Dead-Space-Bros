@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bitpaqcewbnkx"]
+
+[ext_resource type="Script" path="res://scripts/GameWorld.cs" id="1_os2lp"]
+
+[node name="GameWorld" type="CanvasLayer" node_paths=PackedStringArray("colorRect")]
+layer = 10
+script = ExtResource("1_os2lp")
+colorRect = NodePath("")

@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bv30lhc17xr3j"]
-
-[ext_resource type="Texture2D" uid="uid://btxio8xg6dr21" path="res://core/assets/textures/characters/enemies/cannoneer/cannoneer_sheet.png" id="1_8n5pk"]
-
-[resource]
-atlas = ExtResource("1_8n5pk")
-region = Rect2(0, 60, 136, 60)
