@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqa45c6lfsffv"]
+
+[ext_resource type="Script" path="res://addons/wyvernbox/view_extra/tooltip.gd" id="1"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_stats.gd" id="5"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_price.gd" id="6"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_key_hints.gd" id="7"]
+[ext_resource type="Script" path="res://addons/wyvernbox/extension/tooltip_property_description.gd" id="8"]
+
+[node name="Tooltip" type="MarginContainer" groups=["tooltip"]]
+custom_minimum_size = Vector2(160, 0)
+offset_right = 64.0
+offset_bottom = 56.0
+size_flags_horizontal = 5
+size_flags_vertical = 9
+mouse_filter = 2
+script = ExtResource("1")
+color_bonus = Color(0.521569, 0.560784, 0.992157, 1)
+color_malus = Color(1, 0.376471, 0.376471, 1)
+color_neutral = Color(0.415686, 0.415686, 0.415686, 1)
+property_scripts = Array[Script]([ExtResource("5"), ExtResource("8"), ExtResource("6"), ExtResource("7")])
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.901961)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Box" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="PanelContainer" parent="Box"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Box/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cool Item"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Desc" type="RichTextLabel" parent="Box"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+bbcode_enabled = true
+text = "
++5 a
+"
+fit_content = true
+scroll_active = false

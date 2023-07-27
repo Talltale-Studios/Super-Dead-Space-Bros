@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://pb5uh775qycs"]
+
+[ext_resource type="PackedScene" uid="uid://y4rbi5ibv6li" path="res://core_data/scenes/characters/player/player.tscn" id="1_eu33d"]
+[ext_resource type="Texture2D" uid="uid://40xjx62jl7ic" path="res://core_content/textures/objects/tiles_wires_01.png" id="2_lvsgg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_72uja"]
+texture = ExtResource("2_lvsgg")
+texture_region_size = Vector2i(8, 8)
+0:0/next_alternative_id = 3
+0:0/0 = 0
+0:0/1 = 1
+0:0/2 = 2
+
+[sub_resource type="TileSet" id="TileSet_u640e"]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_72uja")
+
+[node name="TestScene" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-128, 0, -192, -64, -256, -64, -256, -48, -192, -48, -128, 16, 192, 16, 256, 64, 320, 64, 320, 48, 256, 48, 192, 0)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(112, 64)
+polygon = PackedVector2Array(-128, -120, -128, -152, -224, -152, -224, -120)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(288, 64)
+polygon = PackedVector2Array(-128, -120, -128, -152, -224, -152, -224, -120)
+
+[node name="Player" parent="." instance=ExtResource("1_eu33d")]
+position = Vector2(-4, -48)
+surface_y_velocity_clamp_min = -9.22337e+18
+surface_y_velocity_clamp_max = 9.22337e+18
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_u640e")
+format = 2
+layer_0/name = "Layer_01"
+layer_1/name = "Layer_02"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()

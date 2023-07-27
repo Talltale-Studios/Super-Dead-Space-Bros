@@ -15,6 +15,10 @@ text_editor/
 # Mono-specific ignores
 .mono/
 data_*/
+mono_crash.*.json
+
+# Imported translations (automatically generated from CSV files)
+*.translation
 
 # Plugins used for development
 
