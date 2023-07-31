@@ -22,15 +22,18 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 
 config/name="Super Dead Space Mercs"
 config/description="Test"
-run/main_scene="res://core_data/scenes/worlds/test_world/test_scene.tscn"
+run/main_scene="res://core/data/scenes/worlds/test_world/test_scene.tscn"
 config/features=PackedStringArray("4.1")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="res://core_content/icon.png"
+config/icon="res://core/content/icon.png"
 
 [autoload]
 
 GGS="*res://addons/ggs/classes/ggs_globals.gd"
+Panku="*res://addons/panku_console/console.tscn"
+Spawning="*res://addons/BulletUpHell/Spawning.tscn"
+DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [display]
 
@@ -38,7 +41,7 @@ window/stretch/mode="2d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/QuickPluginManager/plugin.cfg", "res://addons/script_panel_plus/plugin.cfg")
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg", "res://addons/dictionary_inspector/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/gui_auto_layout/plugin.cfg", "res://addons/inspector_extender/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/script_panel_plus/plugin.cfg", "res://addons/sprite2d_rect_editor/plugin.cfg", "res://addons/super_spector/plugin.cfg", "res://addons/tnowe_extra_controls/plugin.cfg")
 
 [filesystem]
 
