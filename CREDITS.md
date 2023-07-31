@@ -1,7 +1,7 @@
 This project uses assets obtained from various sources such as [OpenGameArt](https://opengameart.org/), [Itch.Io](https://itch.io/), and [SoundCloud](https://soundcloud.com/). While some are still in their original condition, we have adapted assets where necessary to better fit the scope of this project. We are in no way officially endorsed by the authors of these assets and give credit where credit is due regarding the creation and ownership of the original asets. Here follows a list of sources from which assets have been borrowed from.
 
 
-# Audio
+# Audio - Music
 * [DOS-88 Synthwave Music Library](https://dos88.itch.io/dos-88-music-library) by [DOS-88](https://dos88.itch.io/). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 * Files by [Ben Reber](https://soundcloud.com/user-411047148):
@@ -26,18 +26,25 @@ This project uses assets obtained from various sources such as [OpenGameArt](htt
   * [ZenoStar](https://opengameart.org/content/zenostar). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 * Files by [Alexandr Zhelanov](https://opengameart.org/users/alexandr-zhelanov):
-  * [A Darkness Opus](https://opengameart.org/content/a-darkness-opus), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Alert! Outsider!](https://opengameart.org/content/alert-outsider), licensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/).
-  * [Curiosity](https://opengameart.org/content/curiosity), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Cybermatic pulse](https://opengameart.org/content/cybermatic-pulse), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Futuristic ambient](https://opengameart.org/content/futuristic-ambient), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Initiate Landing](https://opengameart.org/content/initiate-landing), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Iron Troopers](https://opengameart.org/content/iron-troopers), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Iron wasteland](https://opengameart.org/content/iron-wasteland), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-  * [Scientific](https://opengameart.org/content/scientific), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [A Darkness Opus](https://opengameart.org/content/a-darkness-opus). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Alert! Outsider!](https://opengameart.org/content/alert-outsider). It is licensed under [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+  * [Curiosity](https://opengameart.org/content/curiosity). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Cybermatic pulse](https://opengameart.org/content/cybermatic-pulse). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Futuristic ambient](https://opengameart.org/content/futuristic-ambient). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Initiate Landing](https://opengameart.org/content/initiate-landing). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Iron Troopers](https://opengameart.org/content/iron-troopers). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Iron wasteland](https://opengameart.org/content/iron-wasteland). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  * [Scientific](https://opengameart.org/content/scientific). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 
-# Graphics
+# Audio - Sound Effects
+* [Dialog Text - Sound Effects](https://alan-dalcastagne.itch.io/dialog-text-sound-effects) by [Alan Dalcastagne](https://alan-dalcastagne.itch.io/). It is licensed under a non-exclusive license for use in commercial games.
+* [Dialog Vocal Samples](https://opengameart.org/content/dialog-vocal-samples) by [MirceaKitsune](https://opengameart.org/users/mirceakitsune). It is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+* [Talking Synthesizer](https://opengameart.org/content/talking-synthesizer) by [tcarisland](https://opengameart.org/users/tcarisland). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+
+
+# Textures
 * [Pixel Art Portal Sprites](https://opengameart.org/content/pixel-art-portal-sprites) by [PixElthen](https://opengameart.org/users/pixelthen). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 * [Pixel Art GUI Elements](https://mounirtohami.itch.io/pixel-art-gui-elements) by [Mounir Tohami](https://mounirtohami.itch.io/). It is not marked as being licensed under any official license, but the author has stated that everyone is free to use the assets in any product.
 * [Godot Logo Pack: Splash Screens & Banners](https://zacksly.itch.io/godot-logo-pack) by [Zacksly](https://zacksly.itch.io/). It is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
