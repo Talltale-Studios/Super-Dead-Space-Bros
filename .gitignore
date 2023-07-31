@@ -21,7 +21,15 @@ mono_crash.*.json
 *.translation
 
 # Plugins used for development
-
+addons/dictionary_inspector/
+addons/gui_auto_layout/
+addons/inspector_extender/
+addons/QuickPluginManager/
+addons/resources_spreadsheet_view/
+addons/script_panel_plus/
+addons/sprite_painter/
+addons/sprite2d_rect_editor/
+addons/super_spector/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
