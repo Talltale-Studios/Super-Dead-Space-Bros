@@ -7,7 +7,7 @@ var can_move : bool = true
 @onready var anim_player = $AnimationPlayer
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction : Vector2 = Vector2.RIGHT.rotated(rotation)
 	if can_move:
 		velocity = direction * speed
@@ -24,6 +24,6 @@ func _despawn() -> void:
 	queue_free()
 
 
-func _on_Area2D_body_entered(body: Node) -> void:
+func _on_Area2D_body_entered(_body: Node) -> void:
 	can_move = false
 	anim_player.play("despawn")

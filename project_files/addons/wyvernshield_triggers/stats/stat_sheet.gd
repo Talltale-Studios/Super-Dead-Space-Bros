@@ -12,8 +12,6 @@ signal clear_timer_changed(path : StringName, time_seconds : float, new_index_in
 ## Emitted when a timer set by [method clear_timed] expires.
 signal clear_timer_expired(path : StringName)
 
-const TimedQueue := preload("res://addons/wyvernshield_triggers/triggers/timed_queue.gd")
-
 const _stat_default := Projection(
 	Vector4(0, 0, 1, 1),
 	Vector4.ZERO,
@@ -193,11 +191,11 @@ func unlock():
 		_recalculate_upwards(&".")
 
 
-func _physics_process(delta):
+func _physics_process(delta : float):
 	_timed_queue.process(delta)
 
 
-func _process(delta):
+func _process(delta : float):
 	_timed_queue.process(delta)
 
 

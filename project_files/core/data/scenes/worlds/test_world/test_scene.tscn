@@ -1,46 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://pb5uh775qycs"]
+[gd_scene load_steps=3 format=3 uid="uid://pb5uh775qycs"]
 
 [ext_resource type="PackedScene" uid="uid://y4rbi5ibv6li" path="res://core/data/scenes/characters/player/player.tscn" id="1_eu33d"]
-[ext_resource type="Texture2D" uid="uid://40xjx62jl7ic" path="res://core/content/textures/objects/tiles_wires_01.png" id="2_lvsgg"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_72uja"]
-texture = ExtResource("2_lvsgg")
-texture_region_size = Vector2i(8, 8)
-0:0/next_alternative_id = 3
-0:0/0 = 0
-0:0/1 = 1
-0:0/2 = 2
-
-[sub_resource type="TileSet" id="TileSet_u640e"]
-tile_size = Vector2i(8, 8)
-sources/0 = SubResource("TileSetAtlasSource_72uja")
+[ext_resource type="TileSet" uid="uid://ba4mo0bytxmit" path="res://core/content/resources/tiles/test_tile_set.tres" id="2_857wc"]
 
 [node name="TestScene" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-128, 0, -192, -64, -256, -64, -256, -48, -192, -48, -128, 16, 192, 16, 256, 64, 320, 64, 320, 48, 256, 48, 192, 0)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(112, 64)
-polygon = PackedVector2Array(-128, -120, -128, -152, -224, -152, -224, -120)
-
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(288, 64)
-polygon = PackedVector2Array(-128, -120, -128, -152, -224, -152, -224, -120)
-
 [node name="Player" parent="." instance=ExtResource("1_eu33d")]
 position = Vector2(-4, -48)
+surface_jump_height = 80.0
 surface_y_velocity_clamp_min = inf_neg
 surface_y_velocity_clamp_max = inf
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
-tile_set = SubResource("TileSet_u640e")
+tile_set = ExtResource("2_857wc")
 format = 2
-layer_0/name = "Layer_01"
-layer_1/name = "Layer_02"
+layer_0/name = "World"
+layer_0/tile_data = PackedInt32Array(327694, 2359296, 4, 458766, 2359296, 4, 458786, 2097152, 4, 327714, 2097152, 4, 589858, 2228224, 4, 589838, 2228224, 4, 589856, 2228224, 2, 589854, 2228224, 2, 589852, 2228224, 2, 589850, 2228224, 2, 589848, 2228224, 2, 589846, 2228224, 2, 589844, 2228224, 2, 589842, 2228224, 2, 589840, 2228224, 2, 131119, 0, 34, 196642, 3276800, 10, 196652, 3538944, 10, 196650, 3538944, 10, 196644, 3538944, 10, 196646, 3538944, 10, 196648, 3538944, 10, 196622, 3670016, 10, 196620, 3538944, 10, 196618, 3538944, 10, 196616, 3538944, 10, 196614, 3538944, 10, 196612, 3538944, 10, 196610, 3538944, 10, 196608, 3538944, 10, 262142, 3538944, 10, 262140, 3538944, 10, 262138, 3538944, 10, 262136, 3538944, 10, 262134, 3538944, 10, 262132, 3538944, 10, 196593, 262144, 34, 65517, 262144, 34, -65559, 262144, 34, -131098, 3538944, 10, -131100, 3538944, 10, -131102, 3538944, 10, -131104, 3538944, 10, -131106, 3538944, 10, -131108, 3538944, 10, -589810, 2359296, 6, -589790, 2097152, 6, -720862, 2097152, 4, -851934, 2097152, 4, -983006, 2097152, 4, -1114078, 2097152, 4, -720882, 2359296, 4, -851954, 2359296, 4, -983026, 2359296, 4, -1114098, 2359296, 4, -1245150, 2228224, 4, -1245170, 2228224, 4, -1245168, 2228224, 6, -1245166, 2228224, 6, -1245164, 2228224, 6, -1245162, 2228224, 6, -1245160, 2228224, 6, -1245158, 2228224, 6, -1245156, 2228224, 6, -1245154, 2228224, 6, -1245152, 2228224, 6)
+layer_1/name = "Platforms"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false

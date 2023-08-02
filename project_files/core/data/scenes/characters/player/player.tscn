@@ -1,16 +1,23 @@
-[gd_scene load_steps=149 format=3 uid="uid://y4rbi5ibv6li"]
+[gd_scene load_steps=156 format=3 uid="uid://y4rbi5ibv6li"]
 
 [ext_resource type="Script" path="res://core/data/scripts/characters/player/player_controller.gd" id="1_vgxc6"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/player_statemachine.gd" id="2_dcaid"]
 [ext_resource type="Texture2D" uid="uid://b6hgjlvycdob3" path="res://core/content/resources/characters/player/legs/legs.tres" id="2_ityqo"]
-[ext_resource type="Texture2D" path="res://core/content/resources/characters/player/torso/aim.tres" id="3_f5d2a"]
+[ext_resource type="Texture2D" uid="uid://mfihf6k6xk2e" path="res://core/content/resources/characters/player/torso/aim.tres" id="3_f5d2a"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_stand_state.gd" id="3_yyofq"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_fall_state.gd" id="4_cbg5f"]
 [ext_resource type="Texture2D" path="res://core/content/resources/characters/player/weaponflash/weaponflash.tres" id="4_y15yd"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_jump_state.gd" id="5_6ijt1"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_run_state.gd" id="6_uayd8"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_crouch_state.gd" id="7_eqlys"]
+[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_climb_state.gd" id="8_jo300"]
 
 [sub_resource type="CapsuleShape2D" id="59"]
-radius = 7.0
+radius = 6.0
 height = 34.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_55fv1"]
-size = Vector2(14, 7)
+size = Vector2(12, 7)
 
 [sub_resource type="Animation" id="51"]
 resource_name = "climb"
@@ -4442,7 +4449,7 @@ surface_jump_time_to_peak = 0.5
 surface_jump_time_to_descend = 0.4
 surface_grounded_acceleration = 0.3
 surface_airborne_acceleration = 0.15
-surface_grounded_friction = 0.3
+surface_grounded_friction = 1.0
 surface_airborne_friction = 0.15
 surface_y_velocity_clamp_max = 16.0
 underwater_jump_height = 64.0
@@ -4458,6 +4465,28 @@ space_jump_time_to_descend = 0.4
 space_grounded_acceleration = 0.1
 space_grounded_friction = 0.1
 
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("2_dcaid")
+root = NodePath("..")
+
+[node name="PlayerLegStandState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("3_yyofq")
+
+[node name="PlayerLegFallState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("4_cbg5f")
+
+[node name="PlayerLegJumpState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("5_6ijt1")
+
+[node name="PlayerLegRunState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("6_uayd8")
+
+[node name="PlayerLegCrouchState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("7_eqlys")
+
+[node name="PlayerLegClimbState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("8_jo300")
+
 [node name="CollisionCapsule" type="CollisionShape2D" parent="."]
 position = Vector2(0, -17)
 shape = SubResource("59")
@@ -4469,7 +4498,7 @@ shape = SubResource("RectangleShape2D_55fv1")
 [node name="HurtBox" type="Area2D" parent="."]
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="HurtBox"]
-polygon = PackedVector2Array(7, -28, 5, -32, 1, -34, -1, -34, -5, -32, -7, -28, -7, 0, 7, 0)
+polygon = PackedVector2Array(6, -29, 5, -31, 3, -33, 1, -34, -1, -34, -3, -33, -5, -31, -6, -29, -6, 0, 6, 0)
 
 [node name="LegsSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -4484,7 +4513,7 @@ texture = ExtResource("3_f5d2a")
 flip_h = true
 hframes = 6
 vframes = 8
-frame = 36
+frame = 47
 
 [node name="Muzzle" type="Marker2D" parent="TorsoSprite"]
 position = Vector2(-14, 0)
@@ -4540,6 +4569,6 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 
 [connection signal="timeout" from="Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

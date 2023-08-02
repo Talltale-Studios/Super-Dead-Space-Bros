@@ -31,9 +31,7 @@ config/icon="res://core/content/icon.png"
 [autoload]
 
 GGS="*res://addons/ggs/classes/ggs_globals.gd"
-Panku="*res://addons/panku_console/console.tscn"
 Spawning="*res://addons/BulletUpHell/Spawning.tscn"
-DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [display]
 
@@ -41,7 +39,7 @@ window/stretch/mode="2d"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg", "res://addons/dictionary_inspector/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/gui_auto_layout/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/script_panel_plus/plugin.cfg", "res://addons/sprite2d_rect_editor/plugin.cfg", "res://addons/super_spector/plugin.cfg", "res://addons/tnowe_extra_controls/plugin.cfg")
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg")
 
 [filesystem]
 
@@ -89,6 +87,9 @@ jump={
 
 2d_physics/layer_1="World Layer 1"
 2d_navigation/layer_1="World Layer 1"
+2d_physics/layer_2="World Layer 2"
+2d_physics/layer_3="World Layer 3"
+2d_physics/layer_4="World Layer 4"
 2d_physics/layer_5="World Neutral Projectile"
 2d_physics/layer_6="World Ally Projectile"
 2d_physics/layer_7="World Enemy Projectile"
