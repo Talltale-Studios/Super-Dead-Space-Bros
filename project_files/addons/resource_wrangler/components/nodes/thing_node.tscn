@@ -1,0 +1,157 @@
+[gd_scene load_steps=7 format=3 uid="uid://8mh1elwx31yq"]
+
+[ext_resource type="StyleBox" uid="uid://bg1p1wnmf5ded" path="res://addons/resource_wrangler/assets/graphnode_style.stylebox" id="1_wiqjr"]
+[ext_resource type="StyleBox" uid="uid://dn3e1wlqewh2v" path="res://addons/resource_wrangler/assets/graphnode_selected_style.stylebox" id="2_u2aqx"]
+[ext_resource type="Script" path="res://addons/resource_wrangler/components/nodes/thing_node.gd" id="3_xamqe"]
+[ext_resource type="StyleBox" uid="uid://tcjydc7qrq2s" path="res://addons/resource_wrangler/assets/button_style.stylebox" id="4_ne12i"]
+
+[sub_resource type="Image" id="Image_3nw1e"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_fkg1j"]
+image = SubResource("Image_3nw1e")
+
+[node name="Thing" type="GraphNode"]
+offset_right = 117.0
+offset_bottom = 207.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/frame = ExtResource("1_wiqjr")
+theme_override_styles/selected_frame = ExtResource("2_u2aqx")
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(0.768627, 0.768627, 0.768627, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("3_xamqe")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="title_and_x" type="HBoxContainer" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="classname_as_title" type="Label" parent="VBox/title_and_x"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 18
+text = "Label"
+
+[node name="title" type="Label" parent="VBox/title_and_x"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 10
+text = "Label"
+
+[node name="close" type="Button" parent="VBox/title_and_x"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+mouse_filter = 1
+text = " x "
+
+[node name="lab_and_buttons" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="preview" type="TextureRect" parent="VBox/lab_and_buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+stretch_mode = 4
+
+[node name="buttons" type="VBoxContainer" parent="VBox/lab_and_buttons"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBox/lab_and_buttons/buttons"]
+layout_mode = 2
+
+[node name="icon" type="TextureRect" parent="VBox/lab_and_buttons/buttons/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="classname" type="Label" parent="VBox/lab_and_buttons/buttons/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 18
+text = "Label"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="VBox/lab_and_buttons/buttons"]
+layout_mode = 2
+
+[node name="editscript" type="Button" parent="VBox/lab_and_buttons/buttons/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 12.0
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("4_ne12i")
+text = "Edit"
+icon = SubResource("ImageTexture_fkg1j")
+
+[node name="showinfs" type="Button" parent="VBox/lab_and_buttons/buttons/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("4_ne12i")
+text = "Locate"
+
+[node name="moveto" type="Button" parent="VBox/lab_and_buttons/buttons/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("4_ne12i")
+text = "Save As"
+
+[node name="comment_text" type="TextEdit" parent="VBox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "Comments"
+context_menu_enabled = false
+wrap_mode = 1
+
+[connection signal="dragged" from="." to="." method="_on_thing_dragged"]
+[connection signal="gui_input" from="." to="." method="_on_thing_gui_input"]
+[connection signal="node_selected" from="." to="." method="_on_node_selected"]
+[connection signal="theme_changed" from="." to="." method="_on_thing_theme_changed"]
+[connection signal="pressed" from="VBox/title_and_x/close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="VBox/lab_and_buttons/buttons/VBoxContainer/editscript" to="." method="_on_editscript_pressed"]
+[connection signal="pressed" from="VBox/lab_and_buttons/buttons/VBoxContainer/showinfs" to="." method="_on_showinfs_pressed"]
+[connection signal="pressed" from="VBox/lab_and_buttons/buttons/VBoxContainer/moveto" to="." method="_on_moveto_pressed"]
+[connection signal="focus_entered" from="VBox/comment_text" to="." method="_on_text_edit_focus_entered"]
+[connection signal="focus_exited" from="VBox/comment_text" to="." method="_on_text_edit_focus_exited"]
+[connection signal="gui_input" from="VBox/comment_text" to="." method="_on_thing_gui_input"]

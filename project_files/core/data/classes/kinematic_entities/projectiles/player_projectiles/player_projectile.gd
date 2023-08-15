@@ -1,0 +1,4 @@
+class_name GameKinematicPlayerProjectile
+extends GameKinematicProjectile
+
+

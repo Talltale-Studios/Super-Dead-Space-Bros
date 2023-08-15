@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://buk5dqg0uoud3"]
 
 [ext_resource type="Script" path="res://addons/wyvernbox/equip_bonus_view.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dujvynl7q4g3e" path="res://example_demos/wyvernbox_example/graphics/gradients/gray.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://dujvynl7q4g3e" path="res://examples_and_demos/wyvernbox_example/graphics/gradients/gray.tres" id="4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tnbgi"]
 outline_size = 1

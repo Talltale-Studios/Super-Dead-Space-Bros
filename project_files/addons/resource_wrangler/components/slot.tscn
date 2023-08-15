@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://co1tfc3d25u2u"]
+
+[ext_resource type="Script" path="res://addons/resource_wrangler/components/slot.gd" id="1_sr012"]
+[ext_resource type="StyleBox" uid="uid://tcjydc7qrq2s" path="res://addons/resource_wrangler/assets/button_style.stylebox" id="2_tif6w"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 139.0
+offset_bottom = 31.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("1_sr012")
+
+[node name="clearbutton" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/normal = ExtResource("2_tif6w")
+text = "x"
+
+[node name="slotlabel" type="Label" parent="."]
+layout_mode = 2
+text = "property"
+
+[node name="slotvalue" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+text = "value"

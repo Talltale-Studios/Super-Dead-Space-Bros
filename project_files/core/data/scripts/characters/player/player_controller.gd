@@ -1,4 +1,4 @@
-extends GamePlayer
+extends GameKinematicPlayer
 
 
 var legs_statemachine : AnimationNodeStateMachinePlayback

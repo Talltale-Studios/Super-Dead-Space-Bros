@@ -1,0 +1,4 @@
+class_name GamePlayerTorsoAimState
+extends GamePlayerTorsoState
+
+

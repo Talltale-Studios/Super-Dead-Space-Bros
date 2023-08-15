@@ -1,0 +1,4 @@
+The nodes 'talk' to each other via the actual resources. iow, they rely on each resource updating and then the next node reloads that resource and updates its props.
+
+To make nodes that don't output a resource, i would need to layer on a new system.
+

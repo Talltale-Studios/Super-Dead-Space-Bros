@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://ox7050n1etp6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c0kw3"]
+load_path = "res://.godot/imported/spinner_skull.png-859f26fe3d27a22351ef48f3278c891d.ctex"
+
+[resource]
+atlas = SubResource("CompressedTexture2D_c0kw3")
+region = Rect2(0, 0, 40, 20)

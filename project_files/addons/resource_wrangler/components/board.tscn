@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://qxk7e1xj40ic"]
+
+[ext_resource type="Script" path="res://addons/resource_wrangler/components/board.gd" id="1_agvjw"]
+[ext_resource type="Script" path="res://addons/resource_wrangler/components/graph_edit.gd" id="2_dm3jq"]
+[ext_resource type="PackedScene" uid="uid://dv1bm84gxmd38" path="res://addons/resource_wrangler/components/thing_popup_menu.tscn" id="3_gai80"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ho3ry"]
+bg_color = Color(0.1612, 0.2106, 0.26, 1)
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1000.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_agvjw")
+
+[node name="Graph" type="GraphEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/grid_minor = Color(1, 1, 1, 0.0196078)
+theme_override_colors/grid_major = Color(1, 1, 1, 0.0509804)
+theme_override_colors/selection_fill = Color(0.160784, 0.211765, 0.258824, 0.47451)
+theme_override_colors/selection_stroke = Color(0.170624, 0.44464, 0.582031, 1)
+theme_override_constants/port_hotzone_outer_extent = 16
+theme_override_styles/bg = SubResource("StyleBoxFlat_ho3ry")
+zoom_min = 0.1
+zoom_max = 3.0
+zoom_step = 1.0
+show_zoom_label = true
+minimap_enabled = false
+minimap_size = Vector2(200, 150)
+arrange_nodes_button_hidden = true
+script = ExtResource("2_dm3jq")
+
+[node name="ThingPopupMenu" parent="." instance=ExtResource("3_gai80")]
+visible = false
+
+[node name="filedialogue" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Move your new resource"
+initial_position = 2
+size = Vector2i(392, 400)
+mode_overrides_title = false
+
+[connection signal="connection_from_empty" from="Graph" to="." method="_on_connection_from_input_port_to_empty"]
+[connection signal="connection_request" from="Graph" to="." method="_on_graph_connection_request"]
+[connection signal="connection_to_empty" from="Graph" to="." method="_on_graph_connection_to_empty"]
+[connection signal="disconnection_request" from="Graph" to="." method="_on_graph_disconnection_request"]
+[connection signal="gui_input" from="Graph" to="." method="_on_graph_gui_input"]
+[connection signal="popup_request" from="Graph" to="." method="_on_graph_popup_request"]
+[connection signal="file_selected" from="filedialogue" to="." method="_on_filedialogue_file_selected"]

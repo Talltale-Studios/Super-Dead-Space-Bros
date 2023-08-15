@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://mfihf6k6xk2e"]
+
+[ext_resource type="Texture2D" uid="uid://bmwvkmnadpcbk" path="res://core/content/textures/characters/player/player_torso_sheet_01.png" id="1_00jt4"]
+
+[resource]
+atlas = ExtResource("1_00jt4")
+region = Rect2(0, 0, 288, 384)

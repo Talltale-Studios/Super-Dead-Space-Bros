@@ -1,4 +1,0 @@
-class_name PlayerTorsoClimbState
-extends PlayerTorsoState
-
-

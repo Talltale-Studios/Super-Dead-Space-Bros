@@ -1,0 +1,3 @@
+class_name GameKinematicCharacter
+extends GameKinematicEntity
+

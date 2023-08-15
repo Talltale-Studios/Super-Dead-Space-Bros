@@ -1,16 +1,16 @@
 [gd_scene load_steps=156 format=3 uid="uid://y4rbi5ibv6li"]
 
 [ext_resource type="Script" path="res://core/data/scripts/characters/player/player_controller.gd" id="1_vgxc6"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/player_statemachine.gd" id="2_dcaid"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/player_state_machine.gd" id="2_hionn"]
 [ext_resource type="Texture2D" uid="uid://b6hgjlvycdob3" path="res://core/content/resources/characters/player/legs/legs.tres" id="2_ityqo"]
-[ext_resource type="Texture2D" uid="uid://mfihf6k6xk2e" path="res://core/content/resources/characters/player/torso/aim.tres" id="3_f5d2a"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_stand_state.gd" id="3_yyofq"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_fall_state.gd" id="4_cbg5f"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_stand_state.gd" id="3_k0bsc"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_fall_state.gd" id="4_hn2n0"]
 [ext_resource type="Texture2D" path="res://core/content/resources/characters/player/weaponflash/weaponflash.tres" id="4_y15yd"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_jump_state.gd" id="5_6ijt1"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_run_state.gd" id="6_uayd8"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_crouch_state.gd" id="7_eqlys"]
-[ext_resource type="Script" path="res://core/data/classes/statemachine/characters/player/leg_states/leg_climb_state.gd" id="8_jo300"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_jump_state.gd" id="5_iht7d"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_run_state.gd" id="6_57bli"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_crouch_state.gd" id="7_33h3l"]
+[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_climb_state.gd" id="8_j8dts"]
+[ext_resource type="Texture2D" uid="uid://mfihf6k6xk2e" path="res://core/content/resources/characters/player/torso/aim_01.tres" id="10_yubrf"]
 
 [sub_resource type="CapsuleShape2D" id="59"]
 radius = 6.0
@@ -4436,7 +4436,8 @@ transitions = ["standby", "shoot", SubResource("138"), "shoot", "standby", SubRe
 graph_offset = Vector2(-95, 0)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 256
+collision_layer = 2048
+collision_mask = 3
 floor_constant_speed = true
 floor_max_angle = 1.0472
 floor_snap_length = 8.0
@@ -4466,26 +4467,27 @@ space_grounded_acceleration = 0.1
 space_grounded_friction = 0.1
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("2_dcaid")
+script = ExtResource("2_hionn")
 root = NodePath("..")
+initial_state = NodePath("PlayerLegStandState")
 
 [node name="PlayerLegStandState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("3_yyofq")
+script = ExtResource("3_k0bsc")
 
 [node name="PlayerLegFallState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("4_cbg5f")
+script = ExtResource("4_hn2n0")
 
 [node name="PlayerLegJumpState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("5_6ijt1")
+script = ExtResource("5_iht7d")
 
 [node name="PlayerLegRunState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("6_uayd8")
+script = ExtResource("6_57bli")
 
 [node name="PlayerLegCrouchState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("7_eqlys")
+script = ExtResource("7_33h3l")
 
 [node name="PlayerLegClimbState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("8_jo300")
+script = ExtResource("8_j8dts")
 
 [node name="CollisionCapsule" type="CollisionShape2D" parent="."]
 position = Vector2(0, -17)
@@ -4496,6 +4498,8 @@ position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_55fv1")
 
 [node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 20560
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="HurtBox"]
 polygon = PackedVector2Array(6, -29, 5, -31, 3, -33, 1, -34, -1, -34, -3, -33, -5, -31, -6, -29, -6, 0, 6, 0)
@@ -4509,24 +4513,23 @@ hframes = 6
 [node name="TorsoSprite" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -23)
-texture = ExtResource("3_f5d2a")
-flip_h = true
+texture = ExtResource("10_yubrf")
 hframes = 6
 vframes = 8
-frame = 47
+frame = 18
 
 [node name="Muzzle" type="Marker2D" parent="TorsoSprite"]
-position = Vector2(-14, 0)
+position = Vector2(-10, -10)
 
 [node name="WeaponflashSprite" type="Sprite2D" parent="."]
 visible = false
+z_index = 2
 texture_filter = 1
 position = Vector2(0, -23)
 texture = ExtResource("4_y15yd")
-flip_h = true
 hframes = 6
 vframes = 8
-frame = 36
+frame = 18
 
 [node name="LegsAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -4561,7 +4564,7 @@ active = true
 [node name="Timers" type="Node" parent="."]
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
@@ -4569,6 +4572,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 
 [connection signal="timeout" from="Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

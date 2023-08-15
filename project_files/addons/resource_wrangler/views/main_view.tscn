@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckqd4jmjqcfu2"]
+
+[ext_resource type="Script" path="res://addons/resource_wrangler/views/main_view.gd" id="1_a6mn1"]
+[ext_resource type="PackedScene" uid="uid://qxk7e1xj40ic" path="res://addons/resource_wrangler/components/board.tscn" id="3_ajhms"]
+[ext_resource type="PackedScene" path="res://addons/resource_wrangler/views/edit_board_dialog.tscn" id="4_yhep0"]
+
+[node name="MainView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_a6mn1")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_layout_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="Toolbar" type="HBoxContainer" parent="Margin/VBox"]
+layout_mode = 2
+
+[node name="AddBoardButton" type="Button" parent="Margin/VBox/Toolbar"]
+layout_mode = 2
+flat = true
+
+[node name="VSeparator" type="VSeparator" parent="Margin/VBox/Toolbar"]
+layout_mode = 2
+
+[node name="BoardsMenu" type="MenuButton" parent="Margin/VBox/Toolbar"]
+layout_mode = 2
+text = "b"
+item_count = 1
+popup/item_0/text = "b"
+popup/item_0/id = 0
+
+[node name="EditBoardButton" type="Button" parent="Margin/VBox/Toolbar"]
+layout_mode = 2
+flat = true
+
+[node name="RemoveBoardButton" type="Button" parent="Margin/VBox/Toolbar"]
+visible = false
+layout_mode = 2
+flat = true
+
+[node name="Spacer2" type="Control" parent="Margin/VBox/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="prune_automades" type="Button" parent="Margin/VBox/Toolbar"]
+layout_mode = 2
+tooltip_text = "Beware: This does not work 100% yet. Try it, but keep an eye on the 'orphans' folder."
+text = "prune automades"
+
+[node name="Board" parent="Margin/VBox" instance=ExtResource("3_ajhms")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EditBoardDialog" parent="." instance=ExtResource("4_yhep0")]
+title = "Edit board"
+size = Vector2i(300, 120)
+unresizable = true
+min_size = Vector2i(300, 80)
+
+[node name="ConfirmRemoveBoardDialog" type="ConfirmationDialog" parent="."]
+title = "Remove board?"
+unresizable = true
+
+[connection signal="theme_changed" from="." to="." method="_on_main_view_theme_changed"]
+[connection signal="visibility_changed" from="." to="." method="_on_main_view_visibility_changed"]
+[connection signal="pressed" from="Margin/VBox/Toolbar/AddBoardButton" to="." method="_on_add_board_button_pressed"]
+[connection signal="about_to_popup" from="Margin/VBox/Toolbar/BoardsMenu" to="." method="_on_boards_menu_about_to_popup"]
+[connection signal="pressed" from="Margin/VBox/Toolbar/EditBoardButton" to="." method="_on_edit_board_button_pressed"]
+[connection signal="pressed" from="Margin/VBox/Toolbar/RemoveBoardButton" to="." method="_on_remove_board_button_pressed"]
+[connection signal="pressed" from="Margin/VBox/Toolbar/prune_automades" to="." method="_on_prune_automades_pressed"]
+[connection signal="updated" from="EditBoardDialog" to="." method="_on_edit_board_dialog_updated"]
+[connection signal="confirmed" from="ConfirmRemoveBoardDialog" to="." method="_on_confirm_remove_board_dialog_confirmed"]

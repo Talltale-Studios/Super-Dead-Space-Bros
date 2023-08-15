@@ -1,0 +1,90 @@
+@user-rb6bx9sd8h:
+There's a much simpler way to visualize a state machine.
+ 
+To implement any state machine that is valid for ANY kind of state, you only
+need 1 function - one function that takes a state as input and returns a state
+as output.
+
+So...
+
+'change_state(new_state: State) -> State'
+
+If you accomplish that, through category theory  analysis you have a complete
+functional and valid state machine, because a state machine is just a monoid in
+the category of types.
+If you want to know the theory and rigorous reason why that is true it's
+because a state machine can be defined by a monoid in the category of types.
+
+And that's also why languages that dont have strong typing like python are
+obsolete in comparisson to C# or C++, cuz type matching allow you to use
+category theory to simplify your code by an insanity.
+
+The way I do it is simply inside the 'change_state' function, that is a public
+method in the 'state_machine' class, I call only 2 things.
+
+First I change the 'current_state' property of the 'state_machine' to be equal
+to the new state, then I call 'new_state.onAttach(state_machine, Entity)'.
+The 'onAttach' is a method that is present on every single 'State' object
+(which can be guaranteed to be true using interfaces) and is the basic
+functionality that must be called at the momment that state is activated.
+
+This method also allows that this same state machine structure can be used for
+anything in my code - players, NPC's, animations, sounds, events - anything that
+requires state changing I can control using the same structure.
+
+
+
+
+@AgnisNeZvers:
+I used the standard finite statemachine approach for a while in situations when
+the 'match' switch approach gets too complicated.
+In a project with action platformer controls this approach wasn't enough to do
+though.
+So I blended it with the behavior tree style - states having under states that
+get checked every frame if that will execute its logic for the current frame.
+Like 'PrimaryState' ('WallSlide', 'FlyUp', 'Fall', 'Run', 'Idle') and
+'JumpGroup' ('Walljump', 'JumpBuffer', 'DoubleJump', 'JumpDown', 'Jump') in a
+hierarchical order.
+
+
+@zarblitz (replying to @AgnisNeZvers):
+For me, the next step was to define hierarchical states so that shared behavior
+can be defined in ancestor states.
+For example, 'WalkState' inherits 'TravelState', and 'TravelState' exports a
+speed property that it uses to determine velocity along with the
+'input_direction' property that it inherits from the 'DirectionInput' state.
+Most of my states also are descended from an 'AnimationState' which exports a
+property for the animation name, the animated sprite node, and starts the
+animation in the 'enter()' method.
+
+The downside to this approach in Godot 4 is that since there is no longer any
+implicit 'super()' call, you need to remember to call that anytime you override
+one of the state methods, and as well check if the superclass logic returned a
+new state that you should transition to instead.
+
+Lastly, there's also no reason your 'StateMachine' class can't also inherit
+'State' and be a state of its own with its own child states to further
+modularize your behavior, especially if there's cases you want to consider some
+external conditions and don't want to bloat your root state machine.
+
+
+
+
+@flamebeard10339:
+Ideally you would want to have the states to be independent of each other,
+since if you wanted to create a new enemy that instead of following, it runs
+away when the player you would have to make minor rewrites to your states to
+make it work (instead of using the same wander state, and just changing export
+variables, for example).
+
+
+@entropywilldestroyusall1323 (replying to @flamebeard10339):
+In that case is it best for the machine itself to decide which state to
+transition to?
+
+
+@flamebeard10339 (replying to @entropywilldestroyusall1323):
+You could either extend the state machine class for more complicated AI, or you
+could create an event listener that waits for a condition or a set of
+conditions (probably just a signal) and then asks the standing to transition to
+another state.

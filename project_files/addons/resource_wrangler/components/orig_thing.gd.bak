@@ -1,0 +1,593 @@
+@tool
+extends GraphNode
+#class_name Thing
+
+# MIT License
+#
+# Copyright (c) 2023 Donn Ingle (donn.ingle@gmail.com)
+# Copyright (c) 2022 Nathan Hoad
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+signal selection_request()
+signal popup_menu_request(position: Vector2)
+signal delete_request()
+signal slot_changed
+
+
+const DataSlotScene = preload("res://addons/ClutterNodes/components/slot.tscn")
+const DataSlotScript = preload("res://addons/ClutterNodes/components/slot.gd")
+
+const ClutterSettings = preload("res://addons/ClutterNodes/utilities/settings.gd")
+const Hacks = preload("res://addons/ClutterNodes/utilities/class_hacks.gd")
+
+
+@onready var frame_style: StyleBoxFlat = get("theme_override_styles/frame")
+@onready var frame_automade_style: StyleBoxFlat = preload("res://addons/ClutterNodes/assets/graphnode_automade.stylebox")
+@onready var frame_missing_resource_style: StyleBoxFlat = preload("res://addons/ClutterNodes/assets/graphnode_missing_resource_file.stylebox")
+@onready var selected_style: StyleBoxFlat = get("theme_override_styles/selected_frame")
+
+@onready var comment_text_control: TextEdit = %comment_text
+@onready var thing_classname_label := %classname
+@onready var edit_script_button := %editscript
+@onready var thing_icon := %icon
+
+var board:Control
+
+var comment_text: String = "":
+	get:
+		return comment_text
+
+## A packet of info about this thing. For serializing etc.
+## TODO: This is a bit silly.
+var dbat_data: Dictionary:
+	get:
+		return dbat_data
+
+var classname_label: String = "":
+	get: return classname_label
+
+
+func _ready() -> void:
+	call_deferred("apply_theme")
+	comment_text_control.set("theme_override_styles/focus",
+	comment_text_control.get("theme_override_styles/normal"))
+	slot_changed.connect(_slot_changed)
+
+
+func apply_theme() -> void:
+	#edit_script_button.visible = false #complains all the time
+	if edit_script_button:
+		edit_script_button.icon = get_theme_icon("GDScript", "EditorIcons")
+
+	if is_instance_valid(comment_text):
+		comment_text_control.add_theme_font_override("font", get_theme_font("bold", "EditorFonts"))
+
+
+func _format_underscores(s:String)->String:
+	#return s.replace("_","/")
+	#return s.replace("_"," ")
+	return s
+
+func set_comment_text(next_text: String) -> void:
+	comment_text = next_text
+
+
+func to_serialized(scale: float) -> Dictionary:
+	return {
+		id = name,
+		comment_text = comment_text,
+		position_offset = position_offset / scale,
+		size = size / scale,
+		dbat_data = dbat_data,
+		updown = updown
+	}
+
+# slots array needs element 0 to be filled. It own't be used, so it's a null dict
+var slots:Array[Dictionary] = [{slot_name=null}]
+var res : Resource
+var resource_previews:Array
+
+
+func smallhash(classname:String)->int:
+	return abs(classname.hash() % 512) # hopefully not more than 512 resource types!
+
+
+## I want automatic "slot type" ints for the graph ports
+## I will try to make them from the hash
+## of the string of a class_name.
+func _get_slot_type(classname:String)->int:#obj:Resource)->int:
+	return smallhash(_get_slot_type_name(classname))
+
+
+func _get_slot_type_name(classname)->String:
+	if classname == "Array":
+		return "Array"
+
+	if classname == "MISSING": return classname
+
+	if classname in board.editor_plugin.blocked_resource_classes:
+		return "BADCLASS"
+
+	#print("Checking slot type for:", classname)
+	if ClassDB.class_exists(classname): #it's a built-in resource
+		var bc = Hacks.get_base_class_name_of_builtin_resources(classname)
+		#print("  best base class:", bc)
+		return bc
+
+	var base_class_name:String = Hacks.get_base_class_name_of_custom_resources(classname)
+
+	return base_class_name
+
+
+## A very sloppy way to try and get a constant color
+## via random, from a class name as a string.
+var rn = RandomNumberGenerator.new()
+func _get_port_col(classname:String)->Color:
+	var c:Color = Color.BLACK
+	var num:int = smallhash(classname)
+	rn.seed = num # this is the key to getting same values for each classname
+	var floatynum:float = float(num) * rn.randf()
+	var x = remap(floatynum, 0., 512.0 , 0., 1.)
+	c = c.from_ok_hsl(x, 0.6, 0.6)
+	return c
+
+
+## Ask the resource if it has a "preview_this" method
+## and return what it supplies, or just the obj.
+## This makes-use of a special method in custom classes.
+func _get_preview_resource(obj):#:Resource):
+	
+	if not obj: return
+
+	if obj.has_method("preview_this"):
+		#print("preview_this on obj:", obj, " ==", obj.preview_this())
+		return obj.preview_this()
+	#print("obj ", obj, " has no method")
+	return obj
+
+
+## TODO: I can't get this to work well. Many resource previews
+## simply refuse to update or are out of synch. I also need a
+## better way to display custom resource class previews which
+## may mean multiple preview icons or some chosen main one.
+func _set_preview():
+	%preview.texture = null
+	var prev
+	# if we are not one of my custom classes:
+	#if res and not res.has_method("preview_this"):
+	if not res.has_method("preview_this"):
+		prev = res # we will just pass resource entirely
+		# Notes/Quirks:
+		# FastNoiseLite simply will not draw a texture. yay.
+		# NoiseTexture2D seems to be one out of step with the
+		# actual settings. E.g "as_normap_map" will show the opposite
+		# image to what you'd expect.
+
+	# otherwise it is one of my resource classes
+	else:
+		if resource_previews.is_empty():
+			return
+		# Find anything at all to show in the properties
+		for r in resource_previews:
+			if r:
+				prev = r
+				#print("previewing r:", r)
+				break
+	if board and board.editor_plugin:
+		var rp:EditorResourcePreview=\
+		board.editor_plugin.get_editor_interface().get_resource_previewer()
+		#print(" res sent for preview:", res)
+		rp.queue_edited_resource_preview( prev, self, "_resource_preview_ready", prev)
+		#wierd:  rp.queue_resource_preview( prev.get_path(), ...)
+
+
+## Call-back for the queue_edited_resource_preview command
+func _resource_preview_ready(path:String, texture:Texture2D, thumbnail_preview:Texture2D, prev):
+	#path is string like this : "ID:-9223370458538119925" huh?
+	#print(path, " vs ", self.res)
+
+	# Gradients are too wide, the thumbnail is better
+	if prev is Gradient and thumbnail_preview:
+			%preview.texture = thumbnail_preview
+			return
+	# Everything else
+	if texture:
+		%preview.texture = texture
+
+
+## Only allow is Object through. Disallow Scripts.
+func _allow_through(dict:Dictionary)->bool:
+	var obj = res.get(dict.name)
+	if dict.name == "script":
+		return false
+	return dict.type in [24]#,28] # is type Object or Array
+	#return dict.type == 24 # is type Object
+
+
+# Welcome, random enum, to life!
+enum mode {NONE, CREATE, UPDATE, MISSING}
+
+
+func refresh_from_resource():
+	#print("refreshing thing:", self, " res:", self.res)
+	#from_serialized({state=mode.UPDATE}, 0)
+	#await get_tree().process_frame
+	call_deferred("from_serialized",{state=mode.UPDATE}, 0)
+
+## Recursive chain upstream from graph to the rhs output to next graph etc.
+func cascade_update():
+	# refresh me
+	self.refresh_from_resource()
+	# Now, who do i connect to?
+	var who_i_connect_to : Array = board.graph.get_connection_list().filter(
+		func(d):return d.from == self.name)
+	# tell each of them to also refresh.
+	for graph in who_i_connect_to:
+		var other_graph = board.things.get(graph.to)
+		if other_graph:
+			other_graph.cascade_update()
+
+
+## Painfully recnstruct the entire graph node (me) to represent the
+## latest info.
+## TODO: Possibly remove the CREATE/UPDATE distinction for better
+## live-coverage of ongoing resource development.
+func from_serialized(data: Dictionary, scale: float) -> void:
+	# Just pull out the state, if not there we assume CREATE
+	var state:int = data.get("state", mode.CREATE)
+	if state == mode.CREATE:
+		if data.has("comment_text"): set("comment_text", data.comment_text)
+		if data.has("position_offset"): set("position_offset", data.position_offset * scale)
+		if data.has("size"): set("size", data.size * scale)
+		if data.has("dbat_data"): set("dbat_data", data.dbat_data)
+
+		updown = data.get("updown",false)
+		updown_state = int(updown) + 1
+
+	if FileAccess.file_exists(dbat_data.files[0]):
+		res = load(dbat_data.files[0])
+		# If this file is in automade_path, make sure it's flagged such.
+		var test := res.get_path().begins_with(ClutterSettings.automade_path)
+		if test:
+			dbat_data["automade"] = true
+	else:
+		#oh shit...
+		#The resource file was probably moved or it's in orphans
+		state = mode.MISSING
+
+	#print("**:", dbat_data.files[0])
+
+	var tit:String = "%s"
+	var graph_main_classname:String
+	if state != mode.MISSING:
+		var slot_dict = {}
+		var slotidx:int=1
+		graph_main_classname = Hacks.lookup_class_name_by_tres(dbat_data.files[0])
+		#print("classname found as:", graph_main_classname)
+		resource_previews.clear()
+		dbat_data.classname = "NO CLASS YET"
+		if graph_main_classname:
+			dbat_data.classname = graph_main_classname
+
+			var properties = res.get_property_list()
+			#print("properties:", properties)
+			# When a property is an Array, we get this kind of thing:
+			# @export var many_resources : Array[Resource]
+			# { "name": "many_resources", "class_name": &"", "type": 28,
+			# "hint": 23, "hint_string": "24/17:Resource", "usage": 4102 }]
+			#
+			# @export var vague_array : Array
+			# { "name": "vague_array", "class_name": &"", "type": 28,
+			# "hint": 0, "hint_string": "Array", "usage": 4102 }]
+			#
+
+			for i in range(properties.size()):
+				if _allow_through(properties[i]):
+					print("allowed:", properties[i])
+					var prop_class_name =\
+					Hacks.get_class_name_from_resource_property(properties[i])
+					print("prop_class_name:", prop_class_name)
+
+					if prop_class_name:
+						var DATA_SLOT_SCENE
+						var prop_var_value
+						match state:
+							mode.CREATE:
+								DATA_SLOT_SCENE = DataSlotScene.instantiate()
+								add_child(DATA_SLOT_SCENE) # do now to get ready to run early
+								# look up the property in the actual resource to get the value
+								# i.e if there's a var called "BOO" in res, then
+								# we are getting res.BOO
+								prop_var_value = res.get(properties[i]["name"])
+								#print("prop_var_value:", prop_var_value)
+							mode.UPDATE:
+								DATA_SLOT_SCENE = slots[slotidx].data_slot_scene
+								prop_var_value = slots[slotidx].slot_value
+								# make sure to put the updated value into the
+								# actual resource's variable
+								res.set(properties[i].name, prop_var_value)
+
+#						if graph_main_classname == "Array":
+#							if prop_var_value.is_empty():
+#								prop_var_value = [1]
+
+
+#						slot_dict = {
+#							slot_name=properties[i].name,
+#							slot_type=_get_slot_type_name(prop_class_name),
+#							slot_value=prop_var_value,
+#							data_slot_scene=DATA_SLOT_SCENE,
+#							slot_index=slotidx
+#						}
+						slot_dict["slot_name"]=properties[i].name
+						print("Here")
+						slot_dict["slot_type"]=_get_slot_type_name(prop_class_name)
+						print("Here2")
+						slot_dict["slot_value"]=prop_var_value
+						print("Here3")
+						slot_dict["data_slot_scene"]=DATA_SLOT_SCENE
+						print("Here4")
+						slot_dict["slot_index"]=slotidx
+
+
+						#print("slot_dict:", slot_dict)
+						# don't want to keep appending when updating this node
+						# TODO: Erase all slots and remake them every time
+						# so that I  can alter my classes and the graphs will
+						# accommodate. In theory.
+						if state == mode.CREATE:
+							slots.append(slot_dict)
+
+						# Set slot label
+						var dsc = slot_dict.data_slot_scene
+						dsc.slot_label.text = "%s:" % [slot_dict.slot_name]
+						dsc.slot_value.text ="(%s) %s" %\
+							[ _format_underscores(slot_dict.slot_type),
+							_shorten_resource_id(slot_dict.slot_value) ]
+
+						# Set slot INPUT port
+						var slot_type = _get_slot_type(prop_class_name)
+						var port_color: Color = _get_port_col(prop_class_name)
+						set_slot(slotidx,
+							true, slot_type, port_color,
+							false,0, Color(0,1,0),
+							null, null, true
+						)
+
+						if state == mode.CREATE:
+							DATA_SLOT_SCENE.clear_button.pressed.connect(
+								_slot_clear_button_pressed.bind(slotidx)
+							)
+
+						# Try to find some kind of resource preview
+						resource_previews.append(_get_preview_resource(prop_var_value))
+
+						slotidx += 1
+
+		if state == mode.CREATE:
+			var spacer_down:Control = Control.new()
+			spacer_down.custom_minimum_size = Vector2(1,16)
+			add_child(spacer_down)
+
+		var icon:Texture2D = Hacks.get_icon_for(graph_main_classname, board.editor_plugin)
+		if icon:
+			thing_icon.texture = icon
+		else:
+			var iconpaf = Hacks.get_script_icon_paf(res)
+			if iconpaf != "":
+				var image:Image = Image.load_from_file(iconpaf)
+				var texture = ImageTexture.create_from_image(image)
+				if texture:
+					thing_icon.texture = texture
+
+		if dbat_data.get("automade",null):
+			self.set("theme_override_styles/frame", frame_automade_style)
+			tit = "AUTOMADE %s"
+			%moveto.visible = true
+		else:
+			self.set("theme_override_styles/frame", frame_style)
+			%moveto.visible = false
+
+		# Set the ref count label
+		%refcount.text = str(res.get_reference_count())
+
+		# set the classname label of the entire node
+		classname_label = _format_underscores(dbat_data.classname)
+		thing_classname_label.text = classname_label
+
+		comment_text_control.text = comment_text
+	else:
+		#MISSING resource file
+		#TODO: Add a test to look for the file in orphans,
+		# and offer a button to move it back to expected path.
+		# or .... just move it back anyway... ?
+
+		self.set("theme_override_styles/frame", frame_missing_resource_style)
+		tit = "MISSING RESOURCE FILE %s"
+		%moveto.visible = false
+		%refcount.visible = false
+		%comment_text.visible = false
+
+		thing_classname_label.text = "Look in orphans folder."
+		graph_main_classname = "MISSING"
+
+	#Set the graph node 'window' title at the top
+	tit = tit % [dbat_data.files[0].get_file()]
+	tit = "%s" % [tit]
+	if state != mode.MISSING:
+		self.title ="%s %s  " % [_format_underscores(tit), _shorten_resource_id(res)]
+	else:
+		self.title = "%s  " % _format_underscores(tit)
+
+	# set the main out node
+	var graph_slot_type = _get_slot_type(graph_main_classname)
+	var out_port_color: Color = _get_port_col(graph_main_classname)
+	set_slot(0,
+		false, 0, Color(0,1,0),
+		true, graph_slot_type, out_port_color,
+		null, null, true
+	)
+
+	if state != mode.MISSING:
+		call_deferred("_set_preview")
+		call_deferred("_roll_up_or_down_or_do_nothing")
+
+
+func _shorten_resource_id(r)->String:
+	# because r is an Object/Array, stringifying it will add
+	# the <...> brackets. I redact the start and assume the end.
+	if r:
+		var s = str(r)
+		return "<RES%s  " % [s.right(6)]
+	return "<null>"
+
+
+var updown:bool = false
+enum rolledstate {DUNNO, UP,DOWN}
+var updown_state = rolledstate.DUNNO
+func _roll_up_or_down_or_do_nothing():
+	match updown_state:
+		rolledstate.DOWN:
+			if updown: #told to go up
+				$VBox.propagate_call("set_visible",[false])
+				%spacer_down.visible = true
+				%comment_text.visible = false
+				$VBox.visible = true
+				for s in get_children():
+					s.set_size(Vector2(s.get_size().x,23))
+				$VBox.size.y = 64
+				set("size",64)
+				updown_state = rolledstate.UP
+		rolledstate.UP:
+			if updown == false: #told to go down
+				$VBox.propagate_call("set_visible",[true])
+				#%editscript.visible = true
+				#%showinfs.visible = true
+				%comment_text.visible = true
+				%moveto.visible = dbat_data.get("automade",false)
+				for s in get_children():
+					s.set_size(Vector2(s.get_size().x,32))
+				set("size",0) #seems to work out the actual size !
+				updown_state = rolledstate.DOWN
+
+
+### Signals
+
+func _slot_changed():
+	accept_event()
+	cascade_update()
+
+
+func _on_thing_theme_changed() -> void:
+	apply_theme()
+
+
+func _on_thing_dragged(from: Vector2, to: Vector2) -> void:
+	board.undo_redo.create_action("Move thing")
+	board.undo_redo.add_do_method(board, "set_thing_position_offset", name, to)
+	board.undo_redo.add_undo_method(board, "set_thing_position_offset", name, from)
+	board.undo_redo.commit_action()
+
+
+func _on_text_edit_focus_entered() -> void:
+	emit_signal("selection_request")
+
+
+func _on_text_edit_focus_exited() -> void:
+	if comment_text_control.text != comment_text:
+		board.undo_redo.create_action("Set thing text")
+		board.undo_redo.add_do_method(board, "set_thing_comment_text_deferred",
+		 name, comment_text_control.text)
+		board.undo_redo.add_undo_method(board, "set_thing_comment_text_deferred",
+		 name, comment_text)
+		board.undo_redo.commit_action()
+
+
+func _on_thing_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 2:
+		emit_signal("popup_menu_request", event.global_position)
+		accept_event()
+
+	if event is InputEventKey and event.is_pressed():
+		match event.as_text():
+			"Escape":
+				board.graph.grab_focus()
+
+	if event is InputEventMouseButton and event.double_click:
+		updown = !updown
+		_roll_up_or_down_or_do_nothing()
+		accept_event()
+
+
+func _on_node_selected() -> void:
+	emit_signal("selection_request")
+
+
+func _on_editscript_pressed() -> void:
+	board.edit(self)
+
+
+## Clear the slot's name and value
+## Also remove any noodle going into it.
+func _slot_clear_button_pressed(idx):
+	var val = slots[idx].slot_value
+
+	board.undo_redo.create_action("Clear slot")
+	board.undo_redo.add_do_method(self, "_set_slot", idx, null)
+	board.undo_redo.add_undo_method(self, "_set_slot", idx, val)
+
+	var cl = board.graph.get_connection_list()
+	idx = idx - 1
+	# find myself in the list, also narrow it down to the exact to_port
+	# should return only one element (or none) in cl:
+	cl = cl.filter(func(i):return i.to == self.name and i.to_port == idx)
+	if not cl.is_empty():
+		var d = cl.back()
+		var from_port = d.from_port
+		var to_port = d.to_port
+		var from_node = d.from
+		var to_node = self.name
+		#print("from_node:",from_node," from_port:", from_port," to_node:", to_node, " to_port:", to_port)
+
+		board.undo_redo.add_do_method(board.graph, "disconnect_node", from_node, from_port, to_node, to_port)
+		board.undo_redo.add_undo_method(board.graph, "connect_node",  from_node, from_port, to_node, to_port)
+
+	board.undo_redo.commit_action()
+	accept_event()
+
+
+func _set_slot(idx, val):
+	slots[idx].slot_value = val
+	refresh_from_resource()
+
+
+func _on_moveto_pressed() -> void:
+	var fd:FileDialog = board.file_dialogue
+	fd.set_filters(PackedStringArray(["*.tres"]))
+	fd.set_meta("thing",self) # using the meta to store the thing ref
+	fd.visible = true
+
+
+func _on_close_pressed() -> void:
+	emit_signal("delete_request")
+
+
+func _on_showinfs_pressed() -> void:
+	board.show_in_filesystem(self)
