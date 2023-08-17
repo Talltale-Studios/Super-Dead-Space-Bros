@@ -1,23 +1,55 @@
-[gd_scene load_steps=156 format=3 uid="uid://y4rbi5ibv6li"]
+[gd_scene load_steps=158 format=3 uid="uid://y4rbi5ibv6li"]
 
 [ext_resource type="Script" path="res://core/data/scripts/characters/player/player_controller.gd" id="1_vgxc6"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/player_state_machine.gd" id="2_hionn"]
 [ext_resource type="Texture2D" uid="uid://b6hgjlvycdob3" path="res://core/content/resources/characters/player/legs/legs.tres" id="2_ityqo"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_stand_state.gd" id="3_k0bsc"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_fall_state.gd" id="4_hn2n0"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/player_state_machine.gd" id="2_nbym7"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_stand_state.gd" id="3_qqj56"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_fall_state.gd" id="4_w0b5q"]
 [ext_resource type="Texture2D" path="res://core/content/resources/characters/player/weaponflash/weaponflash.tres" id="4_y15yd"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_jump_state.gd" id="5_iht7d"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_run_state.gd" id="6_57bli"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_crouch_state.gd" id="7_33h3l"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/player/leg_states/leg_climb_state.gd" id="8_j8dts"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_jump_state.gd" id="5_dk60t"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_run_state.gd" id="6_sjclp"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_crouch_state.gd" id="7_oyvdc"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_climb_state.gd" id="8_oihgp"]
 [ext_resource type="Texture2D" uid="uid://mfihf6k6xk2e" path="res://core/content/resources/characters/player/torso/aim_01.tres" id="10_yubrf"]
 
-[sub_resource type="CapsuleShape2D" id="59"]
-radius = 6.0
-height = 34.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_55fv1"]
-size = Vector2(12, 7)
+[sub_resource type="Animation" id="Animation_g8gem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegsSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TorsoSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -23)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponflashSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -23)]
+}
 
 [sub_resource type="Animation" id="51"]
 resource_name = "climb"
@@ -271,6 +303,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gfha2"]
 _data = {
+"RESET": SubResource("Animation_g8gem"),
 "climb": SubResource("51"),
 "crouch": SubResource("52"),
 "dash": SubResource("Animation_esoof"),
@@ -341,6 +374,45 @@ states/stand/node = SubResource("63")
 states/stand/position = Vector2(167.267, 37)
 transitions = ["stand", "run", SubResource("64"), "run", "stand", SubResource("65"), "stand", "jump", SubResource("68"), "run", "jump", SubResource("69"), "jump", "stand", SubResource("70"), "stand", "crouch", SubResource("71"), "crouch", "stand", SubResource("72"), "run", "crouch", SubResource("73"), "run", "fall", SubResource("75"), "jump", "fall", SubResource("76"), "crouch", "fall", SubResource("77"), "stand", "fall", SubResource("78"), "fall", "stand", SubResource("79"), "fall", "jump", SubResource("80"), "Start", "stand", SubResource("AnimationNodeStateMachineTransition_oupdm")]
 graph_offset = Vector2(-84.7325, 33.784)
+
+[sub_resource type="Animation" id="Animation_mwyeb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TorsoSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TorsoSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TorsoSprite/Muzzle:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14, 0)]
+}
 
 [sub_resource type="Animation" id="57"]
 resource_name = "climb"
@@ -2847,6 +2919,7 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8bj2c"]
 _data = {
+"RESET": SubResource("Animation_mwyeb"),
 "climb": SubResource("57"),
 "down left": SubResource("49"),
 "down right": SubResource("47"),
@@ -2898,6 +2971,33 @@ _data = {
 "right -9": SubResource("28"),
 "up left": SubResource("50"),
 "up right": SubResource("24")
+}
+
+[sub_resource type="Animation" id="Animation_g7db7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponflashSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponflashSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="125"]
@@ -4305,6 +4405,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g44u2"]
 _data = {
+"RESET": SubResource("Animation_g7db7"),
 "climb": SubResource("125"),
 "down left": SubResource("126"),
 "down right": SubResource("127"),
@@ -4358,6 +4459,21 @@ _data = {
 "up right": SubResource("131")
 }
 
+[sub_resource type="Animation" id="Animation_cp53q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponflashSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="133"]
 resource_name = "shoot"
 length = 0.1
@@ -4406,6 +4522,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k484g"]
 _data = {
+"RESET": SubResource("Animation_cp53q"),
 "shoot": SubResource("133"),
 "standby": SubResource("135")
 }
@@ -4450,7 +4567,7 @@ surface_jump_time_to_peak = 0.5
 surface_jump_time_to_descend = 0.4
 surface_grounded_acceleration = 0.3
 surface_airborne_acceleration = 0.15
-surface_grounded_friction = 1.0
+surface_grounded_friction = 0.5
 surface_airborne_friction = 0.15
 surface_y_velocity_clamp_max = 16.0
 underwater_jump_height = 64.0
@@ -4466,36 +4583,31 @@ space_jump_time_to_descend = 0.4
 space_grounded_acceleration = 0.1
 space_grounded_friction = 0.1
 
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(6, -29, 5, -31, 3, -33, 1, -34, -1, -34, -3, -33, -5, -31, -6, -29, -6, 0, 6, 0)
+
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("2_hionn")
+script = ExtResource("2_nbym7")
 root = NodePath("..")
 initial_state = NodePath("PlayerLegStandState")
 
 [node name="PlayerLegStandState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("3_k0bsc")
+script = ExtResource("3_qqj56")
 
 [node name="PlayerLegFallState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("4_hn2n0")
+script = ExtResource("4_w0b5q")
 
 [node name="PlayerLegJumpState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("5_iht7d")
+script = ExtResource("5_dk60t")
 
 [node name="PlayerLegRunState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("6_57bli")
+script = ExtResource("6_sjclp")
 
 [node name="PlayerLegCrouchState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("7_33h3l")
+script = ExtResource("7_oyvdc")
 
 [node name="PlayerLegClimbState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("8_j8dts")
-
-[node name="CollisionCapsule" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
-shape = SubResource("59")
-
-[node name="CollisionRectangle" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_55fv1")
+script = ExtResource("8_oihgp")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2048
@@ -4516,10 +4628,9 @@ position = Vector2(0, -23)
 texture = ExtResource("10_yubrf")
 hframes = 6
 vframes = 8
-frame = 18
 
 [node name="Muzzle" type="Marker2D" parent="TorsoSprite"]
-position = Vector2(-10, -10)
+position = Vector2(14, 0)
 
 [node name="WeaponflashSprite" type="Sprite2D" parent="."]
 visible = false
@@ -4529,7 +4640,6 @@ position = Vector2(0, -23)
 texture = ExtResource("4_y15yd")
 hframes = 6
 vframes = 8
-frame = 18
 
 [node name="LegsAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://vmqvittdn3u6"]
+[gd_scene load_steps=19 format=3 uid="uid://vmqvittdn3u6"]
 
 [ext_resource type="Script" path="res://core/data/scripts/characters/enemies/blade_spinner/blade_spinner_controller.gd" id="1_oyakm"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/enemies/blade_spinner/blade_spinner_state_machine.gd" id="2_vj408"]
-[ext_resource type="Script" path="res://core/data/classes/statemachines/characters/enemies/blade_spinner/states/wander_state.gd" id="3_djssh"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/enemies/blade_spinner/blade_spinner_state_machine.gd" id="2_gf0i7"]
+[ext_resource type="Script" path="res://core/data/classes/state_machines/characters/enemies/blade_spinner/states/wander_state.gd" id="3_iw2sp"]
 [ext_resource type="Texture2D" uid="uid://c8cixkr5qqjsc" path="res://core/content/resources/characters/enemies/spinner/spinner_body_steel.tres" id="4_p831d"]
 [ext_resource type="Texture2D" uid="uid://p6aqx4ahhtt8" path="res://core/content/resources/characters/enemies/spinner/spinner_blades_gold.tres" id="5_p8p4h"]
 [ext_resource type="Texture2D" uid="uid://b1gsky20qkomb" path="res://core/content/resources/characters/enemies/spinner/spinner_skull_green.tres" id="6_wd5hr"]
@@ -26,9 +26,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(0.90125),
 "update": 1,
-"values": [1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_ddfsf"]
@@ -53,6 +53,21 @@ _data = {
 "spin": SubResource("Animation_ddfsf")
 }
 
+[sub_resource type="Animation" id="Animation_2dyci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BladesSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_67v2b"]
 resource_name = "spin"
 loop_mode = 1
@@ -71,7 +86,32 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqk76"]
 _data = {
+"RESET": SubResource("Animation_2dyci"),
 "spin": SubResource("Animation_67v2b")
+}
+
+[sub_resource type="Animation" id="Animation_voegt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkullSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0pibx"]
+resource_name = "temp"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4wly"]
+_data = {
+"RESET": SubResource("Animation_voegt"),
+"temp": SubResource("Animation_0pibx")
 }
 
 [node name="BladeSpinner" type="CharacterBody2D"]
@@ -84,12 +124,12 @@ speed = 50.0
 shape = SubResource("CircleShape2D_rtba3")
 
 [node name="BladeSpinnerStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("2_vj408")
+script = ExtResource("2_gf0i7")
 root = NodePath("..")
 initial_state = NodePath("BladeSpinnerWanderState")
 
 [node name="BladeSpinnerWanderState" type="Node" parent="BladeSpinnerStateMachine"]
-script = ExtResource("3_djssh")
+script = ExtResource("3_iw2sp")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 1024
@@ -111,7 +151,6 @@ target_position = Vector2(9, 0)
 [node name="BodySprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_p831d")
 hframes = 10
-frame = 1
 
 [node name="BladesSprite" type="Sprite2D" parent="."]
 texture = ExtResource("5_p8p4h")
@@ -134,3 +173,6 @@ libraries = {
 }
 
 [node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t4wly")
+}
