@@ -27,20 +27,18 @@ grow_vertical = 2
 [node name="TopBar" type="HBoxContainer" parent="MainCtnr"]
 layout_mode = 2
 
-[node name="AddBtn" type="Button" parent="MainCtnr/TopBar" node_paths=PackedStringArray("shortcut_context")]
+[node name="AddBtn" type="Button" parent="MainCtnr/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Add Setting"
-shortcut_context = NodePath("")
 disabled = true
 icon = ExtResource("3_tdauq")
 flat = true
 
-[node name="DeleteBtn" type="Button" parent="MainCtnr/TopBar" node_paths=PackedStringArray("shortcut_context")]
+[node name="DeleteBtn" type="Button" parent="MainCtnr/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Delete Setting"
-shortcut_context = NodePath("")
 disabled = true
 icon = ExtResource("4_xcneu")
 flat = true

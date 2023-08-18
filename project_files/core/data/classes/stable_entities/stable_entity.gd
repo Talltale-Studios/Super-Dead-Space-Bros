@@ -1,5 +1,4 @@
-## Entities that extend AnimatableBody2D. Includes entities such as moving
-## platforms.
+## The base class for all entities that extend [code]AnimatableBody2D[/code].
 class_name GameStableEntity
 extends AnimatableBody2D
 

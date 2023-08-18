@@ -1,14 +1,14 @@
 extends GameKinematicPlayerProjectile
 
 
-var can_move : bool = true
+var can_move: bool = true
 
 
 @onready var anim_player = $AnimationPlayer
 
 
 func _physics_process(_delta: float) -> void:
-	var direction : Vector2 = Vector2.RIGHT.rotated(rotation)
+	var direction: Vector2 = Vector2.RIGHT.rotated(rotation)
 	if can_move:
 		velocity = direction * speed
 		set_velocity(velocity)

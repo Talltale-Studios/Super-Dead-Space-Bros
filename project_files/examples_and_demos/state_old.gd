@@ -1,8 +1,8 @@
-class_name State
+class_name OldGameState
 extends Node
 
 
-var fsm: FiniteStateMachine
+var fsm: OldGameStateMachine
 
 func enter():
 	pass

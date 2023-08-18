@@ -1,32 +1,33 @@
+## Virtual base class for all state machines
 class_name GameStateMachine
 extends Node
 
 
-const DEBUG : bool = true
+const DEBUG: bool = true
 
 
-## Path to the initial active state.
-## We export it to be able to pick the initial state in the inspector.
-@export var initial_state := NodePath()
+@export var actor : PhysicsBody2D
+## Path to the initial active state. It is exported so that the
+## [code]initial_state[/code] can be picked in the Inspector.
+@export_node_path("GameState") var initial_state: NodePath
 
 
-var history : Array[String]
+var history: Array[String]
 
 
 ## The current active state.
 ## At the start of the game, we get the [code]initial_state[/code].
 var current_state: Object
-#@onready var current_state : GameState = get_node(initial_state)
 
 
 func _ready() -> void:
-	# Set the initial state to the first child node
-	current_state = get_child(0)
+	# Set the initial active state to the [code]initial_state[/code]
+	current_state = get_node(initial_state)
 	_enter_state()
 
 
 ## Change to a new state
-func change_state(new_state : String) -> void:
+func change_state(new_state: String) -> void:
 	history.append(current_state.name)
 	current_state = get_node(new_state.to_pascal_case())
 	_enter_state()

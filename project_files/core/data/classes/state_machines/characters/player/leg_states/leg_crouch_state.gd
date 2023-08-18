@@ -4,24 +4,24 @@ extends GamePlayerLegState
 func physics_process(delta: float) -> void:
 	# Flip Sprite
 	if _get_x_input() > 0:
-		root.legs_sprite.flip_h = false
+		actor.legs_sprite.flip_h = false
 	elif _get_x_input() < 0:
-		root.legs_sprite.flip_h = true
+		actor.legs_sprite.flip_h = true
 	
 	# State switching
 	if Input.is_action_just_released("down"):
-		exit_state("stand")
+		transition_to("stand")
 		return
-	if not root.is_on_floor():
-		exit_state("fall")
+	if not actor.is_on_floor():
+		transition_to("fall")
 		return
 	
 	# State animation
-	root.legs_statemachine.travel("crouch")
+	actor.legs_statemachine.travel("crouch")
 	
 	# Movement
-	root.snap_vector = Vector2.DOWN
-	root.velocity.x = lerp(root.velocity.x, 0.0, root.fric)
+	actor.snap_vector = Vector2.DOWN
+	actor.velocity.x = lerp(actor.velocity.x, 0.0, actor.fric)
 	
 	# Gravity
 	_apply_gravity(delta)

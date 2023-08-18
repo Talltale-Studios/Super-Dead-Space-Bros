@@ -1,8 +1,5 @@
 class_name GamePlayerStateMachine
-extends GameStateMachine
-
-
-@export var root : GameKinematicPlayer
+extends GameCharacterStateMachine
 
 
 func change_state(new_state : String) -> void:

@@ -1,4 +1,4 @@
-class_name FiniteStateMachine
+class_name OldGameStateMachine
 extends Node
 
 

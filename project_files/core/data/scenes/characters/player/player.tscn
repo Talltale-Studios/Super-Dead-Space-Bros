@@ -4560,9 +4560,9 @@ floor_max_angle = 1.0472
 floor_snap_length = 8.0
 script = ExtResource("1_vgxc6")
 speed = 200
-max_jumps = 3
+max_jumps = 2
 surface_jump_height = 64.0
-surface_jump_velocity_cut = 0.5
+surface_jump_release_velocity_cut = 0.5
 surface_jump_time_to_peak = 0.5
 surface_jump_time_to_descend = 0.4
 surface_grounded_acceleration = 0.3
@@ -4571,13 +4571,11 @@ surface_grounded_friction = 0.5
 surface_airborne_friction = 0.15
 surface_y_velocity_clamp_max = 16.0
 underwater_jump_height = 64.0
-underwater_jump_velocity_cut = 0.5
 underwater_jump_time_to_peak = 0.5
 underwater_jump_time_to_descend = 0.4
 underwater_grounded_acceleration = 0.2
 underwater_grounded_friction = 0.4
 space_jump_height = 64.0
-space_jump_velocity_cut = 0.5
 space_jump_time_to_peak = 0.5
 space_jump_time_to_descend = 0.4
 space_grounded_acceleration = 0.1
@@ -4586,9 +4584,8 @@ space_grounded_friction = 0.1
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(6, -29, 5, -31, 3, -33, 1, -34, -1, -34, -3, -33, -5, -31, -6, -29, -6, 0, 6, 0)
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
+[node name="PlayerStateMachine" type="Node" parent="."]
 script = ExtResource("2_nbym7")
-root = NodePath("..")
 initial_state = NodePath("PlayerLegStandState")
 
 [node name="PlayerLegStandState" type="Node" parent="PlayerStateMachine"]
@@ -4683,7 +4680,5 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
 
 [connection signal="timeout" from="Timers/JumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]

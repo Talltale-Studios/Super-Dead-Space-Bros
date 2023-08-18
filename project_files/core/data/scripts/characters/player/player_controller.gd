@@ -1,7 +1,7 @@
 extends GameKinematicPlayer
 
 
-var legs_statemachine : AnimationNodeStateMachinePlayback
+var legs_statemachine: AnimationNodeStateMachinePlayback
 
 
 func _physics_process(_delta):
@@ -9,7 +9,7 @@ func _physics_process(_delta):
 	
 	_aim()
 	if Input.is_action_pressed("shoot"):
-		var weaponflash_statemachine : AnimationNodeStateMachinePlayback = weaponflash_anim_tree["parameters/playback"]
+		var weaponflash_statemachine: AnimationNodeStateMachinePlayback = weaponflash_anim_tree["parameters/playback"]
 		weaponflash_statemachine.travel("shoot")
 	
 	match environment:
@@ -49,7 +49,7 @@ func _physics_process(_delta):
 
 func _input(event):
 	if event.is_action_released("jump") and velocity.y < 0:
-		velocity.y *= jump_velocity_cut
+		velocity.y *= jump_release_velocity_cut
 
 
 func _on_jump_buffer_timer_timeout():

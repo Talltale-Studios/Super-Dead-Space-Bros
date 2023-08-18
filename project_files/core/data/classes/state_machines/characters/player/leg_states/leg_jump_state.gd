@@ -5,43 +5,43 @@ extends GamePlayerLegState
 func physics_process(delta: float) -> void:
 	# Flip Sprite
 	if _get_x_input() > 0:
-		root.legs_sprite.flip_h = false
+		actor.legs_sprite.flip_h = false
 	elif _get_x_input() < 0:
-		root.legs_sprite.flip_h = true
+		actor.legs_sprite.flip_h = true
 	
 	# Jumping and state switching
-	if root.can_jump:
-		if root.is_on_floor() or not root.coyote_timer.is_stopped():
-			if not root.has_jumped:
-				root.coyote_timer.stop()
+	if actor.can_jump:
+		if actor.is_on_floor() or not actor.coyote_timer.is_stopped():
+			if not actor.has_jumped:
 				_jump()
-				root.has_jumped = true
+				actor.has_jumped = true
 			else:
-				root.has_jumped = false
-				root.jumps_made = 0
-				exit_state("stand")
+				actor.has_jumped = false
+				actor.jumps_made = 0
+				transition_to("stand")
 				return
 		else:
-			if root.velocity.y > 0:
-				exit_state("fall")
+			if actor.velocity.y > 0:
+				transition_to("fall")
 				return
 			if Input.is_action_just_pressed("jump"):
-				if root.jumps_made < root.max_jumps:
+				# Coyote Jumping
+				if actor.jumps_made < actor.max_jumps and GameSettings.is_coyote_jump_allowed:
 					_jump()
 	else:
-		if root.velocity.y > 0:
-			exit_state("fall")
+		if actor.velocity.y > 0:
+			transition_to("fall")
 			return
 		else:
-			exit_state("stand")
+			transition_to("stand")
 			return
 	
 	# State animation
-	root.legs_statemachine.travel("jump")
+	actor.legs_statemachine.travel("jump")
 	
 	# Movement
-	root.snap_vector = Vector2.ZERO
-	root.velocity.x = lerp(root.velocity.x, root.speed * _get_x_input(), root.accel)
+	actor.snap_vector = Vector2.ZERO
+	actor.velocity.x = lerp(actor.velocity.x, actor.speed * _get_x_input(), actor.accel)
 	
 	# Gravity
 	_apply_gravity(delta)

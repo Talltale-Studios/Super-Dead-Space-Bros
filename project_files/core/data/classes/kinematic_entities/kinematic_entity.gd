@@ -1,5 +1,5 @@
-## Entities that extend CharacterBody2D. Includes entities such as the player,
-## enemies and projectiles.
+## The base class for all entities that extend
+## [code]CharacterBody2D[/code].
 class_name GameKinematicEntity
 extends CharacterBody2D
 

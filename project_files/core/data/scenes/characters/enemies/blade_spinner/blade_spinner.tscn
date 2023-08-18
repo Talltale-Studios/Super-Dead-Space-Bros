@@ -123,9 +123,8 @@ speed = 50.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rtba3")
 
-[node name="BladeSpinnerStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
+[node name="BladeSpinnerStateMachine" type="Node" parent="."]
 script = ExtResource("2_gf0i7")
-root = NodePath("..")
 initial_state = NodePath("BladeSpinnerWanderState")
 
 [node name="BladeSpinnerWanderState" type="Node" parent="BladeSpinnerStateMachine"]

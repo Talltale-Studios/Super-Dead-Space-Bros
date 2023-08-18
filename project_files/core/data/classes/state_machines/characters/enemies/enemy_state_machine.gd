@@ -1,8 +1,5 @@
 class_name GameEnemyStateMachine
-extends GameStateMachine
-
-
-@export var root : CharacterBody2D
+extends GameCharacterStateMachine
 
 
 func _enter_state() -> void:
@@ -10,5 +7,5 @@ func _enter_state() -> void:
 		print("Entering State: ", current_state.name)
 	# Give the new state a reference to this statemachine script
 	current_state.state_machine = self
-	current_state.root = root
+	current_state.actor = actor
 	current_state.enter_state()

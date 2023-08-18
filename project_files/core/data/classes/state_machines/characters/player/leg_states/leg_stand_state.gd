@@ -5,31 +5,31 @@ extends GamePlayerLegState
 func physics_process(delta: float) -> void:
 	# Flip Sprite
 	if _get_x_input() > 0:
-		root.legs_sprite.flip_h = false
+		actor.legs_sprite.flip_h = false
 	elif _get_x_input() < 0:
-		root.legs_sprite.flip_h = true
+		actor.legs_sprite.flip_h = true
 	
 	# State switching
 	if not is_zero_approx(_get_x_input()):
-		exit_state("run")
+		transition_to("run")
 		return
 	if Input.is_action_just_pressed("jump"):
-		exit_state("jump")
+		transition_to("jump")
 		return
-	if root.is_on_floor() and Input.is_action_just_pressed("down"):
-		exit_state("crouch")
+	if actor.is_on_floor() and Input.is_action_just_pressed("down"):
+		transition_to("crouch")
 		return
-	if not root.is_on_floor():
+	if not actor.is_on_floor():
 		_apply_coyote_time()
-		exit_state("fall")
+		transition_to("fall")
 		return
 	
 	# State animation
-	root.legs_statemachine.travel("stand")
+	actor.legs_statemachine.travel("stand")
 	
 	# Movement
-	root.snap_vector = Vector2.DOWN
-	root.velocity.x = lerp(root.velocity.x, 0.0, root.fric)
+	actor.snap_vector = Vector2.DOWN
+	actor.velocity.x = lerp(actor.velocity.x, 0.0, actor.fric)
 	
 	# Gravity
 	_apply_gravity(delta)

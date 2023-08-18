@@ -24,92 +24,95 @@ enum ENVIRONMENTS {
 }
 
 
-@export var speed : int
-@export var max_jumps : int
+@export var speed: int
+@export var max_jumps: int = 1
 
 @export_group("Environment Variables")
 @export_subgroup("Surface", "surface")
-@export var surface_jump_height : float
-@export var surface_jump_velocity_cut : float
-@export var surface_jump_time_to_peak : float
-@export var surface_jump_time_to_descend : float
-@export var surface_grounded_acceleration : float # (float, 0, 1, 0.01)
-@export var surface_airborne_acceleration : float # (float, 0, 1, 0.01)
-@export var surface_grounded_friction : float # (float, 0, 1, 0.01)
-@export var surface_airborne_friction : float # (float, 0, 1, 0.01)
-@export var surface_y_velocity_clamp_min : float
-@export var surface_y_velocity_clamp_max : float
+@export var surface_jump_height: float
+@export var surface_jump_release_velocity_cut: float
+@export var surface_jump_time_to_peak: float
+@export var surface_jump_time_to_descend: float
+@export var surface_multijump_height_reduction: float
+@export var surface_grounded_acceleration: float # (float, 0, 1, 0.01)
+@export var surface_airborne_acceleration: float # (float, 0, 1, 0.01)
+@export var surface_grounded_friction: float # (float, 0, 1, 0.01)
+@export var surface_airborne_friction: float # (float, 0, 1, 0.01)
+@export var surface_y_velocity_clamp_min: float
+@export var surface_y_velocity_clamp_max: float
 @export_subgroup("Underwater", "underwater")
-@export var underwater_jump_height : float
-@export var underwater_jump_velocity_cut : float
-@export var underwater_jump_time_to_peak : float
-@export var underwater_jump_time_to_descend : float
-@export var underwater_grounded_acceleration : float # (float, 0, 1, 0.01)
-@export var underwater_airborne_acceleration : float # (float, 0, 1, 0.01)
-@export var underwater_grounded_friction : float # (float, 0, 1, 0.01)
-@export var underwater_airborne_friction : float # (float, 0, 1, 0.01)
-@export var underwater_y_velocity_clamp_min : float
-@export var underwater_y_velocity_clamp_max : float
+@export var underwater_jump_height: float
+@export var underwater_jump_release_velocity_cut: float
+@export var underwater_jump_time_to_peak: float
+@export var underwater_jump_time_to_descend: float
+@export var underwater_multijump_height_reduction: float
+@export var underwater_grounded_acceleration: float # (float, 0, 1, 0.01)
+@export var underwater_airborne_acceleration: float # (float, 0, 1, 0.01)
+@export var underwater_grounded_friction: float # (float, 0, 1, 0.01)
+@export var underwater_airborne_friction: float # (float, 0, 1, 0.01)
+@export var underwater_y_velocity_clamp_min: float
+@export var underwater_y_velocity_clamp_max: float
 @export_subgroup("Space", "space")
-@export var space_jump_height : float
-@export var space_jump_velocity_cut : float
-@export var space_jump_time_to_peak : float
-@export var space_jump_time_to_descend : float
-@export var space_grounded_acceleration : float # (float, 0, 1, 0.01)
-@export var space_airborne_acceleration : float # (float, 0, 1, 0.01)
-@export var space_grounded_friction : float # (float, 0, 1, 0.01)
-@export var space_airborne_friction : float # (float, 0, 1, 0.01)
-@export var space_y_velocity_clamp_min : float
-@export var space_y_velocity_clamp_max : float
+@export var space_jump_height: float
+@export var space_jump_release_velocity_cut: float
+@export var space_jump_time_to_peak: float
+@export var space_jump_time_to_descend: float
+@export var space_multijump_height_reduction: float
+@export var space_grounded_acceleration: float # (float, 0, 1, 0.01)
+@export var space_airborne_acceleration: float # (float, 0, 1, 0.01)
+@export var space_grounded_friction: float # (float, 0, 1, 0.01)
+@export var space_airborne_friction: float # (float, 0, 1, 0.01)
+@export var space_y_velocity_clamp_min: float
+@export var space_y_velocity_clamp_max: float
 
-var deceleration : float
+var deceleration: float
 
-var leg_state : int = LEG_STATES.STAND
-var torso_state : int = TORSO_STATES.AIM
-var environment : int = ENVIRONMENTS.SURFACE
-var snap_vector : Vector2
-var gravity : int
-var buffered_jump : bool
-var jump_height : float
-var jump_velocity_cut : float
-var jump_time_to_peak : float
-var jump_time_to_descend : float
-var y_velocity_clamp_min : float
-var y_velocity_clamp_max : float
-var accel : float
-var fric : float
-var had_coyote_time : bool = true
-var can_jump : bool = true
-var has_jumped : bool
-var jumps_made : int
+var leg_state: int = LEG_STATES.STAND
+var torso_state: int = TORSO_STATES.AIM
+var environment: int = ENVIRONMENTS.SURFACE
+var snap_vector: Vector2
+var gravity: int
+var buffered_jump: bool
+var jump_height: float
+var jump_release_velocity_cut: float
+var jump_time_to_peak: float
+var jump_time_to_descend: float
+var y_velocity_clamp_min: float
+var y_velocity_clamp_max: float
+var accel: float
+var fric: float
+var had_coyote_time: bool = true
+var can_jump: bool = true
+var has_jumped: bool
+var jumps_made: int
 
-var jump_velocity : float:
+var jump_velocity: float:
 	get:
 		return ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-var jump_gravity : float:
+var jump_gravity: float:
 	get:
 		return ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
-var fall_gravity : float:
+var fall_gravity: float:
 	get:
 		return ((-2.0 * jump_height) / (jump_time_to_descend * jump_time_to_descend)) * -1.0
 
 
-@onready var torso_sprite : Sprite2D = $TorsoSprite
-@onready var legs_sprite : Sprite2D = $LegsSprite
-@onready var weaponflash_sprite : Sprite2D = $WeaponflashSprite
-@onready var muzzle : Marker2D = $TorsoSprite/Muzzle
-@onready var torso_anim_player : AnimationPlayer = $TorsoAnimationPlayer
-@onready var legs_anim_player : AnimationPlayer = $LegsAnimationPlayer
-@onready var weaponflash_dir_handler : AnimationPlayer = $WeaponflashDirectionHandler
-@onready var weaponflash_anim_player : AnimationPlayer = $WeaponflashAnimationPlayer
-@onready var legs_anim_tree : AnimationTree = $LegsAnimationTree
-@onready var weaponflash_anim_tree : AnimationTree = $WeaponflashAnimationTree
-@onready var jump_buffer_timer : Timer = $Timers/JumpBufferTimer
-@onready var coyote_timer : Timer = $Timers/CoyoteTimer
-@onready var camera : Camera2D = $Camera2D
+@onready var torso_sprite: Sprite2D = $TorsoSprite
+@onready var legs_sprite: Sprite2D = $LegsSprite
+@onready var weaponflash_sprite: Sprite2D = $WeaponflashSprite
+@onready var muzzle: Marker2D = $TorsoSprite/Muzzle
+@onready var torso_anim_player: AnimationPlayer = $TorsoAnimationPlayer
+@onready var legs_anim_player: AnimationPlayer = $LegsAnimationPlayer
+@onready var weaponflash_dir_handler: AnimationPlayer = $WeaponflashDirectionHandler
+@onready var weaponflash_anim_player: AnimationPlayer = $WeaponflashAnimationPlayer
+@onready var legs_anim_tree: AnimationTree = $LegsAnimationTree
+@onready var weaponflash_anim_tree: AnimationTree = $WeaponflashAnimationTree
+@onready var jump_buffer_timer: Timer = $Timers/JumpBufferTimer
+@onready var coyote_timer: Timer = $Timers/CoyoteTimer
+@onready var camera: Camera2D = $Camera2D
 
 
-func _set_gravity_environment(env : String = "surface"):
+func _set_gravity_environment(env: String = "surface"):
 	if env == "surface":
 		jump_height = surface_jump_height
 		jump_time_to_peak = surface_jump_time_to_peak
@@ -124,16 +127,16 @@ func _set_gravity_environment(env : String = "surface"):
 		jump_time_to_descend = space_jump_time_to_descend
 
 
-func _set_jump_vel_cut_environment(env : String = "surface_grounded"):
+func _set_jump_vel_cut_environment(env: String = "surface_grounded"):
 	if env == "surface":
-		jump_velocity_cut = surface_jump_velocity_cut
+		jump_release_velocity_cut = surface_jump_release_velocity_cut
 	if env == "underwater":
-		jump_velocity_cut = underwater_jump_velocity_cut
+		jump_release_velocity_cut = underwater_jump_release_velocity_cut
 	if env == "space":
-		jump_velocity_cut = space_jump_velocity_cut
+		jump_release_velocity_cut = space_jump_release_velocity_cut
 
 
-func _set_velocity_clamp_environment(env : String = "surface"):
+func _set_velocity_clamp_environment(env: String = "surface"):
 	if env == "surface":
 		y_velocity_clamp_min = surface_y_velocity_clamp_min
 		y_velocity_clamp_max = surface_y_velocity_clamp_max
@@ -145,7 +148,7 @@ func _set_velocity_clamp_environment(env : String = "surface"):
 		y_velocity_clamp_max = space_y_velocity_clamp_max
 
 
-func _set_accel_environment(env : String = "surface_grounded"):
+func _set_accel_environment(env: String = "surface_grounded"):
 	if env.begins_with("surface"):
 		if not coyote_timer.is_stopped() or env.ends_with("grounded"):
 			accel = surface_grounded_acceleration
@@ -163,7 +166,7 @@ func _set_accel_environment(env : String = "surface_grounded"):
 			accel = space_airborne_acceleration
 
 
-func _set_fric_environment(env : String = "surface_grounded"):
+func _set_fric_environment(env: String = "surface_grounded"):
 	if env.begins_with("surface"):
 		if not coyote_timer.is_stopped() or env.ends_with("grounded"):
 			fric = surface_grounded_friction

@@ -5,46 +5,52 @@ extends GamePlayerLegState
 func physics_process(delta: float) -> void:
 	# Flip Sprite
 	if _get_x_input() > 0:
-		root.legs_sprite.flip_h = false
+		actor.legs_sprite.flip_h = false
 	elif _get_x_input() < 0:
-		root.legs_sprite.flip_h = true
+		actor.legs_sprite.flip_h = true
 	
 	# Jumping and state switching
-	if root.can_jump:
-		if root.is_on_floor():
-			root.had_coyote_time = false
-			root.has_jumped = false
-			root.jumps_made = 0
-			if root.buffered_jump:
-				root.buffered_jump = false
-				exit_state("jump")
+	if actor.can_jump:
+		if actor.is_on_floor():
+			actor.had_coyote_time = false
+			actor.has_jumped = false
+			actor.jumps_made = 0
+			# Transition to the 'jump' state if a jump is buffered and if allowed
+			if actor.buffered_jump:
+				actor.buffered_jump = false
+				if GameSettings.is_buffered_jump_allowed:
+					transition_to("jump")
 				return
+			# Else, transition to the 'stand' state
 			else:
-				exit_state("stand")
+				transition_to("stand")
 				return
 		else:
 			if not is_zero_approx(_get_x_input()):
-				root.legs_statemachine.travel("run")
+				actor.legs_statemachine.travel("run")
 			else:
-				root.legs_statemachine.travel("stand")
+				actor.legs_statemachine.travel("stand")
 			if Input.is_action_just_pressed("jump"):
-				if root.jumps_made < root.max_jumps:
+				# Coyote Jumping
+				if actor.jumps_made < actor.max_jumps and GameSettings.is_coyote_jump_allowed:
 					_jump()
-				if root.jumps_made >= root.max_jumps:
-					root.jump_buffer_timer.start()
-					root.buffered_jump = true
+				# Jump Buffering
+				if GameSettings.is_jump_buffering_allowed:
+					if actor.jumps_made >= actor.max_jumps:
+						actor.jump_buffer_timer.start()
+						actor.buffered_jump = true
 	else:
-		if root.is_on_floor():
-			exit_state("stand")
+		if actor.is_on_floor():
+			transition_to("stand")
 			return
 
 	# State animation
-	if root.coyote_timer.is_stopped():
-		root.legs_statemachine.travel("fall")
+	if actor.coyote_timer.is_stopped():
+		actor.legs_statemachine.travel("fall")
 
 	# Movement
-	root.snap_vector = Vector2.ZERO
-	root.velocity.x = lerp(root.velocity.x, root.speed * _get_x_input(), root.accel)
+	actor.snap_vector = Vector2.ZERO
+	actor.velocity.x = lerp(actor.velocity.x, actor.speed * _get_x_input(), actor.accel)
 
 	# Gravity
 	_apply_gravity(delta)

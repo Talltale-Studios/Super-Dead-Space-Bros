@@ -1,39 +1,33 @@
 class_name GamePlayerState
-extends GameState
-
-
-var root : GameKinematicPlayer
-
-
-func enter_state() -> void:
-	root = state_machine.root
+extends GameCharacterState
 
 
 func _jump():
-	root.velocity.y = root.jump_velocity
-	root.jumps_made += 1
-	root.coyote_timer.stop()
+	actor.velocity.y = actor.jump_velocity
+	actor.jumps_made += 1
+	actor.coyote_timer.stop()
 
 
 func _ledge_hop():
-	root.velocity.y = root.jump_velocity
+	actor.velocity.y = actor.jump_velocity
 
 
 func _get_gravity() -> float:
-	return root.jump_gravity if root.velocity.y < 0.0 else root.fall_gravity
+	return actor.jump_gravity if actor.velocity.y < 0.0 else actor.fall_gravity
 
 
 func _apply_coyote_time():
-	if root.coyote_timer.is_stopped() and not root.had_coyote_time and not root.has_jumped:
-		root.coyote_timer.start()
-		root.velocity.y = 0
-		root.had_coyote_time = true
+	if GameSettings.is_coyote_time_allowed:
+		if actor.coyote_timer.is_stopped() and not actor.had_coyote_time and not actor.has_jumped:
+			actor.coyote_timer.start()
+			actor.velocity.y = 0
+			actor.had_coyote_time = true
 
 
 func _apply_gravity(delta):
-	if root.coyote_timer.is_stopped():
-		root.velocity.y += _get_gravity() * delta
-		root.velocity.y = clamp(root.velocity.y, root.y_velocity_clamp_min, root.y_velocity_clamp_max)
+	if actor.coyote_timer.is_stopped():
+		actor.velocity.y += _get_gravity() * delta
+		actor.velocity.y = clamp(actor.velocity.y, actor.y_velocity_clamp_min, actor.y_velocity_clamp_max)
 
 
 func _get_x_input() -> float:
@@ -41,6 +35,6 @@ func _get_x_input() -> float:
 
 
 func _get_direction() -> Vector2:
-	return Vector2(_get_x_input(), -1.0 if Input.is_action_just_pressed("jump") and state_machine.root.has_jumped else 1.0)
+	return Vector2(_get_x_input(), -1.0 if Input.is_action_just_pressed("jump") and state_machine.actor.has_jumped else 1.0)
 
 
