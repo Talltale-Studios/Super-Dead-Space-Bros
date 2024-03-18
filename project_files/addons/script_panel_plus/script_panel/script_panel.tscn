@@ -1,7 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://ln8u12ni037b"]
+[gd_scene load_steps=15 format=3 uid="uid://ln8u12ni037b"]
 
 [ext_resource type="Script" path="res://addons/script_panel_plus/script_panel/script_panel.gd" id="1_b1kur"]
 [ext_resource type="Script" path="res://addons/script_panel_plus/script_panel/script_list.gd" id="2_g67jx"]
+
+[sub_resource type="Image" id="Image_k20x6"]
+data = {
+"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_qa1lj"]
+image = SubResource("Image_k20x6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_06sl4"]
 
@@ -26,6 +38,14 @@ shadow_color = Color(0, 0, 0, 0.14902)
 font_size = 11
 font_color = Color(1, 1, 1, 0.564706)
 
+[sub_resource type="LabelSettings" id="LabelSettings_1w553"]
+font_size = 13
+font_color = Color(1, 1, 1, 0.564706)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kaxoe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pnhwh"]
+
 [node name="ScriptPanel" type="HBoxContainer"]
 clip_contents = true
 anchors_preset = 9
@@ -48,12 +68,13 @@ layout_mode = 2
 max_tab_width = 100
 drag_to_rearrange_enabled = true
 tabs_rearrange_group = 0
-tab_count = 5
+tab_count = 6
 tab_0/title = "All"
 tab_1/title = "Scripts"
 tab_2/title = "Docs"
 tab_3/title = "Files"
-tab_4/title = "★"
+tab_4/title = "Tests"
+tab_5/title = "★"
 
 [node name="SearchBar" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -63,6 +84,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Search"
 clear_button_enabled = true
+right_icon = SubResource("ImageTexture_qa1lj")
 select_all_on_focus = true
 
 [node name="MenuButton" type="MenuButton" parent="VBoxContainer/SearchBar"]
@@ -86,7 +108,7 @@ popup/item_3/text = ""
 popup/item_3/id = 3
 popup/item_3/disabled = true
 popup/item_3/separator = true
-popup/item_4/text = "Group Types"
+popup/item_4/text = "Group Items"
 popup/item_4/checkable = 1
 popup/item_4/checked = true
 popup/item_4/id = 4
@@ -94,6 +116,7 @@ popup/item_4/id = 4
 [node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+split_offset = -200
 
 [node name="ScriptList" type="ItemList" parent="VBoxContainer/VSplitContainer"]
 layout_mode = 2
@@ -114,24 +137,44 @@ same_column_width = true
 script = ExtResource("2_g67jx")
 
 [node name="PopupMenu" type="PopupMenu" parent="VBoxContainer/VSplitContainer/ScriptList"]
-size = Vector2i(173, 120)
 allow_search = false
-item_count = 5
-item_0/text = "Add to Favorites ★"
-item_0/id = 1
-item_1/text = "Lock in place 🔒"
-item_1/id = 2
-item_2/text = "Set custom name ♣️"
-item_2/id = 3
-item_3/text = ""
-item_3/id = 99
-item_3/separator = true
-item_4/text = "Close Script"
-item_4/id = 0
 
-[node name="MethodList" type="ItemList" parent="VBoxContainer/VSplitContainer"]
+[node name="MethodListContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="SearchBar" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/MethodListContainer"]
+layout_mode = 2
+
+[node name="SearchLine" type="LineEdit" parent="VBoxContainer/VSplitContainer/MethodListContainer/SearchBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search"
+clear_button_enabled = true
+right_icon = SubResource("ImageTexture_qa1lj")
+select_all_on_focus = true
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/VSplitContainer/MethodListContainer/SearchBar"]
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Current Sorting"
+text = "..."
+flat = false
+item_count = 2
+popup/item_0/text = "No Sorting"
+popup/item_0/checkable = 2
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/text = "Sort: Name"
+popup/item_1/checkable = 2
+popup/item_1/id = 1
+
+[node name="MethodList" type="ItemList" parent="VBoxContainer/VSplitContainer/MethodListContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_06sl4")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_gcjfv")
+theme_override_styles/selected = SubResource("StyleBoxFlat_as5tr")
+theme_override_styles/selected_focus = SubResource("StyleBoxFlat_1uqvt")
 
 [node name="ErrorLabel" type="Label" parent="VBoxContainer"]
 visible = false
@@ -179,6 +222,7 @@ text = "Submit"
 
 [node name="InfoPanel" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="LineNum" type="Label" parent="VBoxContainer/InfoPanel"]
 layout_mode = 2
@@ -189,23 +233,39 @@ vertical_alignment = 2
 [node name="ScriptName" type="Label" parent="VBoxContainer/InfoPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 0
 text = "Script Name"
-label_settings = SubResource("LabelSettings_n74ok")
-horizontal_alignment = 2
+label_settings = SubResource("LabelSettings_1w553")
+horizontal_alignment = 1
 vertical_alignment = 2
 clip_text = true
 text_overrun_behavior = 3
 
 [node name="HideButton" type="Button" parent="VBoxContainer/InfoPanel"]
+clip_contents = true
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 4
 size_flags_vertical = 4
 tooltip_text = "Hide Panel"
-theme_override_colors/font_hover_color = Color(0, 0, 0, 0.215686)
-theme_override_font_sizes/font_size = 13
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kaxoe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pnhwh")
 text = "<"
 flat = true
-alignment = 2
+
+[node name="ZenButton" type="Button" parent="VBoxContainer/InfoPanel"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Distraction Free Mode"
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kaxoe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pnhwh")
+text = "#"
+flat = true
 
 [node name="ShowButton" type="Button" parent="."]
 visible = false

@@ -1,32 +1,32 @@
 [gd_scene load_steps=24 format=3 uid="uid://cs30fdktbayf1"]
 
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_10.tres" id="1"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_21.tres" id="2"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_25.tres" id="3"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_5.tres" id="4"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_24.tres" id="5"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_23.tres" id="6"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_22.tres" id="7"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_26.tres" id="8"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_4.tres" id="9"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_15.tres" id="10"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/defense.tres" id="11"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/dodgerate.tres" id="12"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/weapon_to_lightning.tres" id="13"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/spell_damage.tres" id="14"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/weapon_damage.tres" id="15"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/weapon_to_ice.tres" id="16"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/weapon_to_dark.tres" id="17"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/equip_bonuses/weapon_to_fire.tres" id="18"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_10.tres" id="1"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_21.tres" id="2"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_25.tres" id="3"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_5.tres" id="4"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_24.tres" id="5"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_23.tres" id="6"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_22.tres" id="7"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_26.tres" id="8"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_4.tres" id="9"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_15.tres" id="10"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/defense.tres" id="11"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/dodgerate.tres" id="12"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/weapon_to_lightning.tres" id="13"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/spell_damage.tres" id="14"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/weapon_damage.tres" id="15"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/weapon_to_ice.tres" id="16"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/weapon_to_dark.tres" id="17"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/equip_bonuses/weapon_to_fire.tres" id="18"]
 [ext_resource type="PackedScene" uid="uid://buk5dqg0uoud3" path="res://addons/wyvernbox_prefabs/equip_bonus_view.tscn" id="19"]
-[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_example/theme/font/font_title.tres" id="20"]
-[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_example/theme/font/font_body.tres" id="21"]
-[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_example/theme/font/font_numbers.tres" id="22"]
-[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_example/src/menu_tabs/equip_bonus_list.gd" id="23"]
+[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_examples/theme/font/font_title.tres" id="20"]
+[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_examples/theme/font/font_body.tres" id="21"]
+[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_examples/theme/font/font_numbers.tres" id="22"]
+[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_examples/src/menu_tabs/equip_bonus_list.gd" id="23"]
 
 [node name="StatsDisplay" type="VBoxContainer"]
 offset_right = 225.0
-offset_bottom = 119.0
+offset_bottom = 202.0
 size_flags_horizontal = 3
 script = ExtResource("23")
 equip_inventory_view = NodePath("../..")
@@ -41,7 +41,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="Hpmp/Hp"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("20")
-text = "stats_hp"
+text = "Health"
 
 [node name="Control" type="Control" parent="Hpmp/Hp"]
 layout_mode = 2
@@ -72,7 +72,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="Hpmp/Mp"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("20")
-text = "stats_mp"
+text = "Magic Energy"
 
 [node name="Control" type="Control" parent="Hpmp/Mp"]
 layout_mode = 2
@@ -129,7 +129,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("21")
-text = "stats_damage"
+text = "Damage Per Second:"
 
 [node name="Value" type="Label" parent="Weapon/B/Dmg"]
 layout_mode = 2
@@ -199,7 +199,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="OffDef/Off"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("20")
-text = "stats_offensive"
+text = "Offensive"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OffDef/Off"]
 layout_mode = 2
@@ -229,7 +229,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="OffDef/Def"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("20")
-text = "stats_defensive"
+text = "Defensive"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OffDef/Def"]
 layout_mode = 2

@@ -19,9 +19,15 @@ const TERRAIN_ENTRY_SCENE := preload("res://addons/better-terrain/editor/Terrain
 @onready var paint_type := $VBoxContainer/Toolbar/PaintType
 @onready var paint_terrain := $VBoxContainer/Toolbar/PaintTerrain
 @onready var select_tiles := $VBoxContainer/Toolbar/SelectTiles
-@onready var shuffle_random := $VBoxContainer/Toolbar/ShuffleRandom
 
+@onready var paint_symmetry := $VBoxContainer/Toolbar/PaintSymmetry
+@onready var symmetry_options = $VBoxContainer/Toolbar/SymmetryOptions
+
+@onready var shuffle_random := $VBoxContainer/Toolbar/ShuffleRandom
 @onready var zoom_slider := $VBoxContainer/Toolbar/Zoom
+
+@onready var source_selector := $VBoxContainer/Toolbar/Sources
+@onready var source_selector_popup := $VBoxContainer/Toolbar/Sources/Sources
 
 @onready var clean_button := $VBoxContainer/Toolbar/Clean
 @onready var layer_options := $VBoxContainer/Toolbar/LayerOptions
@@ -71,6 +77,11 @@ enum PaintAction {
 	LINE
 }
 
+enum SourceSelectors {
+	ALL = 1000000,
+	NONE = 1000001,
+}
+
 var paint_mode := PaintMode.NO_PAINT
 
 var paint_action := PaintAction.NO_ACTION
@@ -101,6 +112,9 @@ func _ready() -> void:
 	tile_view.paste_occurred.connect(_on_paste_occurred)
 	tile_view.change_zoom_level.connect(_on_change_zoom_level)
 	tile_view.terrain_updated.connect(_on_terrain_updated)
+	
+	if Engine.get_version_info().hex < 0x040200:
+		paint_symmetry.visible = false
 
 
 func _process(delta):
@@ -161,6 +175,35 @@ func tiles_changed() -> void:
 		var child = terrain_list.get_child(terrain_list.get_child_count() - 1)
 		terrain_list.remove_child(child)
 		child.free()
+	
+	source_selector_popup.clear()
+	source_selector_popup.add_item("All", SourceSelectors.ALL)
+	source_selector_popup.add_item("None", SourceSelectors.NONE)
+	var source_count = tileset.get_source_count() if tileset else 0
+	for s in source_count:
+		var source_id = tileset.get_source_id(s)
+		var source := tileset.get_source(source_id)
+		if !(source is TileSetAtlasSource):
+			continue
+		
+		var name := source.resource_name
+		if name.is_empty():
+			var texture := (source as TileSetAtlasSource).texture
+			var texture_name := texture.resource_name if texture else ""
+			if !texture_name.is_empty():
+				name = texture_name
+			else:
+				var texture_path := texture.resource_path if texture else ""
+				if !texture_path.is_empty():
+					name = texture_path.get_file()
+		
+		if !name.is_empty():
+			name += " "
+		name += " (ID: %d)" % source_id
+		
+		source_selector_popup.add_check_item(name, source_id)
+		source_selector_popup.set_item_checked(source_selector_popup.get_item_index(source_id), true)
+	source_selector.visible = source_selector_popup.item_count > 3 # All, None and more than one source
 	
 	layer_options.clear()
 	if tilemap and tilemap.get_layers_count() == 0:
@@ -388,8 +431,12 @@ func add_terrain_entry(terrain:Dictionary, index:int = -1):
 	terrain_list.move_child(entry, index)
 
 
-func remove_terrain_entry(index:int):
+func remove_terrain_entry(index: int):
 	terrain_list.get_child(index).free()
+	for i in range(index, terrain_list.get_child_count()):
+		var child = terrain_list.get_child(i)
+		child.terrain = BetterTerrain.get_terrain(tileset, i)
+		child.update()
 
 
 func perform_add_terrain(name: String, color: Color, type: int, categories: Array, icon:Dictionary = {}) -> void:
@@ -402,7 +449,6 @@ func perform_add_terrain(name: String, color: Color, type: int, categories: Arra
 func perform_remove_terrain(index: int) -> void:
 	if index >= BetterTerrain.terrain_count(tileset):
 		return
-	var item = terrain_list.get_child(index)
 	if BetterTerrain.remove_terrain(tileset, index):
 		remove_terrain_entry(index)
 		update_tile_view_paint()
@@ -417,6 +463,10 @@ func perform_swap_terrain(index1: int, index2: int) -> void:
 	var item2 = terrain_list.get_child(higher)
 	if BetterTerrain.swap_terrains(tileset, lower, higher):
 		terrain_list.move_child(item1, higher)
+		item1.terrain = BetterTerrain.get_terrain(tileset, higher)
+		item1.update()
+		item2.terrain = BetterTerrain.get_terrain(tileset, lower)
+		item2.update()
 		selected_entry = index2
 		terrain_list.get_child(index2).set_selected(true)
 		update_tile_view_paint()
@@ -446,8 +496,15 @@ func _on_bit_button_pressed(button: BaseButton) -> void:
 		select_tiles: tile_view.paint_mode = tile_view.PaintMode.SELECT
 		paint_type: tile_view.paint_mode = tile_view.PaintMode.PAINT_TYPE
 		paint_terrain: tile_view.paint_mode = tile_view.PaintMode.PAINT_PEERING
-		null: tile_view.paint_mode = tile_view.PaintMode.NO_PAINT
+		paint_symmetry: tile_view.paint_mode = tile_view.PaintMode.PAINT_SYMMETRY
+		_: tile_view.paint_mode = tile_view.PaintMode.NO_PAINT
 	tile_view.queue_redraw()
+	
+	symmetry_options.visible = paint_symmetry.button_pressed
+
+
+func _on_symmetry_selected(index):
+	tile_view.paint_symmetry = index
 
 
 func _on_layer_options_item_selected(index) -> void:
@@ -549,7 +606,7 @@ func canvas_input(event: InputEvent) -> bool:
 					var coord := Vector2i(x, y)
 					if paint_mode == PaintMode.PAINT:
 						if replace_mode:
-							undo_manager.add_do_method(BetterTerrain, &"replace_cell", tilemap, layer, coord, tileset, type)
+							undo_manager.add_do_method(BetterTerrain, &"replace_cell", tilemap, layer, coord, type)
 						else:
 							undo_manager.add_do_method(BetterTerrain, &"set_cell", tilemap, layer, coord, type)
 					else:
@@ -564,7 +621,7 @@ func canvas_input(event: InputEvent) -> bool:
 			var cells := _get_tileset_line(initial_click, current_position, tileset)
 			if paint_mode == PaintMode.PAINT:
 				if replace_mode:
-					undo_manager.add_do_method(BetterTerrain, &"replace_cells", tilemap, layer, cells, tileset, type)
+					undo_manager.add_do_method(BetterTerrain, &"replace_cells", tilemap, layer, cells, type)
 				else:
 					undo_manager.add_do_method(BetterTerrain, &"set_cells", tilemap, layer, cells, type)
 			elif paint_mode == PaintMode.ERASE:
@@ -611,7 +668,7 @@ func canvas_input(event: InputEvent) -> bool:
 			var cells := _get_tileset_line(prev_position, current_position, tileset)
 			if paint_mode == PaintMode.PAINT:
 				if replace_mode:
-					terrain_undo.add_do_method(undo_manager, BetterTerrain, &"replace_cells", [tilemap, layer, cells, tileset, type])
+					terrain_undo.add_do_method(undo_manager, BetterTerrain, &"replace_cells", [tilemap, layer, cells, type])
 				else:
 					terrain_undo.add_do_method(undo_manager, BetterTerrain, &"set_cells", [tilemap, layer, cells, type])
 			elif paint_mode == PaintMode.ERASE:
@@ -626,7 +683,7 @@ func canvas_input(event: InputEvent) -> bool:
 			undo_manager.create_action(tr("Fill terrain"), UndoRedo.MERGE_DISABLE, tilemap)
 			if paint_mode == PaintMode.PAINT:
 				if replace_mode:
-					undo_manager.add_do_method(BetterTerrain, &"replace_cells", tilemap, layer, cells, tileset, type)
+					undo_manager.add_do_method(BetterTerrain, &"replace_cells", tilemap, layer, cells, type)
 				else:
 					undo_manager.add_do_method(BetterTerrain, &"set_cells", tilemap, layer, cells, type)
 			elif paint_mode == PaintMode.ERASE:
@@ -743,4 +800,21 @@ func _get_tileset_line(from:Vector2i, to:Vector2i, tileset:TileSet) -> Array[Vec
 			points.push_back(Vector2i(current.y, current.x) if transposed else current)
 	
 	return points
+
+
+func _on_terrain_enable_id_pressed(id):
+	if id in [SourceSelectors.ALL, SourceSelectors.NONE]:
+		for i in source_selector_popup.item_count:
+			if source_selector_popup.is_item_checkable(i):
+				source_selector_popup.set_item_checked(i, id == SourceSelectors.ALL)
+	else:
+		var index = source_selector_popup.get_item_index(id)
+		var checked = source_selector_popup.is_item_checked(index)
+		source_selector_popup.set_item_checked(index, !checked)
+	
+	var disabled_sources : Array[int]
+	for i in source_selector_popup.item_count:
+		if source_selector_popup.is_item_checkable(i) and !source_selector_popup.is_item_checked(i):
+			disabled_sources.append(source_selector_popup.get_item_id(i))
+	tile_view.disabled_sources = disabled_sources
 

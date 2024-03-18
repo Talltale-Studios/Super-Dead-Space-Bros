@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=3]
 
-[ext_resource type="Texture2D" uid="uid://dp7qllrxy41ga" path="res://examples_and_demos/wyvernbox_example/graphics/gradients/irid1.tres" id="1"]
-[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_example/graphics/symbol_icons/stats/stat_icons/stat_icons_8.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://dp7qllrxy41ga" path="res://examples_and_demos/wyvernbox_examples/graphics/gradients/irid1.tres" id="1"]
+[ext_resource type="Texture2D" path="res://examples_and_demos/wyvernbox_examples/graphics/symbol_icons/stats/stat_icons/stat_icons_8.tres" id="2"]
 [ext_resource type="Script" path="res://addons/wyvernbox/equip_bonus.gd" id="3"]
 
 [resource]

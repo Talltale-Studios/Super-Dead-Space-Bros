@@ -6,11 +6,11 @@ extends Control
 ## A view into an [Inventory]. Allows to edit and save the inventory's contents.
 
 enum InteractionFlags {
-	CAN_TAKE = 1 << 0,  # Player can take items from here.
-	VENDOR = 1 << 1,  # The player can only take items if CAN_TAKE_AUTO inventories contain items from the item's price extra property. When taken, items will be consumed.
-	CAN_PLACE = 1 << 2,  # Player can place items here.
-	CAN_TAKE_AUTO = 1 << 3,  # VENDOR inventories can take from this inventory, and ItemConversion.get_takeable_inventories filters out inventories wihout this flag.
-	CAN_QUICK_TRANSFER_HERE = 1 << 4,  # If CAN_PLACE, can be quick-transferred into via Shift-click.
+	CAN_TAKE = 1 << 0,  ## Player can take items from here.
+	VENDOR = 1 << 1,  ## The player can only take items if CAN_TAKE_AUTO inventories contain items from the item's price extra property. When taken, items will be consumed.
+	CAN_PLACE = 1 << 2,  ## Player can place items here.
+	CAN_TAKE_AUTO = 1 << 3,  ## VENDOR inventories can take from this inventory, and ItemConversion.get_takeable_inventories filters out inventories wihout this flag.
+	CAN_QUICK_TRANSFER_HERE = 1 << 4,  ## If CAN_PLACE, can be quick-transferred into via Shift-click.
 }
 
 signal item_stack_added(item_stack)
@@ -90,6 +90,8 @@ signal grab_attempted(item_stack, success)
 ## The latest autosave time, in seconds since startup.
 var last_autosave_sec := -1.0
 
+static var _instances : Array[InventoryView] = []:
+	set(v): return
 
 var _dragged_node : Control
 var _dragged_stack : ItemStack
@@ -106,11 +108,38 @@ func _ready():
 	load_state()
 	add_to_group(&"inventory_view")
 	add_to_group(&"view_filterable")
+	_on_visibility_changed()
+
+
+func _enter_tree():
+	_instances.append(self)
 
 
 func _exit_tree():
+	_instances.erase(self)
 	if autosave_intensity >= 1:
 		save_state()
+
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if !Engine.is_editor_hint(): return PackedStringArray()
+	var arr : Array[String] = []
+	if !is_instance_valid(InventoryTooltip.get_instance()):
+		arr.append("""To allow viewing of item descriptions and properties, add an InventoryTooltip object.
+Search for one in the Scene -> Add Node (Ctrl+A) menu or drag the scene from addons/wyvernbox_prefabs."""
+		)
+
+	if !is_instance_valid(GrabbedItemStackView.get_instance()):
+		arr.append("""To allow moving items using the mouse cursor, add a GrabbedItemStackView object.
+Search for one in the Scene -> Add Node (Ctrl+A) menu or drag the scene from addons/wyvernbox_prefabs."""
+		)
+
+	return arr
+
+
+## Creates a list of all inventory views on the scene.
+static func get_instances() -> Array[InventoryView]:
+	return _instances.duplicate()
 
 
 func _set_cell_size(v):
@@ -203,6 +232,14 @@ func _regenerate_view():
 			diff += 1
 			cells.add_child(cell)
 			cell.owner = owner if owner != null else self
+
+		if cells is Container:
+			# Container items aren't immediately ordered. Wait for the cells to align correctly.
+			# NO, awaiting Container.sort_children doesn't work, even if you wait a frame. Why? An enigma.
+			await cells.visibility_changed
+			await get_tree().process_frame
+			for i in _view_nodes.size():
+				_redraw_item(_view_nodes[i], inventory.items[i])
 
 
 ## Returns the in-inventory position of the cell clicked from global [code]pos[/code].
@@ -304,7 +341,9 @@ func _grab_stack(stack_index : int):
 		return
 
 	# First, handle stacking and swapping
-	var grabbed = get_tree().get_nodes_in_group(&"grabbed_item")[0]
+	var grabbed := GrabbedItemStackView.get_instance()
+	if !is_instance_valid(grabbed): return
+
 	if grabbed.grabbed_stack != null:
 		# With non-placeable invs, stack with the Grabbed stack instead of one in the inv.
 		var grabbed_stack = grabbed.grabbed_stack
@@ -351,7 +390,7 @@ func _try_buy(stack : ItemStack):
 	
 	var price = stack.extra_properties[&"price"].duplicate()
 	var counts = {}
-	var inventories = get_tree().get_nodes_in_group(&"inventory_view")
+	var inventories := InventoryView.get_instances()
 	inventories.sort_custom(_compare_inventory_priority)
 
 	var k_loaded
@@ -434,15 +473,17 @@ func _quick_transfer_anywhere(stack : ItemStack):
 			return
 
 		# If can't, just drop it.
-#		else:
-#			get_tree().call_group(&"grabbed_item", &"drop_on_ground", returned_stack)
+		# else:
+		# 	var grabbed := GrabbedItemStackView.get_instance()
+		# 	if is_instance_valid(grabbed):
+		# 		grabbed.drop_on_ground(returned_stack)
 
 		grab_attempted.emit(stack, true)
 
 
 func _get_quick_transfer_targets(has_price) -> Array:
 	var result := []
-	for x in get_tree().get_nodes_in_group(&"inventory_view"):
+	for x in InventoryView.get_instances():
 		if (
 			x == self
 			|| !x.is_visible_in_tree()
@@ -479,7 +520,7 @@ func _on_item_stack_gui_input(event : InputEvent, stack_index : int):
 func _can_drop_data(position, data):
 	return true
 
-## Updates item visibility based on [member view_filter_patterns].
+## Updates item visibility based on [member view_filter_patterns]. Call manually after editing the pattern array instead of setting.
 func apply_view_filters(stack_index : int = -1):
 	if stack_index == -1:
 		if view_filter_color == Color(1, 1, 1, 1):

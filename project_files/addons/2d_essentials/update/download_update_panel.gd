@@ -74,8 +74,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	updated.emit(next_version_release.tag_name.substr(1))
 
 func _on_download_version_button_pressed():
-	if FileAccess.file_exists("res://examples/click-point-movement/world.tscn"): 
-		push_error("You can't update the 2d essentials addon from within itself.")
+	if FileAccess.file_exists("res://examples/.gitkeep"): 
+		push_error("Godot2DEssentialsPlugin: You can't update the 2d essentials addon from within itself.")
 		failed.emit(401)
 		return
 		
@@ -85,7 +85,7 @@ func _on_download_version_button_pressed():
 		download_version_button.disabled = true
 		download_version_button.text = "Downloading new version..."
 	else:
-		push_warning("You're up to date with the latest version of 2d essentials plugin")
+		push_warning("Godot2DEssentialsPlugin: You're up to date with the latest version of the plugin")
 
 
 func _on_read_release_notes_button_pressed():
@@ -149,7 +149,6 @@ func _on_read_release_notes_button_pressed():
 #  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/MagnifyingGlass.png.import",
 #  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/autoload/",
 #  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/autoload/helpers.gd",
-#  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/autoload/helpers.tscn",
 #  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/camera/",
 #  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/camera/shake_camera_component.gd",
 #  "godotessentials-2d-essentials-e68fb3a/addons/2d_essentials/camera/shake_camera_component.tscn",

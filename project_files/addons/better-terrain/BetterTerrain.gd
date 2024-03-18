@@ -48,6 +48,18 @@ enum TileCategory {
 	ERROR = -3
 }
 
+enum SymmetryType {
+	NONE,
+	MIRROR, ## Horizontally mirror
+	FLIP, ## Vertically flip
+	REFLECT, ## All four reflections
+	ROTATE_CLOCKWISE,
+	ROTATE_COUNTER_CLOCKWISE,
+	ROTATE_180,
+	ROTATE_ALL, ## All four rotated forms
+	ALL ## All rotated and reflected forms
+}
+
 
 func _intersect(first: Array, second: Array) -> bool:
 	if first.size() > second.size():
@@ -140,9 +152,19 @@ func _get_cache(ts: TileSet) -> Array:
 					
 					peering[key] = targets
 				
-				# Only interface with decoration tiles that have at least some peering data
-				if td_meta.type != TileCategory.EMPTY or peering:
+				# Decoration tiles without peering are skipped
+				if td_meta.type == TileCategory.EMPTY and !peering:
+					continue
+				
+				var symmetry = td_meta.get("symmetry", SymmetryType.NONE)
+				# Branch out no symmetry tiles early
+				if symmetry == SymmetryType.NONE:
 					cache[td_meta.type].push_back([source_id, coord, alternate, peering, td.probability])
+					continue
+				
+				for flags in data.symmetry_mapping[symmetry]:
+					var symmetric_peering = data.peering_bits_after_symmetry(peering, flags)
+					cache[td_meta.type].push_back([source_id, coord, alternate | flags, symmetric_peering, td.probability])
 	
 	return cache
 
@@ -267,13 +289,12 @@ func _weighted_selection_seeded(choices: Array, coord: Vector2i, apply_empty_pro
 	return _weighted_selection(choices, apply_empty_probability)
 
 
-func _update_tile_tiles(tm: TileMap, layer: int, coord: Vector2i, types: Dictionary, apply_empty_probability: bool):
+func _update_tile_tiles(tm: TileMap, layer: int, coord: Vector2i, types: Dictionary, cache: Array, apply_empty_probability: bool):
 	var type = types[coord]
-	var c := _get_cache(tm.tile_set)
 	
 	var best_score := -1000 # Impossibly bad score
 	var best := []
-	for t in c[type]:
+	for t in cache[type]:
 		var score = 0
 		for peering in t[3]:
 			score += 3 if t[3][peering].has(types[tm.get_neighbor_cell(coord, peering)]) else -10
@@ -314,13 +335,12 @@ func _probe(tm: TileMap, coord: Vector2i, peering: int, types: Dictionary, goal:
 	return -5
 
 
-func _update_tile_vertices(tm: TileMap, layer: int, coord: Vector2i, types: Dictionary):
+func _update_tile_vertices(tm: TileMap, layer: int, coord: Vector2i, types: Dictionary, cache: Array):
 	var type = types[coord]
-	var c := _get_cache(tm.tile_set)
 	
 	var best_score := -1000 # Impossibly bad score
 	var best = []
-	for t in c[type]:
+	for t in cache[type]:
 		var score := 0
 		for peering in t[3]:
 			score += _probe(tm, coord, peering, types, t[3][peering])
@@ -334,7 +354,7 @@ func _update_tile_vertices(tm: TileMap, layer: int, coord: Vector2i, types: Dict
 	return _weighted_selection_seeded(best, coord, false)
 
 
-func _update_tile_immediate(tm: TileMap, layer: int, coord: Vector2i, ts_meta: Dictionary, types: Dictionary) -> void:
+func _update_tile_immediate(tm: TileMap, layer: int, coord: Vector2i, ts_meta: Dictionary, types: Dictionary, cache: Array) -> void:
 	var type = types[coord]
 	if type < TileCategory.EMPTY or type >= ts_meta.terrains.size():
 		return
@@ -342,9 +362,9 @@ func _update_tile_immediate(tm: TileMap, layer: int, coord: Vector2i, ts_meta: D
 	var placement
 	var terrain = _get_cache_terrain(ts_meta, type)
 	if terrain[2] in [TerrainType.MATCH_TILES, TerrainType.DECORATION]:
-		placement = _update_tile_tiles(tm, layer, coord, types, terrain[2] == TerrainType.DECORATION)
+		placement = _update_tile_tiles(tm, layer, coord, types, cache, terrain[2] == TerrainType.DECORATION)
 	elif terrain[2] == TerrainType.MATCH_VERTICES:
-		placement = _update_tile_vertices(tm, layer, coord, types)
+		placement = _update_tile_vertices(tm, layer, coord, types, cache)
 	else:
 		return
 	
@@ -352,14 +372,14 @@ func _update_tile_immediate(tm: TileMap, layer: int, coord: Vector2i, ts_meta: D
 		tm.set_cell(layer, coord, placement[0], placement[1], placement[2])
 
 
-func _update_tile_deferred(tm: TileMap, layer: int, coord: Vector2i, ts_meta: Dictionary, types: Dictionary):
+func _update_tile_deferred(tm: TileMap, layer: int, coord: Vector2i, ts_meta: Dictionary, types: Dictionary, cache: Array):
 	var type = types[coord]
 	if type >= TileCategory.EMPTY and type < ts_meta.terrains.size():
 		var terrain = _get_cache_terrain(ts_meta, type)
 		if terrain[2] in [TerrainType.MATCH_TILES, TerrainType.DECORATION]:
-			return _update_tile_tiles(tm, layer, coord, types, terrain[2] == TerrainType.DECORATION)
+			return _update_tile_tiles(tm, layer, coord, types, cache, terrain[2] == TerrainType.DECORATION)
 		elif terrain[2] == TerrainType.MATCH_VERTICES:
-			return _update_tile_vertices(tm, layer, coord, types)
+			return _update_tile_vertices(tm, layer, coord, types, cache)
 	return null
 
 
@@ -520,6 +540,7 @@ func get_terrain(ts: TileSet, index: int) -> Dictionary:
 	
 	var terrain = _get_cache_terrain(ts_meta, index)
 	return {
+		id = index,
 		name = terrain[0],
 		color = terrain[1],
 		type = terrain[2],
@@ -659,6 +680,33 @@ func get_tile_terrain_type(td: TileData) -> int:
 		return TileCategory.ERROR
 	var td_meta := _get_tile_meta(td)
 	return td_meta.type
+
+
+## For a tile represented by [TileData] [code]td[/code] in [TileSet]
+## [code]ts[/code], sets [enum SymmetryType] [code]type[/code]. This controls
+## how the tile is rotated/mirrored during placement.
+func set_tile_symmetry_type(ts: TileSet, td: TileData, type: int) -> bool:
+	if !ts or !td or type < SymmetryType.NONE or type > SymmetryType.ALL:
+		return false
+	
+	var td_meta := _get_tile_meta(td)
+	if td_meta.type == TileCategory.NON_TERRAIN:
+		return false
+	
+	td_meta.symmetry = type
+	_set_tile_meta(td, td_meta)
+	_purge_cache(ts)
+	return true
+
+
+## For a tile [code]td[/code], returns the [enum SymmetryType] which that
+## tile uses.
+func get_tile_symmetry_type(td: TileData) -> int:
+	if !td:
+		return SymmetryType.NONE
+	
+	var td_meta := _get_tile_meta(td)
+	return td_meta.get("symmetry", SymmetryType.NONE)
 
 
 ## Returns an Array of all [TileData] tiles included in the specified
@@ -861,11 +909,10 @@ func set_cells(tm: TileMap, layer: int, coords: Array, type: int) -> bool:
 
 ## Replaces an existing tile on the [TileMap] for the [code]layer[/code]
 ## and [code]coord[/code] with a new tile in the provided terrain [code]type[/code] 
-## in [TileSet] [code]ts[/code] *only if* there is a tile with a matching set of 
-## peering sides in this terrain.
+## *only if* there is a tile with a matching set of peering sides in this terrain.
 ## Returns [code]true[/code] if any tiles were changed. Use [method replace_cells]
 ## to replace multiple tiles at once.
-func replace_cell(tm: TileMap, layer: int, coord: Vector2i, ts: TileSet, type: int) -> bool:
+func replace_cell(tm: TileMap, layer: int, coord: Vector2i, type: int) -> bool:
 	if !tm or !tm.tile_set or layer < 0 or layer >= tm.get_layers_count() or type < 0:
 		return false
 	
@@ -880,13 +927,13 @@ func replace_cell(tm: TileMap, layer: int, coord: Vector2i, ts: TileSet, type: i
 	if !td:
 		return false
 	
-	var ts_meta := _get_terrain_meta(ts)
+	var ts_meta := _get_terrain_meta(tm.tile_set)
 	var categories = ts_meta.terrains[type][3]
 	var check_types = [type] + categories
 	
 	for check_type in check_types:
 		var placed_peering = tile_peering_for_type(td, check_type)
-		for pt in get_tiles_in_terrain(ts, type):
+		for pt in get_tiles_in_terrain(tm.tile_set, type):
 			var check_peering = tile_peering_for_type(pt, check_type)
 			if placed_peering == check_peering:
 				var tile = cache[type].front()
@@ -898,10 +945,10 @@ func replace_cell(tm: TileMap, layer: int, coord: Vector2i, ts: TileSet, type: i
 
 ## Replaces existing tiles on the [TileMap] for the [code]layer[/code]
 ## and [code]coords[/code] with new tiles in the provided terrain [code]type[/code] 
-## in [TileSet] [code]ts[/code] *only if* there is a tile with a matching set of 
-## peering sides in this terrain for each tile.
+## *only if* there is a tile with a matching set of peering sides in this terrain
+## for each tile.
 ## Returns [code]true[/code] if any tiles were changed.
-func replace_cells(tm: TileMap, layer: int, coords: Array, ts: TileSet, type: int) -> bool:
+func replace_cells(tm: TileMap, layer: int, coords: Array, type: int) -> bool:
 	if !tm or !tm.tile_set or layer < 0 or layer >= tm.get_layers_count() or type < 0:
 		return false
 	
@@ -912,12 +959,12 @@ func replace_cells(tm: TileMap, layer: int, coords: Array, ts: TileSet, type: in
 	if cache[type].is_empty():
 		return false
 	
-	var ts_meta := _get_terrain_meta(ts)
+	var ts_meta := _get_terrain_meta(tm.tile_set)
 	var categories = ts_meta.terrains[type][3]
 	var check_types = [type] + categories
 	
 	var changed = false
-	var potential_tiles = get_tiles_in_terrain(ts, type)
+	var potential_tiles = get_tiles_in_terrain(tm.tile_set, type)
 	for c in coords:
 		var found = false
 		var td = tm.get_cell_tile_data(layer, c)
@@ -976,8 +1023,9 @@ func update_terrain_cells(tm: TileMap, layer: int, cells: Array, and_surrounding
 		types[c] = get_cell(tm, layer, c)
 	
 	var ts_meta := _get_terrain_meta(tm.tile_set)
+	var cache = _get_cache(tm.tile_set)
 	for c in cells:
-		_update_tile_immediate(tm, layer, c, ts_meta, types)
+		_update_tile_immediate(tm, layer, c, ts_meta, types, cache)
 
 
 ## Runs the tile solving algorithm on the [TileMap] for the given [code]layer[/code]
@@ -1026,12 +1074,13 @@ func update_terrain_area(tm: TileMap, layer: int, area: Rect2i, and_surrounding_
 		types[c] = get_cell(tm, layer, c)
 	
 	var ts_meta := _get_terrain_meta(tm.tile_set)
+	var cache = _get_cache(tm.tile_set)
 	for y in range(area.position.y, area.end.y):
 		for x in range(area.position.x, area.end.x):
 			var coord := Vector2i(x, y)
-			_update_tile_immediate(tm, layer, coord, ts_meta, types)
+			_update_tile_immediate(tm, layer, coord, ts_meta, types, cache)
 	for c in additional_cells:
-		_update_tile_immediate(tm, layer, c, ts_meta, types)
+		_update_tile_immediate(tm, layer, c, ts_meta, types, cache)
 
 
 ## For a [TileMap], on a specific [code]layer[/code], create a changeset that will
@@ -1059,7 +1108,7 @@ func create_terrain_changeset(tm: TileMap, layer: int, paint: Dictionary) -> Dic
 	
 	var ts_meta := _get_terrain_meta(tm.tile_set)
 	var work := func(n: int):
-		placements[n] = _update_tile_deferred(tm, layer, cells[n], ts_meta, types)
+		placements[n] = _update_tile_deferred(tm, layer, cells[n], ts_meta, types, _cache)
 	
 	return {
 		"valid": true,

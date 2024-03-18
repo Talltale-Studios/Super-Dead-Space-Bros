@@ -1,6 +1,9 @@
+@tool
 @icon("res://addons/wyvernbox/icons/grabbed_item_stack.png")
 class_name GrabbedItemStackView
 extends ItemStackView
+
+@export_group("Drop")
 
 ## The node whose position [method drop_on_ground] uses for spawning a ground item.
 @export var drop_at_node := NodePath("")
@@ -11,8 +14,15 @@ extends ItemStackView
 ## The max distance an item dropped by [method drop_on_ground] can fly.
 @export var drop_max_distance := 256.0
 
-## The [Camera] used for dropping the item into a 3D scene. In 2D, unused.
+@export_group("Drop/3D")
+
+## The [Camera3D] used for dropping the item into a 3D scene. In 2D, unused.
 @export var drop_camera_3d := NodePath("")
+
+## For dropping items in 3D, the physics layers to hit when determining destination position.
+@export_flags_3d_physics var drop_ray_mask := 1
+
+@export_group("View")
 
 ## The size of the item's texture, if its in-inventory size was [code](1, 1)[/code].
 @export var unit_size := Vector2(18, 18)
@@ -29,7 +39,36 @@ var grabbed_stack : ItemStack
 var drop_surface_node : Control
 
 
+static var _instance : GrabbedItemStackView
+
+
+func _enter_tree():
+	_instance = self
+
+
+func _exit_tree():
+	if _instance == self: _instance = null
+
+
+static func get_instance() -> GrabbedItemStackView:
+	return _instance
+
+
 func _ready():
+	if get_parent() && !(has_node("%Texture") && has_node("%Count")):
+		var new_node : Node = load("res://addons/wyvernbox_prefabs/grabbed_item_stack_view.tscn").instantiate()
+		add_sibling(new_node)
+		await get_tree().process_frame
+		new_node.owner = owner
+		free()
+		return
+
+	if Engine.is_editor_hint():
+		for x in InventoryView.get_instances():
+			x.update_configuration_warnings()
+
+		return
+
 	var new_node = Control.new()
 	new_node.set_anchors_and_offsets_preset(PRESET_FULL_RECT)
 	new_node.gui_input.connect(_drop_surface_input)
@@ -40,7 +79,9 @@ func _ready():
 	get_parent().move_child(new_node, 0)
 
 	drop_surface_node = new_node
-	connect("visibility_changed", Callable(self, "_on_visibility_changed"))
+	visibility_changed.connect(_on_visibility_changed)
+	add_to_group(&"grabbed_item")
+	hide()
 	_on_visibility_changed()
 
 ## Grabs a stack, removing it from its inventory.
@@ -54,7 +95,9 @@ func grab(item_stack : ItemStack):
 		else:
 			item_stack.inventory.remove_item(item_stack)
 
-	get_tree().get_nodes_in_group(&"tooltip")[0].hide()
+	var tt := InventoryTooltip.get_instance()
+	if is_instance_valid(tt): tt.hide()
+
 	_set_grabbed_stack(item_stack)
 	_move_to_mouse()
 	if hide_cursor:
@@ -79,6 +122,7 @@ func _set_grabbed_stack(item_stack : ItemStack):
 
 ## Drop the whole stack onto the first inventory under the cursor.
 func drop():
+	if grabbed_stack == null: return
 	_any_inventory_try_drop_stack(grabbed_stack)
 	update_stack(grabbed_stack, unit_size, false)
 
@@ -120,8 +164,8 @@ func _move_to_mouse():
 
 func _any_inventory_try_drop_stack(stack):
 	var found_stack : ItemStack
-	var invs = get_tree().get_nodes_in_group(&"inventory_view")
-	var invs_reversed = []
+	var invs := InventoryView.get_instances()
+	var invs_reversed := []
 	# Nodes initialized later are placed above (well, if nothing gets created after the initial scene load)
 	# So reversing the array has a higher chance of a correct order
 	invs_reversed.resize(invs.size())
@@ -157,7 +201,8 @@ func drop_on_ground(stack, click_pos = null):
 	else:
 		var cam : Camera3D = get_node(drop_camera_3d)
 		var origin := cam.project_ray_origin(click_pos)
-		var hit = node.get_world_3d().direct_space_state.intersect_ray(origin, origin + cam.project_ray_normal(click_pos) * 9999)
+		var ray := PhysicsRayQueryParameters3D.create(origin, origin + cam.project_ray_normal(click_pos) * 9999, drop_ray_mask)
+		var hit = node.get_world_3d().direct_space_state.intersect_ray(ray)
 		throw_vec = (hit["position"] - spawn_at_pos).limit_length(drop_max_distance)
 
 	get_node(drop_ground_item_manager).add_item(stack, spawn_at_pos, throw_vec)
@@ -165,7 +210,7 @@ func drop_on_ground(stack, click_pos = null):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-func _input(event):
+func _input(event : InputEvent):
 	if event is InputEventMouseMotion:
 		_move_to_mouse()
 		
@@ -178,7 +223,7 @@ func _input(event):
 			drop_one()
 
 
-func _drop_surface_input(event):
+func _drop_surface_input(event : InputEvent):
 	if event is InputEventMouseButton && grabbed_stack != null && !event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			drop_on_ground(grabbed_stack, event.global_position)
@@ -195,7 +240,14 @@ func _drop_surface_input(event):
 
 
 func _on_visibility_changed():
-	var v = get_parent().is_visible_in_tree()
+	var v := false
+	var parent := get_parent()
+	if parent is CanvasItem:
+		v = parent.is_visible_in_tree()
+
+	elif parent is CanvasLayer:
+		v = parent.visible
+
 	set_process_input(v && visible)
 	if !v && grabbed_stack != null:
 		drop_on_ground(grabbed_stack, get_global_mouse_position())

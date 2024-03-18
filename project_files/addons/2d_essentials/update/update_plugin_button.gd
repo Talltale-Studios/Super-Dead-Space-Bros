@@ -39,7 +39,7 @@ func show_dialog(dialog: Window):
 	if not dialog.visible:
 		var scale: float = editor_plugin.get_editor_interface().get_editor_scale() if editor_plugin else 1.0
 		dialog.gui_embed_subwindows = false
-		dialog.popup_centered(Vector2i(200, 200) * scale)
+		dialog.popup_centered(Vector2i(250, 250) * scale)
 
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
@@ -88,12 +88,13 @@ func _version_to_number(version: String) -> int:
 
 
 func _prepare_update_checker_timer():
-	update_checker_timer.process_callback = Timer.TIMER_PROCESS_IDLE
-	update_checker_timer.autostart = true
-	update_checker_timer.one_shot = false
-	update_checker_timer.wait_time = (60 * 60 * 12)
-	
-	update_checker_timer.timeout.connect(check_for_update)
+	if update_checker_timer:
+		update_checker_timer.process_callback = Timer.TIMER_PROCESS_IDLE
+		update_checker_timer.autostart = true
+		update_checker_timer.one_shot = false
+		update_checker_timer.wait_time = (60 * 60 * 12)
+		
+		update_checker_timer.timeout.connect(check_for_update)
 
 
 func _on_pressed():

@@ -4,12 +4,12 @@
 
 [resource]
 script = ExtResource("1_wabe0")
-categories = {}
-category_order = Array[Resource("res://addons/ggs/classes/resources/ggs_category.gd")]([])
-recent_settings = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
-setting_list_cache = Array[Resource("res://addons/ggs/classes/resources/ggs_setting.gd")]([])
+recent_settings = Array[String]([])
+apply_on_changed_all = true
+grab_focus_on_mouse_over_all = true
 dir_settings = "res://game_settings/settings"
+dir_templates = "res://game_settings/templates"
 dir_components = "res://game_settings/components"
 dir_save_file = "user://settings.cfg"
-split_offset_0 = -225
-split_offset_1 = 420
+split_offset_0 = -315
+split_offset_1 = 615

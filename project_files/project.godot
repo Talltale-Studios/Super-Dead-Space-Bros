@@ -24,7 +24,7 @@ instance_dock/scenes=[]
 config/name="Super Dead Space Mercs"
 config/description="Test"
 run/main_scene="res://core/data/scenes/worlds/test_world/test_scene.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://core/content/icons/default_icon.png"
@@ -33,18 +33,24 @@ config/icon="res://core/content/icons/default_icon.png"
 
 GameSettings="*res://core/data/autoloads/game_settings.gd"
 CommonGlobals="*res://core/data/autoloads/common_globals.gd"
-Helpers="*res://addons/2d_essentials/autoload/helpers.tscn"
 Spawning="*res://addons/BulletUpHell/Spawning.tscn"
 GGS="*res://addons/ggs/classes/ggs_globals.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
+Helpers="*res://core/data/autoloads/helpers.gd"
+GodotEssentialsHelpers="*res://addons/2d_essentials/autoload/helpers.gd"
+TurnManager="*res://addons/godot_gameplay_systems/turn_based/./autoloads/turn_manager.gd"
 
 [display]
 
 window/stretch/mode="2d"
 
+[dotnet]
+
+project/assembly_name="Super Dead Space Mercs"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_essentials/plugin.cfg", "res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/godot_gameplay_systems/plugin.cfg", "res://addons/godot_style/plugin.cfg", "res://addons/imrp/plugin.cfg")
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg", "res://addons/diagnosticlist/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/godot_gameplay_systems/plugin.cfg", "res://addons/godot_style/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/nv.file_system/plugin.cfg")
 
 [filesystem]
 

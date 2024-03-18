@@ -1,19 +1,19 @@
 [gd_scene load_steps=21 format=3 uid="uid://dr5hmv204a1sj"]
 
-[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_example/src/menu_tabs/crafting_tab.gd" id="1"]
-[ext_resource type="Theme" uid="uid://75b71yv7xu1e" path="res://examples_and_demos/wyvernbox_example/theme/default.tres" id="1_gtsdm"]
+[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_examples/src/menu_tabs/crafting_tab.gd" id="1"]
+[ext_resource type="Theme" uid="uid://75b71yv7xu1e" path="res://examples_and_demos/wyvernbox_examples/theme/default.tres" id="1_gtsdm"]
 [ext_resource type="PackedScene" uid="uid://dk2b3ordhblc2" path="res://addons/wyvernbox_prefabs/inventories/grid_inventory.tscn" id="2"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/craft_arrows.tres" id="3"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/exchange_into_gold.tres" id="4"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/craft_arrows.tres" id="3"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/exchange_into_gold.tres" id="4"]
 [ext_resource type="PackedScene" uid="uid://b7jlucsddt6dg" path="res://addons/wyvernbox_prefabs/inventory_cell.tscn" id="5"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/enchant_wand_purple.tres" id="6"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/enchant_melee_battleaxe.tres" id="7"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/enchant_melee_sword.tres" id="8"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/enchant_wand_red.tres" id="9"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/forge_sword.tres" id="10"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/forge_wand.tres" id="11"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/brew_purple_potion.tres" id="12"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/crafting_recipes/brew_red_potion.tres" id="13"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/enchant_wand_purple.tres" id="6"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/enchant_melee_battleaxe.tres" id="7"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/enchant_melee_sword.tres" id="8"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/enchant_wand_red.tres" id="9"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/forge_sword.tres" id="10"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/forge_wand.tres" id="11"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/brew_purple_potion.tres" id="12"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/crafting_recipes/brew_red_potion.tres" id="13"]
 [ext_resource type="Script" path="res://addons/wyvernbox/inventories/grid_inventory.gd" id="15_rhpox"]
 
 [sub_resource type="Gradient" id="4"]
@@ -71,7 +71,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/Panel"]
 layout_mode = 2
-text = "menu_craft"
+text = "Craft"
 horizontal_alignment = 1
 vertical_alignment = 2
 

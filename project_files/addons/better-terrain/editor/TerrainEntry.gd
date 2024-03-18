@@ -36,13 +36,13 @@ func _ready():
 	update()
 
 func update():
-	if !terrain:
+	if !terrain or !terrain.valid:
 		return
 	if !tileset:
 		return
 	
 	name_label.text = terrain.name
-	tooltip_text = terrain.name
+	tooltip_text = "%s (%d)" % [terrain.name, terrain.id]
 	
 	color_style_list = color_panel.get_theme_stylebox("panel").duplicate()
 	color_style_grid = color_panel.get_theme_stylebox("panel").duplicate()

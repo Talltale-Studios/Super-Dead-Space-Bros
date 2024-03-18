@@ -1,6 +1,7 @@
-extends SheetsCellEditor
+extends ResourceTablesCellEditor
 
-const SettingsGrid := preload("res://addons/resources_spreadsheet_view/settings_grid.gd")
+const TablesPluginSettingsClass := preload("res://addons/resources_spreadsheet_view/settings_grid.gd")
+
 
 func can_edit_value(value, type, property_hint, column_index) -> bool:
 	return type == TYPE_PACKED_STRING_ARRAY or type == TYPE_ARRAY
@@ -11,9 +12,9 @@ func create_cell(caller : Control) -> Control:
 
 
 func set_value(node : Control, value):
-	var children = node.get_node("Box").get_children()
-	node.custom_minimum_size.x = ProjectSettings.get_setting(SettingsGrid.SETTING_PREFIX + "array_min_width")
-	var colored = ProjectSettings.get_setting(SettingsGrid.SETTING_PREFIX + "color_arrays")
+	var children := node.get_node("Box").get_children()
+	node.custom_minimum_size.x = ProjectSettings.get_setting(TablesPluginSettingsClass.PREFIX + "array_min_width")
+	var colored = ProjectSettings.get_setting(TablesPluginSettingsClass.PREFIX + "color_arrays")
 	while children.size() < value.size():
 		children.append(Label.new())
 		node.get_node("Box").add_child(children[children.size() - 1])
@@ -25,16 +26,23 @@ func set_value(node : Control, value):
 
 		else:
 			children[i].visible = true
-			_write_value_to_child(value[i], column_hints, children[i], colored)
+			_write_value_to_child(value[i], value[i], column_hints, children[i], colored)
 
 
-func _write_value_to_child(value, hint_arr : PackedStringArray, child : Label, colored : bool):
+func _write_value_to_child(value, key, hint_arr : PackedStringArray, child : Label, colored : bool):
+	if value is Resource:
+		value = _resource_to_string(value)
+
 	child.text = str(value)
 	child.self_modulate = (
 		Color.WHITE
 		if !colored else
-		Color(str(value).hash()) + Color(0.25, 0.25, 0.25, 1.0)
+		Color(str(key).hash()) + Color(0.25, 0.25, 0.25, 1.0)
 	)
+
+
+func _resource_to_string(res : Resource):
+	return res.resource_name if res.resource_name != "" else res.resource_path.get_file()
 
 
 func is_text():

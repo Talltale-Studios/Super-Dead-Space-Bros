@@ -1,5 +1,5 @@
 @tool
-extends SheetsDockEditor
+extends ResourceTablesDockEditor
 
 @onready var _value_rect := $"EditColor/ColorProper/ColorRect"
 @onready var _color_picker_panel := $"EditColor/VSeparator6/Panel"
@@ -110,7 +110,7 @@ func _on_Button_pressed():
 
 
 func _on_ColorPicker_gui_input(event : InputEvent):
-	if event is InputEventMouseButton && !event.pressed:
+	if event is InputEventMouseButton and !event.pressed:
 		_set_stored_value(_color_picker.color)
 		update_cell_values()
 

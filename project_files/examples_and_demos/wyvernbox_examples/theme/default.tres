@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://75b71yv7xu1e"]
 
-[ext_resource type="FontFile" uid="uid://bqh6sqblfqaoo" path="res://examples_and_demos/wyvernbox_example/theme/font/ttf/Abaddon Bold.ttf" id="1_k4mv6"]
+[ext_resource type="FontFile" uid="uid://bqh6sqblfqaoo" path="res://examples_and_demos/wyvernbox_examples/theme/font/ttf/Abaddon Bold.ttf" id="1_k4mv6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ypfh"]
 bg_color = Color(0.0901961, 0.0901961, 0.0901961, 0.752941)

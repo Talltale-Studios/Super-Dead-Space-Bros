@@ -1,6 +1,17 @@
 extends VBoxContainer
 
+@export var base_stats : Dictionary = {
+  "health" : 20.0,
+  "magic" : 0.0,
+  "weapon_speed" : 1.0,
+  "crit_power" : 150.0,
+}
 @export var equip_inventory_view := NodePath("../Equip")
+
+@export_group("Fluff")
+@export var no_weapon_text := "Left Hook Right Hook Jab"
+@export var crit_stat_text := "Chance for x%s Damage:"
+@export var item_bonus_locale_string := "item_bonus_%s"
 
 var stats := {}
 var stats_per_item := {}
@@ -23,11 +34,14 @@ func _on_Equip_item_stack_added(item_stack):
 
 func update_view():
 	stats.clear()
+	for k in base_stats:
+		stats[k] = base_stats[k]
+
 	for k in stats_per_item:
 		for l in stats_per_item[k]:
 			stats[l] = stats.get(l, 0.0) + stats_per_item[k][l]
 
-	call_deferred("_update_stat_view")
+	_update_stat_view.call_deferred()
 
 
 func _update_stat_view():
@@ -39,62 +53,65 @@ func _update_stat_view():
 	_update_nullable($"OffDef/Def/HBoxContainer/Dodge", "dodgerate")
 
 	var already_shown_stats = {
-		"weapon_damage" : true,
-		"weapon_speed" : true,
-		"spell_damage" : true,
-		"defense" : true,
-		"dodgerate" : true,
-		"health" : true,
-		"magic" : true,
-		"health_regen" : true,
-		"magic_regen" : true,
-		"crit_chance" : true,
-		"crit_power" : true,
+		&"weapon_damage" : true,
+		&"weapon_speed" : true,
+		&"spell_damage" : true,
+		&"defense" : true,
+		&"dodgerate" : true,
+		&"health" : true,
+		&"magic" : true,
+		&"health_regen" : true,
+		&"magic_regen" : true,
+		&"crit_chance" : true,
+		&"crit_power" : true,
 	}
-	var other_list = $"OtherStats"
-	other_list.text = ""
+	var other_list : RichTextLabel = $"OtherStats"
+	other_list.clear()
 	var stats_sorted = stats.keys()
 	stats_sorted.sort()
 	for k in stats_sorted:
 		if k in already_shown_stats:
 			continue
 		
-		other_list.append_text(
-			"[color=#858ffd]"
-			+ ("%.1f" % (stats.get(k, 0.0)))
-			+ "[/color] "
-			+ tr("item_bonus_" + k)
-			+ "\n"
-		)
+		other_list.append_text("[color=#858ffd]%.1f[/color] %s\n" % [
+			stats.get(k, 0.0),
+			tr(item_bonus_locale_string % k),
+		])
 
 
 func _update_hpmp():
-	var health_str := str(stats.get("health", 0.0))
+	var health_str := str(stats.get(&"health", 0.0))
 	$"Hpmp/Hp/Num".text = (
 		health_str + "/" + health_str  # TODO: replace with actual health
-		if stats.get("health_regen", 0.0) == 0 else
+		if stats.get(&"health_regen", 0.0) == 0 else
 		"%s/%s (+%s/s)" % [
 		health_str,
 		health_str,
-		stats.get("health_regen", 0.0),
+		stats.get(&"health_regen", 0.0),
 	])
-	var magic_str := str(stats.get("magic", 0.0))
+	var magic_str := str(stats.get(&"magic", 0.0))
 	$"Hpmp/Mp/Num".text = (
 		magic_str + "/" + magic_str  # TODO: replace with actual magic energy
-		if stats.get("magic_regen", 0.0) == 0 else
+		if stats.get(&"magic_regen", 0.0) == 0 else
 		"%s/%s (+%s/s)" % [
 		magic_str,
 		magic_str,
-		stats.get("magic_regen", 0.0),
+		stats.get(&"magic_regen", 0.0),
 	])
 
 
 func _update_weapon_stats():
 	var weapon = get_node(equip_inventory_view).inventory.get_item_at_position(0, 0)
-	$"WeaponName".text = weapon.get_name() if weapon != null else "no_weapon"
+	$"WeaponName".text = weapon.get_name() if weapon != null else no_weapon_text
 	$"Weapon/B/Dmg/Value".text = str(stats.get("weapon_damage", 0.0) * stats.get("weapon_speed", 1.0))
-	$"Weapon/B/Crit/Label".text = tr("stats_crit") % (stats.get("crit_power", 0.0) * 0.01)
 	$"Weapon/B/Crit/Value".text = str(stats.get("crit_chance", 0.0)) + "%"
+
+	var crit_label := tr(crit_stat_text)
+	if !("%s" in crit_label || "%d" in crit_label || "%f" in crit_label):
+    # Epic localization fail (Github #17)
+		crit_label += " %s"
+	
+	$"Weapon/B/Crit/Label".text = crit_label % (stats.get("crit_power", 0.0) * 0.01)
 
 
 func _update_nullable(node, stat, prefix : String = "", add_to_value : float = 0.0, hide_if_zero : bool = false):

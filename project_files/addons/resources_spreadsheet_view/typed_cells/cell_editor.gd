@@ -1,5 +1,7 @@
-class_name SheetsCellEditor
+class_name ResourceTablesCellEditor
 extends RefCounted
+
+const TextEditingUtilsClass := preload("res://addons/resources_spreadsheet_view/text_editing_utils.gd")
 
 const CELL_SCENE_DIR = "res://addons/resources_spreadsheet_view/typed_cells/"
 
@@ -21,7 +23,7 @@ func set_selected(node : Control, selected : bool):
 
 ## Override to change how the value is displayed.
 func set_value(node : Control, value):
-	node.text = TextEditingUtils.show_non_typing(str(value))
+	node.text = TextEditingUtilsClass.show_non_typing(str(value))
 
 ## Override to prevent the cell from being edited as text.
 func is_text():

@@ -7,14 +7,28 @@ signal terrain_updated(index)
 
 @onready var checkerboard := get_theme_icon("Checkerboard", "EditorIcons")
 
+@onready var paint_symmetry_icons := [
+	null,
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryMirror.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryFlip.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryReflect.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryRotateClockwise.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryRotateCounterClockwise.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryRotate180.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryRotateAll.svg"),
+	preload("res://addons/better-terrain/icons/paint-symmetry/SymmetryAll.svg"),
+]
+
 # Draw checkerboard and tiles with specific  materials in
 # individual canvas items via rendering server
 var _canvas_item_map = {}
 var _canvas_item_background : RID
 
 var tileset: TileSet
+var disabled_sources: Array[int] = []: set = set_disabled_sources
 
 var paint := BetterTerrain.TileCategory.NON_TERRAIN
+var paint_symmetry := BetterTerrain.SymmetryType.NONE
 var highlighted_tile_part := { valid = false }
 var zoom_level := 1.0
 
@@ -45,6 +59,7 @@ enum PaintMode {
 	NO_PAINT,
 	PAINT_TYPE,
 	PAINT_PEERING,
+	PAINT_SYMMETRY,
 	SELECT,
 	PASTE
 }
@@ -58,6 +73,8 @@ enum PaintAction {
 	ERASE_TYPE,
 	DRAW_PEERING,
 	ERASE_PEERING,
+	DRAW_SYMMETRY,
+	ERASE_SYMMETRY,
 	SELECT,
 	PASTE
 }
@@ -85,6 +102,7 @@ func refresh_tileset(ts: TileSet) -> void:
 	tiles_size = Vector2.ZERO
 	alternate_size = Vector2.ZERO
 	alternate_lookup = []
+	disabled_sources = []
 	
 	if !tileset:
 		return
@@ -153,6 +171,8 @@ func tile_part_from_position(position: Vector2i) -> Dictionary:
 	var alt_offset := Vector2.RIGHT * (zoom_level * tiles_size.x + ALTERNATE_TILE_MARGIN)
 	if Rect2(alt_offset, zoom_level * alternate_size).has_point(position):
 		for a in alternate_lookup:
+			if a[1] in disabled_sources:
+				continue
 			var next_offset_y = alt_offset.y + zoom_level * a[0].y
 			if position.y > next_offset_y:
 				alt_offset.y = next_offset_y
@@ -185,8 +205,10 @@ func tile_part_from_position(position: Vector2i) -> Dictionary:
 	else:
 		for s in tileset.get_source_count():
 			var source_id := tileset.get_source_id(s)
+			if source_id in disabled_sources:
+				continue
 			var source := tileset.get_source(source_id) as TileSetAtlasSource
-			if !source:
+			if !source || !source.texture:
 				continue
 			for t in source.get_tiles_count():
 				var coord := source.get_tile_id(t)
@@ -218,6 +240,8 @@ func tile_rect_from_position(position: Vector2i) -> Rect2:
 	var alt_offset := Vector2.RIGHT * (zoom_level * tiles_size.x + ALTERNATE_TILE_MARGIN)
 	if Rect2(alt_offset, zoom_level * alternate_size).has_point(position):
 		for a in alternate_lookup:
+			if a[1] in disabled_sources:
+				continue
 			var next_offset_y = alt_offset.y + zoom_level * a[0].y
 			if position.y > next_offset_y:
 				alt_offset.y = next_offset_y
@@ -240,6 +264,8 @@ func tile_rect_from_position(position: Vector2i) -> Rect2:
 	else:
 		for s in tileset.get_source_count():
 			var source_id := tileset.get_source_id(s)
+			if source_id in disabled_sources:
+				continue
 			var source := tileset.get_source(source_id) as TileSetAtlasSource
 			if !source:
 				continue
@@ -368,6 +394,39 @@ func _draw_tile_data(texture: Texture2D, rect: Rect2, src_rect: Rect2, td: TileD
 			draw_colored_polygon(transform * side_polygon, Color(paint_terrain.color, 0.6))
 
 
+func _draw_tile_symmetry(texture: Texture2D, rect: Rect2, src_rect: Rect2, td: TileData, draw_icon: bool = true) -> void:
+	var flipped_rect := rect
+	if td.flip_h:
+		flipped_rect.size.x = -rect.size.x
+	if td.flip_v:
+		flipped_rect.size.y = -rect.size.y
+	
+	RenderingServer.canvas_item_add_texture_rect_region(
+		_get_canvas_item(td),
+		flipped_rect,
+		texture.get_rid(),
+		src_rect,
+		td.modulate,
+		td.transpose
+	)
+	
+	if not draw_icon:
+		return
+	
+	var symmetry_type = BetterTerrain.get_tile_symmetry_type(td)
+	if symmetry_type == 0:
+		return
+	var symmetry_icon = paint_symmetry_icons[symmetry_type]
+	
+	RenderingServer.canvas_item_add_texture_rect_region(
+		_get_canvas_item(td),
+		rect,
+		symmetry_icon.get_rid(),
+		Rect2(Vector2.ZERO, symmetry_icon.get_size()),
+		Color(1,1,1,0.5)
+	)
+
+
 func _draw() -> void:
 	if !tileset:
 		return
@@ -388,7 +447,10 @@ func _draw() -> void:
 	)
 	
 	for s in tileset.get_source_count():
-		var source := tileset.get_source(tileset.get_source_id(s)) as TileSetAtlasSource
+		var source_id := tileset.get_source_id(s)
+		if source_id in disabled_sources:
+			continue
+		var source := tileset.get_source(source_id) as TileSetAtlasSource
 		if !source or !source.texture:
 			continue
 		
@@ -410,10 +472,15 @@ func _draw() -> void:
 				else:
 					target_rect = Rect2(alt_offset + zoom_level * (a - 1) * rect.size.x * Vector2.RIGHT, zoom_level * rect.size)
 					alt_id = source.get_alternative_tile_id(coord, a)
-				var td := source.get_tile_data(coord, alt_id)
-				_draw_tile_data(source.texture, target_rect, rect, td)
 				
-				if BetterTerrain.get_tile_terrain_type(td) == paint:
+				var td := source.get_tile_data(coord, alt_id)
+				var drawing_current = BetterTerrain.get_tile_terrain_type(td) == paint
+				if paint_mode == PaintMode.PAINT_SYMMETRY:
+					_draw_tile_symmetry(source.texture, target_rect, rect, td, drawing_current)
+				else:
+					_draw_tile_data(source.texture, target_rect, rect, td)
+				
+				if drawing_current:
 					draw_rect(target_rect.grow(-1), Color(0,0,0, 0.75), false, 1)
 					draw_rect(target_rect, Color(1,1,1, 0.75), false, 1)
 				
@@ -440,6 +507,8 @@ func _draw() -> void:
 	# Blank out unused alternate tile sections
 	alt_offset = Vector2.RIGHT * (zoom_level * tiles_size.x + ALTERNATE_TILE_MARGIN)
 	for a in alternate_lookup:
+		if a[1] in disabled_sources:
+			continue
 		var source := tileset.get_source(a[1]) as TileSetAtlasSource
 		if source:
 			var count := source.get_alternative_tiles_count(a[2]) - 1
@@ -460,6 +529,10 @@ func _draw() -> void:
 		if paint_mode != PaintMode.NO_PAINT:
 			var inner_rect := Rect2(highlighted_tile_part.rect.position + Vector2.ONE, highlighted_tile_part.rect.size - 2 * Vector2.ONE) 
 			draw_rect(inner_rect, Color.WHITE, false)
+		if paint_mode == PaintMode.PAINT_SYMMETRY:
+			if paint_symmetry > 0:
+				var symmetry_icon = paint_symmetry_icons[paint_symmetry]
+				draw_texture_rect(symmetry_icon, highlighted_tile_part.rect, false, Color(0.5,0.75,1,0.5))
 	
 	if paint_mode == PaintMode.SELECT:
 		draw_rect(selection_rect, Color.WHITE, false)
@@ -503,10 +576,34 @@ func delete_selection():
 			if old_peering.has(paint):
 				undo_manager.add_do_method(BetterTerrain, &"remove_tile_peering_type", tileset, t.part.data, side, paint)
 				undo_manager.add_undo_method(BetterTerrain, &"add_tile_peering_type", tileset, t.part.data, side, paint)
-			
+	
 	undo_manager.add_do_method(self, &"queue_redraw")
 	undo_manager.add_undo_method(self, &"queue_redraw")
 	undo_manager.commit_action()
+
+
+func toggle_selection():
+	undo_manager.create_action("Toggle tile terrain", UndoRedo.MERGE_DISABLE, tileset, true)
+	for t in selected_tile_states:
+		var type := BetterTerrain.get_tile_terrain_type(t.part.data)
+		var goal := paint if paint != type else BetterTerrain.TileCategory.NON_TERRAIN
+		
+		terrain_undo.add_do_method(undo_manager, BetterTerrain, &"set_tile_terrain_type", [tileset, t.part.data, goal])
+		if goal == BetterTerrain.TileCategory.NON_TERRAIN:
+			terrain_undo.create_peering_restore_point_tile(
+				undo_manager,
+				tileset,
+				t.part.source_id,
+				t.part.coord,
+				t.part.alternate
+			)
+		else:
+			undo_manager.add_undo_method(BetterTerrain, &"set_tile_terrain_type", tileset, t.part.data, type)
+	
+	terrain_undo.add_do_method(undo_manager, self, &"queue_redraw", [])
+	undo_manager.add_undo_method(self, &"queue_redraw")
+	undo_manager.commit_action()
+	terrain_undo.action_count += 1
 
 
 func copy_selection():
@@ -522,15 +619,23 @@ func paste_selection():
 	queue_redraw()
 
 
+func set_disabled_sources(list):
+	disabled_sources = list
+	queue_redraw()
+
+
 func emit_terrain_updated(index):
 	terrain_updated.emit(index)
 
 
 func _gui_input(event) -> void:
-	if event is InputEventKey:
+	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_DELETE and not event.echo:
 			accept_event()
 			delete_selection()
+		if event.keycode == KEY_ENTER and not event.echo:
+			accept_event()
+			toggle_selection()
 		if event.keycode == KEY_ESCAPE and not event.echo:
 			accept_event()
 			if paint_action == PaintAction.PASTE:
@@ -607,14 +712,19 @@ func _gui_input(event) -> void:
 					for side in range(16):
 						var old_peering = BetterTerrain.tile_peering_types(old_tile_part.data, side)
 						var new_sides = new_tile_state.sides
-						
 						if new_sides.has(side) and not old_peering.has(paint):
 							undo_manager.add_do_method(BetterTerrain, &"add_tile_peering_type", tileset, old_tile_part.data, side, paint)
 							undo_manager.add_undo_method(BetterTerrain, &"remove_tile_peering_type", tileset, old_tile_part.data, side, paint)
 						elif old_peering.has(paint) and not new_sides.has(side):
 							undo_manager.add_do_method(BetterTerrain, &"remove_tile_peering_type", tileset, old_tile_part.data, side, paint)
 							undo_manager.add_undo_method(BetterTerrain, &"add_tile_peering_type", tileset, old_tile_part.data, side, paint)
-						
+					
+					var old_symmetry = BetterTerrain.get_tile_symmetry_type(old_tile_part.data)
+					var new_symmetry = new_tile_state.symmetry
+					if new_symmetry != old_symmetry:
+						undo_manager.add_do_method(BetterTerrain, &"set_tile_symmetry_type", tileset, old_tile_part.data, new_symmetry)
+						undo_manager.add_undo_method(BetterTerrain, &"set_tile_symmetry_type", tileset, old_tile_part.data, old_symmetry)
+					
 				undo_manager.add_do_method(self, &"queue_redraw")
 				undo_manager.add_undo_method(self, &"queue_redraw")
 				undo_manager.commit_action()
@@ -656,6 +766,8 @@ func _gui_input(event) -> void:
 				[PaintMode.PAINT_TYPE, MOUSE_BUTTON_RIGHT]: paint_action = PaintAction.ERASE_TYPE
 				[PaintMode.PAINT_PEERING, MOUSE_BUTTON_LEFT]: paint_action = PaintAction.DRAW_PEERING
 				[PaintMode.PAINT_PEERING, MOUSE_BUTTON_RIGHT]: paint_action = PaintAction.ERASE_PEERING
+				[PaintMode.PAINT_SYMMETRY, MOUSE_BUTTON_LEFT]: paint_action = PaintAction.DRAW_SYMMETRY
+				[PaintMode.PAINT_SYMMETRY, MOUSE_BUTTON_RIGHT]: paint_action = PaintAction.ERASE_SYMMETRY
 				[PaintMode.SELECT, MOUSE_BUTTON_LEFT]: paint_action = PaintAction.SELECT
 		else:
 			match [paint_mode, event.button_index]:
@@ -679,7 +791,8 @@ func _gui_input(event) -> void:
 					part = t,
 					base_rect = Rect2(t.rect.position / zoom_level, t.rect.size / zoom_level),
 					paint = paint,
-					sides = BetterTerrain.tile_peering_for_type(t.data, paint)
+					sides = BetterTerrain.tile_peering_for_type(t.data, paint),
+					symmetry = BetterTerrain.get_tile_symmetry_type(t.data)
 				}
 				selected_tile_states.push_back(state)
 		else:
@@ -739,6 +852,26 @@ func _gui_input(event) -> void:
 							undo_manager.add_undo_method(self, &"queue_redraw")
 							undo_manager.commit_action()
 							terrain_undo.action_count += 1
+				elif paint_action == PaintAction.DRAW_SYMMETRY:
+					if paint == BetterTerrain.get_tile_terrain_type(highlighted_tile_part.data):
+						undo_manager.create_action("Set tile symmetry type " + str(terrain_undo.action_index), UndoRedo.MERGE_ALL, tileset, true)
+						var old_symmetry = BetterTerrain.get_tile_symmetry_type(highlighted_tile_part.data)
+						terrain_undo.add_do_method(undo_manager, BetterTerrain, &"set_tile_symmetry_type", [tileset, highlighted_tile_part.data, paint_symmetry])
+						terrain_undo.add_do_method(undo_manager, self, &"queue_redraw", [])
+						undo_manager.add_undo_method(BetterTerrain, &"set_tile_symmetry_type", tileset, highlighted_tile_part.data, old_symmetry)
+						undo_manager.add_undo_method(self, &"queue_redraw")
+						undo_manager.commit_action()
+						terrain_undo.action_count += 1
+				elif paint_action == PaintAction.ERASE_SYMMETRY:
+					if paint == BetterTerrain.get_tile_terrain_type(highlighted_tile_part.data):
+						undo_manager.create_action("Remove tile symmetry type " + str(terrain_undo.action_index), UndoRedo.MERGE_ALL, tileset, true)
+						var old_symmetry = BetterTerrain.get_tile_symmetry_type(highlighted_tile_part.data)
+						terrain_undo.add_do_method(undo_manager, BetterTerrain, &"set_tile_symmetry_type", [tileset, highlighted_tile_part.data, BetterTerrain.SymmetryType.NONE])
+						terrain_undo.add_do_method(undo_manager, self, &"queue_redraw", [])
+						undo_manager.add_undo_method(BetterTerrain, &"set_tile_symmetry_type", tileset, highlighted_tile_part.data, old_symmetry)
+						undo_manager.add_undo_method(self, &"queue_redraw")
+						undo_manager.commit_action()
+						terrain_undo.action_count += 1
 
 
 func _on_zoom_value_changed(value) -> void:

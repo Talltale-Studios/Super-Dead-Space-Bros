@@ -1,0 +1,4 @@
+class_name GamePlayerMovementComponent
+extends GameMovementComponent
+
+

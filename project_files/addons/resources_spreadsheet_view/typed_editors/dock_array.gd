@@ -1,5 +1,5 @@
 @tool
-extends SheetsDockEditor
+extends ResourceTablesDockEditor
 
 @onready var recent_container := $"HBoxContainer/Control2/HBoxContainer/HFlowContainer"
 @onready var contents_label := $"HBoxContainer/HBoxContainer/Panel/Label"
@@ -26,10 +26,41 @@ func try_edit_value(value, type, property_hint) -> bool:
 	_stored_value = value.duplicate()  # Generic arrays are passed by reference
 	contents_label.text = str(value)
 	
-	var is_generic_array = _stored_type == TYPE_ARRAY
-	button_box.get_child(1).visible = is_generic_array or _stored_type == TYPE_PACKED_STRING_ARRAY
-	button_box.get_child(2).visible = is_generic_array or _stored_type == TYPE_PACKED_INT32_ARRAY or _stored_type == TYPE_PACKED_INT64_ARRAY
-	button_box.get_child(3).visible = is_generic_array or _stored_type == TYPE_PACKED_FLOAT32_ARRAY or _stored_type == TYPE_PACKED_FLOAT64_ARRAY
+	var is_generic_array = _stored_type == TYPE_ARRAY and !value.is_typed()
+	button_box.get_child(1).visible = (
+		is_generic_array or value.get_typed_builtin() == TYPE_STRING
+		or _stored_type == TYPE_PACKED_STRING_ARRAY
+	)
+	button_box.get_child(2).visible = (
+		is_generic_array or value.get_typed_builtin() == TYPE_INT
+		or _stored_type == TYPE_PACKED_INT32_ARRAY or _stored_type == TYPE_PACKED_INT64_ARRAY
+	)
+	button_box.get_child(3).visible = (
+		is_generic_array or value.get_typed_builtin() == TYPE_FLOAT
+		or _stored_type == TYPE_PACKED_FLOAT32_ARRAY or _stored_type == TYPE_PACKED_FLOAT64_ARRAY
+	)
+	button_box.get_child(5).visible = (
+		is_generic_array or value.get_typed_builtin() == TYPE_OBJECT
+	)
+
+	if value.get_typed_builtin() == TYPE_OBJECT:
+		if !value_input is EditorResourcePicker:
+			var new_input := EditorResourcePicker.new()
+			new_input.size_flags_horizontal = SIZE_EXPAND_FILL
+			new_input.base_type = value.get_typed_class_name()
+
+			value_input.replace_by(new_input)
+			value_input.free()
+			value_input = new_input
+
+	else:
+		if !value_input is LineEdit:
+			var new_input := LineEdit.new()
+			new_input.size_flags_horizontal = SIZE_EXPAND_FILL
+
+			value_input.replace_by(new_input)
+			value_input.free()
+			value_input = new_input
 
 	return true
 
@@ -38,7 +69,7 @@ func _add_value(value):
 	_stored_value.append(value)
 	var values = sheet.get_edited_cells_values()
 	var cur_value
-	var dupe_array : bool = ProjectSettings.get_setting(SettingsGrid.SETTING_PREFIX + "dupe_arrays") 
+	var dupe_array : bool = ProjectSettings.get_setting(TablesPluginSettingsClass.PREFIX + "dupe_arrays") 
 	for i in values.size():
 		cur_value = values[i]
 		if dupe_array:
@@ -54,7 +85,7 @@ func _remove_value(value):
 	_stored_value.remove_at(_stored_value.find(value))
 	var values = sheet.get_edited_cells_values()
 	var cur_value : Array
-	var dupe_array : bool = ProjectSettings.get_setting(SettingsGrid.SETTING_PREFIX + "dupe_arrays") 
+	var dupe_array : bool = ProjectSettings.get_setting(TablesPluginSettingsClass.PREFIX + "dupe_arrays") 
 	for i in values.size():
 		cur_value = values[i]
 		if dupe_array:
@@ -73,9 +104,18 @@ func _add_recent(value):
 		if x.text == str(value):
 			return
 
+		if value is Resource and x.tooltip_text == value.resource_path:
+			return
+
 	var node := Button.new()
-	node.text = str(value)
-	node.self_modulate = Color(value.hash()) + Color(0.25, 0.25, 0.25, 1.0)
+	var value_str : String = str(value)
+	if value is Resource:
+		value_str = value.resource_path.get_file()
+		node.tooltip_text = value.resource_path
+		value = value.resource_path
+
+	node.text = value_str
+	node.self_modulate = Color(value_str.hash()) + Color(0.25, 0.25, 0.25, 1.0)
 	node.pressed.connect(_on_recent_clicked.bind(node, value))
 	recent_container.add_child(node)
 
@@ -94,7 +134,10 @@ func _on_recent_clicked(button, value):
 
 
 func _on_Remove_pressed():
-	if str_to_var(value_input.text) != null:
+	if value_input is EditorResourcePicker:
+		_remove_value(value_input.edited_resource)
+
+	elif str_to_var(value_input.text) != null:
 		_remove_value(str_to_var(value_input.text))
 		
 	else:
@@ -105,7 +148,7 @@ func _on_RemoveLast_pressed():
 	_stored_value.pop_back()
 	var values = sheet.get_edited_cells_values()
 	var cur_value : Array
-	var dupe_array : bool = ProjectSettings.get_setting(SettingsGrid.SETTING_PREFIX + "dupe_arrays") 
+	var dupe_array : bool = ProjectSettings.get_setting(TablesPluginSettingsClass.PREFIX + "dupe_arrays") 
 	for i in values.size():
 		cur_value = values[i]
 		if dupe_array:
@@ -132,13 +175,24 @@ func _on_Int_pressed():
 
 
 func _on_String_pressed():
-	if value_input.text == "": return
 	_add_value(value_input.text)
 	_add_recent(value_input.text)
 
 
 func _on_Variant_pressed():
-	_add_value(str_to_var(value_input.text))
+	if value_input is EditorResourcePicker:
+		_add_value(value_input.edited_resource)
+	
+	else:
+		_add_value(str_to_var(value_input.text))
+
+
+func _on_Resource_pressed():
+	if value_input is LineEdit:
+		_add_value(load(value_input.text))
+
+	elif value_input is EditorResourcePicker:
+		_add_value(value_input.edited_resource)
 
 
 func _on_AddRecentFromSel_pressed():

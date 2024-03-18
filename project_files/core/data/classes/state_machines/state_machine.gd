@@ -12,7 +12,8 @@ const DEBUG: bool = true
 @export_node_path("GameState") var initial_state: NodePath
 
 
-var history: Array[String]
+var state_history: Array[String]
+var max_state_history_size: int = 5
 
 
 ## The current active state.
@@ -28,15 +29,19 @@ func _ready() -> void:
 
 ## Change to a new state
 func change_state(new_state: String) -> void:
-	history.append(current_state.name)
+	state_history.append(current_state.name)
+	
+	if state_history.size() > max_state_history_size:
+		state_history.pop_front()
+	
 	current_state = get_node(new_state.to_pascal_case())
 	_enter_state()
 
 
 ## Travel to the previous state
 func back() -> void:
-	if history.size() > 0:
-		current_state = get_node(history.pop_back())
+	if state_history.size() > 0:
+		current_state = get_node(state_history.pop_back())
 		_enter_state()
 
 

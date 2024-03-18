@@ -1,17 +1,17 @@
 [gd_scene load_steps=25 format=3 uid="uid://dsoiq0u4jfsqb"]
 
-[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_example/theme/font/font_title.tres" id="1"]
-[ext_resource type="PackedScene" uid="uid://0r7o3wklblhy" path="res://examples_and_demos/wyvernbox_example/src/menu_tabs/equipment_tab.tscn" id="2"]
+[ext_resource type="FontFile" path="res://examples_and_demos/wyvernbox_examples/theme/font/font_title.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://0r7o3wklblhy" path="res://examples_and_demos/wyvernbox_examples/src/menu_tabs/equipment_tab.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dk2b3ordhblc2" path="res://addons/wyvernbox_prefabs/inventories/grid_inventory.tscn" id="3"]
-[ext_resource type="Theme" uid="uid://75b71yv7xu1e" path="res://examples_and_demos/wyvernbox_example/theme/default.tres" id="4"]
-[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_example/src/clear_all_inv_view_filters_button.gd" id="5"]
-[ext_resource type="PackedScene" uid="uid://dr5hmv204a1sj" path="res://examples_and_demos/wyvernbox_example/src/menu_tabs/crafting_tab.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://t1f7781n680v" path="res://examples_and_demos/wyvernbox_example/src/menu_tabs/shop_tab.tscn" id="7"]
-[ext_resource type="Resource" uid="uid://ba1ie6jofkmu8" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_types/consumable/coin_gold.tres" id="8"]
-[ext_resource type="Resource" uid="uid://bdo8mj57sn4es" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_types/consumable/coin_purple.tres" id="9"]
-[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_example/src/inventory_menu.gd" id="11"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_generators/basic_loot.tres" id="12"]
-[ext_resource type="Texture2D" uid="uid://bdgy1763wv21a" path="res://examples_and_demos/wyvernbox_example/graphics/item_icons/items.png" id="13"]
+[ext_resource type="Theme" uid="uid://75b71yv7xu1e" path="res://examples_and_demos/wyvernbox_examples/theme/default.tres" id="4"]
+[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_examples/src/clear_all_inv_view_filters_button.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://dr5hmv204a1sj" path="res://examples_and_demos/wyvernbox_examples/src/menu_tabs/crafting_tab.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://t1f7781n680v" path="res://examples_and_demos/wyvernbox_examples/src/menu_tabs/shop_tab.tscn" id="7"]
+[ext_resource type="Resource" uid="uid://ba1ie6jofkmu8" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_types/consumable/coin_gold.tres" id="8"]
+[ext_resource type="Resource" uid="uid://bdo8mj57sn4es" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_types/consumable/coin_purple.tres" id="9"]
+[ext_resource type="Script" path="res://examples_and_demos/wyvernbox_examples/src/inventory_menu.gd" id="11"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_generators/basic_loot.tres" id="12"]
+[ext_resource type="Texture2D" uid="uid://bdgy1763wv21a" path="res://examples_and_demos/wyvernbox_examples/graphics/item_icons/items.png" id="13"]
 [ext_resource type="Script" path="res://addons/wyvernbox/inventories/grid_inventory.gd" id="14"]
 [ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="16"]
 
@@ -136,40 +136,40 @@ mouse_filter = 2
 texture = SubResource("12")
 expand_mode = 1
 
-[node name="menu_equip" parent="CenterContainer/TabContainer" instance=ExtResource("2")]
+[node name="Equip" parent="CenterContainer/TabContainer" instance=ExtResource("2")]
 visible = false
 layout_mode = 2
 
-[node name="menu_craft" type="CenterContainer" parent="CenterContainer/TabContainer"]
+[node name="Craft" type="CenterContainer" parent="CenterContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Control" parent="CenterContainer/TabContainer/menu_craft" instance=ExtResource("6")]
+[node name="Control" parent="CenterContainer/TabContainer/Craft" instance=ExtResource("6")]
 layout_mode = 2
 
-[node name="menu_shop" parent="CenterContainer/TabContainer" instance=ExtResource("7")]
+[node name="Shop" parent="CenterContainer/TabContainer" instance=ExtResource("7")]
 visible = false
 layout_mode = 2
 
-[node name="menu_stash" type="VBoxContainer" parent="CenterContainer/TabContainer"]
+[node name="Stash" type="VBoxContainer" parent="CenterContainer/TabContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 alignment = 1
 
-[node name="Inventory" parent="CenterContainer/TabContainer/menu_stash" instance=ExtResource("3")]
+[node name="Inventory" parent="CenterContainer/TabContainer/Stash" instance=ExtResource("3")]
 custom_minimum_size = Vector2(168, 168)
 layout_mode = 2
 size_flags_horizontal = 4
 inventory = SubResource("Resource_spve3")
 autosave_file_path = "items/hero/stash1.dat"
 
-[node name="Label" type="Label" parent="CenterContainer/TabContainer/menu_stash"]
+[node name="Label" type="Label" parent="CenterContainer/TabContainer/Stash"]
 layout_mode = 2
 text = "Random goodies:"
 horizontal_alignment = 1
 
-[node name="Income" parent="CenterContainer/TabContainer/menu_stash" instance=ExtResource("3")]
+[node name="Income" parent="CenterContainer/TabContainer/Stash" instance=ExtResource("3")]
 custom_minimum_size = Vector2(168, 56)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -193,7 +193,7 @@ offset_bottom = -12.0
 [node name="Sort" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "button_sort"
+text = "Sort"
 
 [node name="ClearAllInvViewFilters" type="Button" parent="HBoxContainer"]
 layout_mode = 2
@@ -201,10 +201,10 @@ size_flags_horizontal = 3
 text = "Clear Filters (Alt+F)"
 script = ExtResource("5")
 
-[connection signal="item_stack_added" from="Box/MainInventory" to="CenterContainer/TabContainer/menu_craft/Control" method="update_availability"]
-[connection signal="item_stack_changed" from="Box/MainInventory" to="CenterContainer/TabContainer/menu_craft/Control" method="update_availability"]
-[connection signal="item_stack_removed" from="Box/MainInventory" to="CenterContainer/TabContainer/menu_craft/Control" method="update_availability"]
+[connection signal="item_stack_added" from="Box/MainInventory" to="CenterContainer/TabContainer/Craft/Control" method="update_availability"]
+[connection signal="item_stack_changed" from="Box/MainInventory" to="CenterContainer/TabContainer/Craft/Control" method="update_availability"]
+[connection signal="item_stack_removed" from="Box/MainInventory" to="CenterContainer/TabContainer/Craft/Control" method="update_availability"]
 [connection signal="text_changed" from="Box/NameFilter" to="HBoxContainer/ClearAllInvViewFilters" method="_on_search_text_changed"]
 [connection signal="pressed" from="HBoxContainer/Sort" to="Box/MainInventory" method="sort_inventory"]
 
-[editable path="CenterContainer/TabContainer/menu_shop"]
+[editable path="CenterContainer/TabContainer/Shop"]

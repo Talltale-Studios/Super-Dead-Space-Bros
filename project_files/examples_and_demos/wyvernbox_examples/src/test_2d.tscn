@@ -1,19 +1,19 @@
 [gd_scene load_steps=25 format=3 uid="uid://dfwlhkhfag51y"]
 
-[ext_resource type="PackedScene" uid="uid://dsoiq0u4jfsqb" path="res://examples_and_demos/wyvernbox_example/src/inventory_menu.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://examples_and_demos/wyvernbox_example/src/world/char.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dsoiq0u4jfsqb" path="res://examples_and_demos/wyvernbox_examples/src/inventory_menu.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://coca3cj5aa8qc" path="res://examples_and_demos/wyvernbox_examples/src/world/char.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cjdtl6ek4qp7d" path="res://addons/wyvernbox_prefabs/ground_item_stack_view_2d.tscn" id="4"]
-[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_generators/basic_loot.tres" id="5"]
+[ext_resource type="Resource" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_generators/basic_loot.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://dk2b3ordhblc2" path="res://addons/wyvernbox_prefabs/inventories/grid_inventory.tscn" id="6"]
-[ext_resource type="Resource" uid="uid://ba1ie6jofkmu8" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_types/consumable/coin_gold.tres" id="7"]
-[ext_resource type="Resource" uid="uid://bdo8mj57sn4es" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_types/consumable/coin_purple.tres" id="8"]
-[ext_resource type="Resource" uid="uid://bc5mn5etsfr76" path="res://examples_and_demos/wyvernbox_example/wyvernbox/item_generators/random_enchanted_equip.tres" id="9"]
+[ext_resource type="Resource" uid="uid://ba1ie6jofkmu8" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_types/consumable/coin_gold.tres" id="7"]
+[ext_resource type="Resource" uid="uid://bdo8mj57sn4es" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_types/consumable/coin_purple.tres" id="8"]
+[ext_resource type="Resource" uid="uid://bc5mn5etsfr76" path="res://examples_and_demos/wyvernbox_examples/wyvernbox/item_generators/random_enchanted_equip.tres" id="9"]
 [ext_resource type="Script" path="res://addons/wyvernbox/inventories/grid_inventory.gd" id="10"]
-[ext_resource type="PackedScene" path="res://examples_and_demos/wyvernbox_example/src/world/inworld_container2d.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://examples_and_demos/wyvernbox_example/src/world/touch_dropper.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://examples_and_demos/wyvernbox_examples/src/world/inworld_container2d.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://examples_and_demos/wyvernbox_examples/src/world/touch_dropper.tscn" id="12"]
 [ext_resource type="Script" path="res://addons/wyvernbox/item_instantiator.gd" id="13"]
 [ext_resource type="PackedScene" uid="uid://co5ok1mm2s7vu" path="res://addons/wyvernbox_prefabs/item_stack_view.tscn" id="17"]
-[ext_resource type="Theme" uid="uid://75b71yv7xu1e" path="res://examples_and_demos/wyvernbox_example/theme/default.tres" id="17_6ufom"]
+[ext_resource type="Theme" uid="uid://75b71yv7xu1e" path="res://examples_and_demos/wyvernbox_examples/theme/default.tres" id="17_6ufom"]
 [ext_resource type="Script" path="res://addons/wyvernbox/ground/ground_items_manager.gd" id="18"]
 [ext_resource type="PackedScene" uid="uid://cqa45c6lfsffv" path="res://addons/wyvernbox_prefabs/tooltip.tscn" id="19"]
 [ext_resource type="Script" path="res://addons/wyvernbox/view_extra/grabbed_item_stack.gd" id="20"]
@@ -269,7 +269,7 @@ text = "(Hold Alt to highlight items)"
 [node name="InventoryMenu" parent="Inventory" instance=ExtResource("1")]
 visible = false
 
-[node name="GrabbedItem" parent="Inventory/InventoryMenu" groups=["grabbed_item"] instance=ExtResource("17")]
+[node name="GrabbedItem" parent="Inventory/InventoryMenu" instance=ExtResource("17")]
 visible = false
 z_index = 1
 offset_left = 220.787
@@ -283,6 +283,7 @@ drop_at_node = NodePath("../../../Gameplay/Node2D/Char")
 drop_ground_item_manager = NodePath("../../../Gameplay/Node2D/Items")
 drop_max_distance = 256.0
 drop_camera_3d = NodePath("")
+drop_ray_mask = 1
 unit_size = Vector2(14, 14)
 hide_cursor = false
 
@@ -301,8 +302,7 @@ offset_top = -23.0
 offset_right = 358.0
 offset_bottom = 52.0
 theme = ExtResource("17_6ufom")
-color_neutral = Color(0.376471, 0.376471, 0.376471, 1)
-compare_to_inventory = NodePath("../InventoryMenu/CenterContainer/TabContainer/menu_equip/Control/Equip")
+compare_to_inventory = NodePath("../InventoryMenu/CenterContainer/TabContainer/Equip/Control/Equip")
 
 [connection signal="item_clicked" from="Gameplay/Node2D/Items" to="Gameplay/Node2D/Char" method="_on_items_item_clicked"]
 [connection signal="pressed" from="Gameplay/Node2D/Openable/Chest/Inventory/Control2/Button" to="Inventory/InventoryMenu/InworlnventoriesTutorial" method="popup"]

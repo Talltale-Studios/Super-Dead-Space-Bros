@@ -29,10 +29,6 @@ func _physics_process(_delta):
 		var _new_velocity = velocity
 
 
-func _ready():
-	get_node(inventory_menu).hide()
-
-
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		_mouse_pressed = event.is_pressed()
@@ -63,5 +59,5 @@ func _on_inworld_inv_button_pressed(inventory_view, inventory_name):
 		get_node(inventory_menu).open_inworld_inventory(inventory_view, inventory_name)
 
 
-func _on_items_item_clicked(item_node):
+func _on_items_item_clicked(item_node : Node):
 	_on_ItemPickup_area_entered(item_node)

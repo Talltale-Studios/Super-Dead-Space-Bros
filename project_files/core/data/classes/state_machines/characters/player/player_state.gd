@@ -27,7 +27,6 @@ func _apply_coyote_time():
 func _apply_gravity(delta):
 	if actor.coyote_timer.is_stopped():
 		actor.velocity.y += _get_gravity() * delta
-		actor.velocity.y = clamp(actor.velocity.y, actor.y_velocity_clamp_min, actor.y_velocity_clamp_max)
 
 
 func _get_x_input() -> float:
