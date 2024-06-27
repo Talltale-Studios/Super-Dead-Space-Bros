@@ -10,6 +10,11 @@ var _stored_value
 var _last_column := -1
 
 
+func _ready():
+	super()
+	contents_label.text_changed.connect(_on_contents_edit_text_changed)
+
+
 func try_edit_value(value, type, property_hint) -> bool:
 	if !sheet.column_hint_strings[sheet.get_selected_column()][0].begins_with("2/2:"):
 		return false
@@ -37,7 +42,12 @@ func _create_option_button(index : int):
 	if index >= options_container.get_child_count() - _init_nodes_in_options_container:
 		node = Button.new()
 		options_container.add_child(node)
-		node.pressed.connect(_on_option_clicked.bind(index))
+		var colon_found : int = value.rfind(":")
+		if colon_found == -1:
+			node.pressed.connect(_on_option_clicked.bind(index))
+
+		else:
+			node.pressed.connect(_on_option_clicked.bind(value.substr(colon_found + 1).to_int()))
 
 	else:
 		node = options_container.get_child(index + _init_nodes_in_options_container)
@@ -48,7 +58,7 @@ func _create_option_button(index : int):
 	return node
 
 
-func _add_value(option_value):
+func _add_value(option_value : int):
 	_stored_value.append(option_value)
 	var values = sheet.get_edited_cells_values()
 	var cur_value
@@ -64,7 +74,7 @@ func _add_value(option_value):
 	sheet.set_edited_cells_values(values)
 
 
-func _remove_value(option_value):
+func _remove_value(option_value : int):
 	_stored_value.append(option_value)
 	var values = sheet.get_edited_cells_values()
 	var cur_value
@@ -104,4 +114,24 @@ func _on_Remove_pressed():
 		cur_value.remove_at(cur_value.size() - 1)
 		values[i] = cur_value
 
+	sheet.set_edited_cells_values(values)
+
+
+func _on_contents_edit_text_changed():
+	var value := str_to_var(contents_label.text)
+	if !value is Array:
+		return
+
+	for x in value:
+		if !x is int:
+			return
+
+	var values = sheet.get_edited_cells_values()
+	for i in values.size():
+		values[i] = values[i].duplicate()
+		values[i].resize(value.size())
+		for j in value.size():
+			values[i][j] = value[j]
+
+	_stored_value = value
 	sheet.set_edited_cells_values(values)

@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://core/data/scripts/characters/enemies/blade_spinner/blade_spinner_controller.gd" id="1_oyakm"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/enemies/blade_spinner/blade_spinner_state_machine.gd" id="2_gf0i7"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/enemies/blade_spinner/states/wander_state.gd" id="3_iw2sp"]
-[ext_resource type="Texture2D" uid="uid://c8cixkr5qqjsc" path="res://core/content/resources/characters/enemies/spinner/spinner_body_steel.tres" id="4_p831d"]
-[ext_resource type="Texture2D" uid="uid://p6aqx4ahhtt8" path="res://core/content/resources/characters/enemies/spinner/spinner_blades_gold.tres" id="5_p8p4h"]
-[ext_resource type="Texture2D" uid="uid://b1gsky20qkomb" path="res://core/content/resources/characters/enemies/spinner/spinner_skull_green.tres" id="6_wd5hr"]
+[ext_resource type="Texture2D" uid="uid://c8cixkr5qqjsc" path="res://core/assets/resources/characters/enemies/blade_spinner/blade_spinner_body_purple.tres" id="4_p831d"]
+[ext_resource type="Texture2D" uid="uid://p6aqx4ahhtt8" path="res://core/assets/resources/characters/enemies/blade_spinner/blade_spinner_blades_yellow.tres" id="5_p8p4h"]
+[ext_resource type="Texture2D" uid="uid://b1gsky20qkomb" path="res://core/assets/resources/characters/enemies/blade_spinner/blade_spinner_head_green.tres" id="6_wd5hr"]
 [ext_resource type="Script" path="res://core/data/classes/components/movement_component/enemies/enemy_movement_component.gd" id="7_b8308"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtba3"]
@@ -96,7 +96,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SkullSprite:frame")
+tracks/0/path = NodePath("HeadSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -154,13 +154,12 @@ target_position = Vector2(9, 0)
 
 [node name="BodySprite" type="Sprite2D" parent="."]
 texture = ExtResource("4_p831d")
-hframes = 10
 
 [node name="BladesSprite" type="Sprite2D" parent="."]
 texture = ExtResource("5_p8p4h")
-hframes = 10
+hframes = 5
 
-[node name="SkullSprite" type="Sprite2D" parent="."]
+[node name="HeadSprite" type="Sprite2D" parent="."]
 texture = ExtResource("6_wd5hr")
 hframes = 2
 
@@ -176,7 +175,7 @@ libraries = {
 }
 autoplay = "spin"
 
-[node name="SkullAnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="HeadAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_t4wly")
 }

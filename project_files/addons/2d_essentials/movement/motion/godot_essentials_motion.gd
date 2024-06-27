@@ -140,7 +140,7 @@ func apply_air_friction_horizontal(friction_factor: float = AIR_FRICTION_HORIZON
 		velocity.x *= friction_factor
 		
 	return self
-	
+
 
 func apply_air_friction_vertical(friction_factor: float = AIR_FRICTION_VERTICAL_FACTOR) -> GodotEssentialsMotion:
 	if AIR_FRICTION_VERTICAL_FACTOR > 0 and not body.is_on_floor() and not body.is_on_wall():

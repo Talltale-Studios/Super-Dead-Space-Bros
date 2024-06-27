@@ -5,12 +5,13 @@ func _init() -> void: super("SpriteFrames", "SpriteFrames", "res")
 
 func import(
 	res_source_file_path: String,
+	atlas: Texture2D,
 	sprite_sheet: _Common.SpriteSheetInfo,
 	animation_library: _Common.AnimationLibraryInfo,
 	options: Dictionary,
 	save_path: String
-	) -> _Common.ImportResult:
-	var result: _Common.ImportResult = _Common.ImportResult.new()
+	) -> ImportResult:
+	var result: ImportResult = ImportResult.new()
 
 	var sprite_frames: SpriteFrames = SpriteFrames.new()
 	for animation_name in sprite_frames.get_animation_names():
@@ -38,7 +39,7 @@ func import(
 				if atlas_texture == null:
 					atlas_texture = AtlasTexture.new()
 					atlas_texture.filter_clip = filter_clip_enabled
-					atlas_texture.atlas = sprite_sheet.atlas
+					atlas_texture.atlas = atlas
 					atlas_texture.region = region
 					atlas_texture.margin = margin
 					atlas_textures.push_back(atlas_texture)
@@ -46,7 +47,7 @@ func import(
 				if empty_atlas_texture == null:
 					empty_atlas_texture = AtlasTexture.new()
 					empty_atlas_texture.filter_clip = filter_clip_enabled
-					empty_atlas_texture.atlas = sprite_sheet.atlas
+					empty_atlas_texture.atlas = atlas
 					empty_atlas_texture.region = Rect2(0, 0, 1, 1)
 					empty_atlas_texture.margin = Rect2(2, 2, 0, 0)
 				atlas_texture = empty_atlas_texture

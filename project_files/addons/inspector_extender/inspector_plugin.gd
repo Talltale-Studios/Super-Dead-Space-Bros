@@ -41,6 +41,10 @@ var all_properties := []
 var hidden_properties := {}
 var original_edited_object : Object
 var edited_object : Object
+var deferred_init_attributes : Array = []
+var constructed_nodes = []
+var script_prop_count := 0
+var curr_prop_count := 1
 
 var plugin : EditorPlugin
 var inspector : EditorInspector
@@ -71,8 +75,12 @@ func _parse_begin(object):
 		object = create_editable_copy(object)
 
 	var source = object.get_script().source_code
+	# 1 less than the list size because it includes the script name
+	script_prop_count = object.get_script().get_script_property_list().size() - 1
+	curr_prop_count = 1
 	edited_object = object
 
+	deferred_init_attributes.clear()
 	var parse_found_prop := ""
 	var parse_found_comments := []
 	var illegal_starts = ["#".unicode_at(0), " ".unicode_at(0), "\t".unicode_at(0)]
@@ -143,7 +151,10 @@ func get_suffix(to_find : String, line : String):
 				):
 					string_chars_matched += 1
 					if string_chars_matched == to_find.length():
-						return line.substr(i + 1, line.find(" ", i + to_find.length()) - i - 1)
+						var result = line.substr(i + 1, line.find(" ", i + to_find.length()) - i - 1)
+						if result.ends_with(":"):
+							result = result.trim_suffix(":")
+						return result
 
 				else:
 					string_chars_matched = 0
@@ -200,16 +211,27 @@ func get_params(string : String):
 
 func _parse_property(object, type, name, hint_type, hint_string, usage_flags, wide):
 	all_properties.append(name)
-	if !attribute_data.has(name): return false
+	
+	if !attribute_data.has(name): return hidden_properties.has(name)
 	var prop_hidden := false
+	var is_last_property := curr_prop_count == script_prop_count
+	constructed_nodes = []
 	for x in attribute_data[name]:
 		var prototype = attribute_scenes[x[0]]
 		var new_node = prototype.instantiate() if prototype is PackedScene else prototype.new()
 		var attr_name = x[0].substr(x[0].find("@@") + 2)
 		attr_name = attr_name.left(attr_name.find("("))
-		new_node._initialize(edited_object, name, attr_name, x[1], self)
+		
 		attribute_nodes.append(new_node)
-		if new_node.has_method("_hides_property"):
+		constructed_nodes.append(new_node)
+		if new_node.has_method(&"_deferred_init") && new_node._deferred_init():
+			deferred_init_attributes.append([new_node, name, attr_name, x[1]])
+			# add container now so it is in the correct position
+			add_custom_control(new_node)
+			continue
+
+		new_node._initialize(edited_object, name, attr_name, x[1], self)
+		if new_node.has_method(&"_hides_property"):
 			var hides = new_node._hides_property()
 			if hides is bool:
 				prop_hidden = prop_hidden || hides
@@ -229,7 +251,16 @@ func _parse_property(object, type, name, hint_type, hint_string, usage_flags, wi
 			add_custom_control(new_node)
 
 	_on_edited_object_changed()
+	curr_prop_count += 1
 	return prop_hidden || hidden_properties.has(name)
+
+
+func _parse_end(object):
+	for x in deferred_init_attributes:
+		x[0]._initialize(edited_object, x[1], x[2], x[3], self)
+		attribute_nodes.append(x[0])
+
+		_on_edited_object_changed()
 
 
 func _on_edited_object_changed(prop = ""):

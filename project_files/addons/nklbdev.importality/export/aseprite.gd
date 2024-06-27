@@ -6,54 +6,55 @@ const __aseprite_sheet_types_by_sprite_sheet_layout: PackedStringArray = \
 const __aseprite_animation_directions: PackedStringArray = \
 	[ "forward", "reverse", "pingpong", "pingpong_reverse" ]
 
-var __os_command_project_setting: _ProjectSetting = _ProjectSetting.new(
+var __os_command_setting: _Setting = _Setting.new(
 	"aseprite_or_libre_sprite_command", "", TYPE_STRING, PROPERTY_HINT_NONE,
 	"", true, func(v: String): return v.is_empty())
 
-var __os_command_arguments_project_setting: _ProjectSetting = _ProjectSetting.new(
+var __os_command_arguments_setting: _Setting = _Setting.new(
 	"aseprite_or_libre_sprite_command_arguments", PackedStringArray(), TYPE_PACKED_STRING_ARRAY, PROPERTY_HINT_NONE,
 	"", true, func(v: PackedStringArray): return false)
 
 func _init(editor_file_system: EditorFileSystem) -> void:
 	var recognized_extensions: PackedStringArray = ["ase", "aseprite"]
-	super("Aseprite", recognized_extensions, [], editor_file_system,
-		[__os_command_project_setting, __os_command_arguments_project_setting],
+	super("Aseprite", recognized_extensions, [],
+		[__os_command_setting, __os_command_arguments_setting],
 		CustomImageFormatLoaderExtension.new(
 			recognized_extensions,
-			__os_command_project_setting,
-			__os_command_arguments_project_setting,
-			_Common.common_temporary_files_directory_path_project_setting))
+			__os_command_setting,
+			__os_command_arguments_setting,
+			_Common.common_temporary_files_directory_path_setting))
 
-func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dictionary) -> _Common.ExportResult:
-	var result: _Common.ExportResult = _Common.ExportResult.new()
+func _export(res_source_file_path: String, options: Dictionary) -> ExportResult:
+	var result: ExportResult = ExportResult.new()
 	var err: Error
 
-	var os_command_result: _ProjectSetting.Result = __os_command_project_setting.get_value()
+	var os_command_result: _Setting.GettingValueResult = __os_command_setting.get_value()
 	if os_command_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Aseprite Command to export spritesheet", os_command_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Aseprite Command to export spritesheet", os_command_result)
 		return result
 
-	var os_command_arguments_result: _ProjectSetting.Result = __os_command_arguments_project_setting.get_value()
+	var os_command_arguments_result: _Setting.GettingValueResult = __os_command_arguments_setting.get_value()
 	if os_command_arguments_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Aseprite Command Arguments to export spritesheet", os_command_arguments_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Aseprite Command Arguments to export spritesheet", os_command_arguments_result)
 		return result
 
-	var temp_dir_path_result: _ProjectSetting.Result = _Common.common_temporary_files_directory_path_project_setting.get_value()
+	var temp_dir_path_result: _Setting.GettingValueResult = _Common.common_temporary_files_directory_path_setting.get_value()
 	if temp_dir_path_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Temporary Files Directory Path to export spritesheet", temp_dir_path_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Temporary Files Directory Path to export spritesheet", temp_dir_path_result)
 		return result
 	var global_temp_dir_path: String = ProjectSettings.globalize_path(
 		temp_dir_path_result.value.strip_edges())
+	var unique_temp_dir_creation_result: _DirAccessExtensions.CreationResult = \
+		_DirAccessExtensions.create_directory_with_unique_name(global_temp_dir_path)
+	if unique_temp_dir_creation_result.error:
+		result.fail(ERR_QUERY_FAILED, "Failed to create unique temporary directory to export spritesheet", unique_temp_dir_creation_result)
+		return result
+	var unique_temp_dir_path: String = unique_temp_dir_creation_result.path
 
-	if not DirAccess.dir_exists_absolute(global_temp_dir_path):
-		err = DirAccess.make_dir_recursive_absolute(global_temp_dir_path)
-		if err:
-			result.fail(ERR_UNCONFIGURED, "Unable to create directory for temporary files \"%s\" with error %s \"%s\"" %
-				[global_temp_dir_path, err, error_string(err)])
-			return result
+	var global_source_file_path: String = ProjectSettings.globalize_path(res_source_file_path)
 
-	var global_png_path: String = global_temp_dir_path.path_join("temp.png")
-	var global_json_path: String = global_temp_dir_path.path_join("temp.json")
+	var global_png_path: String = unique_temp_dir_path.path_join("temp.png")
+	var global_json_path: String = unique_temp_dir_path.path_join("temp.json")
 
 	var command: String = os_command_result.value.strip_edges()
 	var arguments: PackedStringArray = \
@@ -64,7 +65,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 			"--list-tags",
 			"--sheet", global_png_path,
 			"--data", global_json_path,
-			ProjectSettings.globalize_path(res_source_file_path)])
+			global_source_file_path])
 
 	var output: Array = []
 	var exit_code: int = OS.execute(command, arguments, output, true, false)
@@ -77,13 +78,11 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 			]) % [exit_code, command, "".join(arguments)])
 		return result
 	var raw_atlas_image: Image = Image.load_from_file(global_png_path)
-	DirAccess.remove_absolute(global_png_path)
 	var json = JSON.new()
 	err = json.parse(FileAccess.get_file_as_string(global_json_path))
 	if err:
-		result.fail(ERR_INVALID_DATA, "Unable to parse sprite sheet json data with error %s \"%s\"" % [err, error_string(err)])
+		result.fail(ERR_INVALID_DATA, "Failed to parse sprite sheet json data with error %s \"%s\"" % [err, error_string(err)])
 		return result
-	#DirAccess.remove_absolute(global_json_path)
 	var raw_sprite_sheet_data: Dictionary = json.data
 
 	var sprite_sheet_layout: _Common.SpriteSheetLayout = options[_Options.SPRITE_SHEET_LAYOUT]
@@ -129,18 +128,11 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 
 	var sprite_sheet_builder: _SpriteSheetBuilderBase = _create_sprite_sheet_builder(options)
 
-	var sprite_sheet_building_result: _SpriteSheetBuilderBase.Result = sprite_sheet_builder.build_sprite_sheet(used_frames_images)
+	var sprite_sheet_building_result: _SpriteSheetBuilderBase.SpriteSheetBuildingResult = sprite_sheet_builder.build_sprite_sheet(used_frames_images)
 	if sprite_sheet_building_result.error:
 		result.fail(ERR_BUG, "Sprite sheet building failed", sprite_sheet_building_result)
 		return result
 	var sprite_sheet: _Common.SpriteSheetInfo = sprite_sheet_building_result.sprite_sheet
-
-	var atlas_making_result: AtlasMaker.Result = atlas_maker \
-		.make_atlas(sprite_sheet_building_result.atlas_image)
-	if atlas_making_result.error:
-		result.fail(ERR_SCRIPT_FAILED, "Unable to make atlas texture from image", atlas_making_result)
-		return result
-	sprite_sheet.atlas = atlas_making_result.atlas
 
 	var animation_library: _Common.AnimationLibraryInfo = _Common.AnimationLibraryInfo.new()
 	var autoplay_animation_name: String = options[_Options.AUTOPLAY_ANIMATION_NAME].strip_edges()
@@ -157,7 +149,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 			tag_data.from,
 			tag_data.to - tag_data.from + 1)
 		if animation_params_parsing_result.error:
-			result.fail(ERR_CANT_RESOLVE, "Unable to parse animation parameters",
+			result.fail(ERR_CANT_RESOLVE, "Failed to parse animation parameters",
 				animation_params_parsing_result)
 			return result
 		if unique_animations_names.has(animation_params_parsing_result.name):
@@ -175,7 +167,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 		animation.direction = __aseprite_animation_directions.find(tag_data.direction)
 		if animation_params_parsing_result.direction >= 0:
 			animation.direction = animation_params_parsing_result.direction
-		animation.repeat_count = int(tag_data.get("repeat", "1"))
+		animation.repeat_count = int(tag_data.get("repeat", "0"))
 		if animation_params_parsing_result.repeat_count >= 0:
 			animation.repeat_count = animation_params_parsing_result.repeat_count
 		for global_frame_index in range(tag_data.from, tag_data.to + 1):
@@ -193,27 +185,32 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	if not autoplay_animation_name.is_empty() and animation_library.autoplay_index < 0:
 		push_warning("Autoplay animation name not found: \"%s\". Continuing..." % [autoplay_animation_name])
 
-	result.success(sprite_sheet, animation_library)
+	if _DirAccessExtensions.remove_dir_recursive(unique_temp_dir_path).error:
+		push_warning(
+			"Failed to remove unique temporary directory: \"%s\"" %
+			[unique_temp_dir_path])
+
+	result.success(sprite_sheet_building_result.atlas_image, sprite_sheet, animation_library)
 	return result
 
 class CustomImageFormatLoaderExtension:
 	extends ImageFormatLoaderExtension
 
 	var __recognized_extensions: PackedStringArray
-	var __os_command_project_setting: _ProjectSetting
-	var __os_command_arguments_project_setting: _ProjectSetting
-	var __common_temporary_files_directory_path_project_setting: _ProjectSetting
+	var __os_command_setting: _Setting
+	var __os_command_arguments_setting: _Setting
+	var __common_temporary_files_directory_path_setting: _Setting
 
 	func _init(recognized_extensions: PackedStringArray,
-		os_command_project_setting: _ProjectSetting,
-		os_command_arguments_project_setting: _ProjectSetting,
-		common_temporary_files_directory_path_project_setting: _ProjectSetting
+		os_command_setting: _Setting,
+		os_command_arguments_setting: _Setting,
+		common_temporary_files_directory_path_setting: _Setting
 		) -> void:
 		__recognized_extensions = recognized_extensions
-		__os_command_project_setting = os_command_project_setting
-		__os_command_arguments_project_setting = os_command_arguments_project_setting
-		__common_temporary_files_directory_path_project_setting = \
-			common_temporary_files_directory_path_project_setting
+		__os_command_setting = os_command_setting
+		__os_command_arguments_setting = os_command_arguments_setting
+		__common_temporary_files_directory_path_setting = \
+			common_temporary_files_directory_path_setting
 
 	func _get_recognized_extensions() -> PackedStringArray:
 		return __recognized_extensions
@@ -222,30 +219,31 @@ class CustomImageFormatLoaderExtension:
 		var global_source_file_path: String = file_access.get_path_absolute()
 		var err: Error
 
-		var os_command_result: _ProjectSetting.Result = __os_command_project_setting.get_value()
+		var os_command_result: _Setting.GettingValueResult = __os_command_setting.get_value()
 		if os_command_result.error:
 			push_error(os_command_result.error_description)
 			return os_command_result.error
 
-		var os_command_arguments_result: _ProjectSetting.Result = __os_command_arguments_project_setting.get_value()
+		var os_command_arguments_result: _Setting.GettingValueResult = __os_command_arguments_setting.get_value()
 		if os_command_arguments_result.error:
 			push_error(os_command_arguments_result.error_description)
 			return os_command_arguments_result.error
 
-		var temp_dir_path_result: _ProjectSetting.Result = __common_temporary_files_directory_path_project_setting.get_value()
+		var temp_dir_path_result: _Setting.GettingValueResult = _Common.common_temporary_files_directory_path_setting.get_value()
 		if temp_dir_path_result.error:
-			push_error(temp_dir_path_result.error_description)
+			push_error("Failed to get Temporary Files Directory Path to export spritesheet")
 			return temp_dir_path_result.error
-		var global_temp_dir_path: String = ProjectSettings.globalize_path(temp_dir_path_result.value.strip_edges())
+		var global_temp_dir_path: String = ProjectSettings.globalize_path(
+			temp_dir_path_result.value.strip_edges())
+		var unique_temp_dir_creation_result: _DirAccessExtensions.CreationResult = \
+			_DirAccessExtensions.create_directory_with_unique_name(global_temp_dir_path)
+		if unique_temp_dir_creation_result.error:
+			push_error("Failed to create unique temporary directory to export spritesheet")
+			return unique_temp_dir_creation_result.error
+		var unique_temp_dir_path: String = unique_temp_dir_creation_result.path
 
-		var global_png_path: String = global_temp_dir_path.path_join("temp.png")
-		var global_json_path: String = global_temp_dir_path.path_join("temp.json")
-		if not DirAccess.dir_exists_absolute(global_temp_dir_path):
-			err = DirAccess.make_dir_recursive_absolute(global_temp_dir_path)
-			if err:
-				push_error("Unable to create directory for temporary files \"%s\" with error %s \"%s\"" %
-					[global_temp_dir_path, err, error_string(err)])
-				return ERR_QUERY_FAILED
+		var global_png_path: String = unique_temp_dir_path.path_join("temp.png")
+		var global_json_path: String = unique_temp_dir_path.path_join("temp.json")
 
 		var command: String = os_command_result.value.strip_edges()
 		var arguments: PackedStringArray = \
@@ -271,17 +269,20 @@ class CustomImageFormatLoaderExtension:
 			return ERR_QUERY_FAILED
 
 		var raw_atlas_image: Image = Image.load_from_file(global_png_path)
-		DirAccess.remove_absolute(global_png_path)
 		var json = JSON.new()
 		err = json.parse(FileAccess.get_file_as_string(global_json_path))
 		if err:
-			push_error("Unable to parse sprite sheet json data with error %s \"%s\"" % [err, error_string(err)])
+			push_error("Failed to parse sprite sheet json data with error %s \"%s\"" % [err, error_string(err)])
 			return ERR_INVALID_DATA
-		DirAccess.remove_absolute(global_json_path)
 		var raw_sprite_sheet_data: Dictionary = json.data
 
 		var source_image_size: Vector2i = _Common.get_vector2i(
 			raw_sprite_sheet_data.frames[0].sourceSize, "w", "h")
+
+		if _DirAccessExtensions.remove_dir_recursive(unique_temp_dir_path).error:
+			push_warning(
+				"Failed to remove unique temporary directory: \"%s\"" %
+				[unique_temp_dir_path])
 
 		image.copy_from(raw_atlas_image.get_region(Rect2i(Vector2i.ZERO, source_image_size)))
 		return OK

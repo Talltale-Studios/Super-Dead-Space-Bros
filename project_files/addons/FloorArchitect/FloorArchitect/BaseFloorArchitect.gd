@@ -6,13 +6,6 @@ class_name BaseFloorArchitect extends Node
 var rand:=RandomNumberGenerator.new()
 
 signal floor_planned
-@export var passage_weigths:={"NONE":3,
-			"NORMAL":5,
-			"HIDDEN":0,
-			"LOCKED":0,
-			"CONNECTION":0,
-			}
-			
 
 ## Dictionary of cells (using [CellData]) keyed by position (using [Vector2i])
 @export var cells: Dictionary={}
@@ -21,7 +14,7 @@ var potential_cells:Dictionary={}
 
 ## Function that generates the floor layout, should be overloaded for each implementation.[br]
 ## Base implementation should be called at the end.
-func _plan_floor()->void:
+func plan_floor()->void:
 	clean_invalid_passages()
 	floor_planned.emit()
 
@@ -76,7 +69,7 @@ func add_new_cell(pos:Vector2i, psgs:Dictionary,add_potential:bool=true):
 				and psgs[Utils.EAST] not in [Utils.PassageType.NONE,Utils.PassageType.UNDEFINED]):
 			var pc:CellData=(
 					potential_cells[nc.map_pos+Utils.EAST] if potential_cells.has(nc.map_pos+Utils.EAST) 
-					else Utils.CreateTemplateCell(nc.map_pos+Utils.EAST)
+					else Utils.create_template_cell(nc.map_pos+Utils.EAST)
 					)
 			pc.passages[Utils.WEST]=nc.passages[Utils.EAST]
 			potential_cells[pc.map_pos]=pc

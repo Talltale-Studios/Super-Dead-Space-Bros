@@ -3,6 +3,8 @@ extends Node
 
 class_name Log
 
+signal log_message(level:LogLevel,message:String)
+
 enum LogLevel {
 	DEBUG,
 	INFO,
@@ -65,10 +67,10 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 	match typeof(values):
 		TYPE_ARRAY:
 			if values.size() > 0:
-				msg += "{"
+				msg += "["
 				for k in values:
-					msg += "{k}".format({"k":k})
-				msg = msg.left(msg.length()-1)+"}"
+					msg += "{k},".format({"k":JSON.stringify(k)})
+				msg = msg.left(msg.length()-1)+"]"
 		TYPE_DICTIONARY:
 			for k in _default_args:
 				values[k] = _default_args[k]
@@ -76,25 +78,29 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 				msg += "{"
 				for k in values:
 					if typeof(values[k]) == TYPE_OBJECT && values[k] != null:
-						msg += '"{k}":"{v}",'.format({"k":k,"v":JSON.stringify(JsonData.to_dict(values[k],false))})
+						msg += '"{k}":{v},'.format({"k":k,"v":JSON.stringify(JsonData.to_dict(values[k],false))})
 					else:
-						msg += '"{k}":"{v}",'.format({"k":k,"v":values[k]})
+						msg += '"{k}":{v},'.format({"k":k,"v":JSON.stringify(values[k])})
 				msg = msg.left(msg.length()-1)+"}"
 		TYPE_PACKED_BYTE_ARRAY:
 			if values == null:
-				return
-			msg += JSON.stringify(JsonData.unmarshal_bytes_to_dict(values))
+				msg += JSON.stringify(null)
+			else:
+				msg += JSON.stringify(JsonData.unmarshal_bytes_to_dict(values))
 		TYPE_OBJECT:
 			if values == null:
-				return
-			
-			msg += JSON.stringify(JsonData.to_dict(values,false))
+				msg += JSON.stringify(null)
+			else:
+				msg += JSON.stringify(JsonData.to_dict(values,false))
+		TYPE_NIL:
+			msg += JSON.stringify(null)
 		_:
-			msg += values
+			msg += JSON.stringify(values)
 	if OS.get_main_thread_id() != OS.get_thread_caller_id() and log_level == LogLevel.DEBUG:
 		print("[%d]Cannot retrieve debug info outside the main thread:\n\t%s" % [OS.get_thread_caller_id(),msg])
 		return
 	_write_logs(msg)
+	emit_signal("log_message", log_level, msg)
 	match log_level:
 		LogLevel.DEBUG:
 			print(msg)
@@ -120,19 +126,19 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 			print(msg)
 			
 func debug(message:String,values={}):
-	logger(message,values,LogLevel.DEBUG)	
-			
+	call_thread_safe("logger",message,values,LogLevel.DEBUG)
+
 func info(message:String,values={}):
-	logger(message,values)	
-	
+	call_thread_safe("logger",message,values)
+
 func warn(message:String,values={}):
-	logger(message,values,LogLevel.WARN)	
-	
+	call_thread_safe("logger",message,values,LogLevel.WARN)
+
 func error(message:String,values={}):
-	logger(message,values,LogLevel.ERROR)	
-	
+	call_thread_safe("logger",message,values,LogLevel.ERROR)
+
 func fatal(message:String,values={}):
-	logger(message,values,LogLevel.FATAL)
+	call_thread_safe("logger",message,values,LogLevel.FATAL)
 	
 
 func _write_logs(message:String):
@@ -143,4 +149,3 @@ func _write_logs(message:String):
 	_file.store_line(message)
 	pass
 	
-

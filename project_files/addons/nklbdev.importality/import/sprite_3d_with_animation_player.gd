@@ -6,12 +6,13 @@ func _init() -> void:
 
 func import(
 	res_source_file_path: String,
+	atlas: Texture2D,
 	sprite_sheet: _Common.SpriteSheetInfo,
 	animation_library: _Common.AnimationLibraryInfo,
 	options: Dictionary,
 	save_path: String
-	) -> _Common.ImportResult:
-	var result: _Common.ImportResult = _Common.ImportResult.new()
+	) -> ImportResult:
+	var result: ImportResult = ImportResult.new()
 
 	var sprite_size: Vector2i = sprite_sheet.source_image_size
 
@@ -27,7 +28,7 @@ func import(
 	match options[_Options.ANIMATION_STRATEGY]:
 
 		AnimationStrategy.SPRITE_REGION_AND_OFFSET:
-			sprite.texture = sprite_sheet.atlas
+			sprite.texture = atlas
 			sprite.region_enabled = true
 			animation_player = _create_animation_player(animation_library, {
 				".:offset": func(frame: _Common.FrameInfo) -> Vector2:
@@ -45,7 +46,7 @@ func import(
 			var atlas_texture: AtlasTexture = AtlasTexture.new()
 			atlas_texture.filter_clip = filter_clip_enabled
 			atlas_texture.resource_local_to_scene = true
-			atlas_texture.atlas = sprite_sheet.atlas
+			atlas_texture.atlas = atlas
 			atlas_texture.region = Rect2(0, 0, 1, 1)
 			atlas_texture.margin = Rect2(2, 2, 0, 0)
 			sprite.texture = atlas_texture
@@ -63,7 +64,7 @@ func import(
 			var atlas_textures: Array[AtlasTexture]
 			var empty_atlas_texture: AtlasTexture = AtlasTexture.new()
 			empty_atlas_texture.filter_clip = filter_clip_enabled
-			empty_atlas_texture.atlas = sprite_sheet.atlas
+			empty_atlas_texture.atlas = atlas
 			empty_atlas_texture.region = Rect2(0, 0, 1, 1)
 			empty_atlas_texture.margin = Rect2(2, 2, 0, 0)
 			animation_player = _create_animation_player(animation_library, {
@@ -79,7 +80,7 @@ func import(
 					if not equivalent_atlas_textures.is_empty():
 						return equivalent_atlas_textures.front()
 					var atlas_texture: AtlasTexture = AtlasTexture.new()
-					atlas_texture.atlas = sprite_sheet.atlas
+					atlas_texture.atlas = atlas
 					atlas_texture.filter_clip = filter_clip_enabled
 					atlas_texture.region = region
 					atlas_texture.margin = margin

@@ -11,15 +11,16 @@ func _init() -> void:
 
 func import(
 	res_source_file_path: String,
+	atlas: Texture2D,
 	sprite_sheet: _Common.SpriteSheetInfo,
 	animation_library: _Common.AnimationLibraryInfo,
 	options: Dictionary,
 	save_path: String
-	) -> _Common.ImportResult:
-	var result: _Common.ImportResult = _Common.ImportResult.new()
+	) -> ImportResult:
+	var result: ImportResult = ImportResult.new()
 
-	var sprite_frames_import_result: _Common.ImportResult = __sprite_frames_importer \
-		.import(res_source_file_path, sprite_sheet, animation_library, options, save_path)
+	var sprite_frames_import_result: ImportResult = __sprite_frames_importer \
+		.import(res_source_file_path, atlas, sprite_sheet, animation_library, options, save_path)
 	if sprite_frames_import_result.error:
 		return sprite_frames_import_result
 	var sprite_frames: SpriteFrames = sprite_frames_import_result.resource

@@ -10,22 +10,22 @@ enum PxoLayerType {
 func _init(editor_file_system: EditorFileSystem) -> void:
 	var recognized_extensions: PackedStringArray = ["pxo"]
 	super("Pixelorama", recognized_extensions, [
-	], editor_file_system, [
+	], [
 		# settings
 	], CustomImageFormatLoaderExtension.new(recognized_extensions))
 
-func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dictionary) -> _Common.ExportResult:
-	var result: _Common.ExportResult = _Common.ExportResult.new()
+func _export(res_source_file_path: String, options: Dictionary) -> ExportResult:
+	var result: ExportResult = ExportResult.new()
 
 	var file: FileAccess = FileAccess.open_compressed(res_source_file_path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	if file == null or file.get_open_error() == ERR_FILE_UNRECOGNIZED:
 		file = FileAccess.open(res_source_file_path, FileAccess.READ)
 	if file == null:
-		result.fail(ERR_FILE_CANT_OPEN, "Unable to open file with unknown error")
+		result.fail(ERR_FILE_CANT_OPEN, "Failed to open file with unknown error")
 		return result
 	var open_error: Error = file.get_open_error()
 	if open_error:
-		result.fail(ERR_FILE_CANT_OPEN, "Unable to open file with error: %s \"%s\"" % [open_error, error_string(open_error)])
+		result.fail(ERR_FILE_CANT_OPEN, "Failed to open file with error: %s \"%s\"" % [open_error, error_string(open_error)])
 		return result
 
 	var first_line: String = file.get_line()
@@ -83,7 +83,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 				pxo_tag.name, AnimationOptions.Direction | AnimationOptions.RepeatCount,
 				pxo_tag.from, animation_frames_count)
 			if animation_params_parsing_result.error:
-				result.fail(ERR_CANT_RESOLVE, "Unable to parse animation parameters",
+				result.fail(ERR_CANT_RESOLVE, "Failed to parse animation parameters",
 					animation_params_parsing_result)
 				return result
 			if unique_animations_names.has(animation_params_parsing_result.name):
@@ -149,24 +149,18 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 
 	var sprite_sheet_builder: _SpriteSheetBuilderBase = _create_sprite_sheet_builder(options)
 
-	var sprite_sheet_building_result: _SpriteSheetBuilderBase.Result = \
+	var sprite_sheet_building_result: _SpriteSheetBuilderBase.SpriteSheetBuildingResult = \
 		sprite_sheet_builder.build_sprite_sheet(unique_frames_images)
 	if sprite_sheet_building_result.error:
 		result.fail(ERR_BUG, "Sprite sheet building failed", sprite_sheet_building_result)
 		return result
 	var sprite_sheet: _Common.SpriteSheetInfo = sprite_sheet_building_result.sprite_sheet
-	var atlas_making_result: AtlasMaker.Result = atlas_maker \
-		.make_atlas(sprite_sheet_building_result.atlas_image)
-	if atlas_making_result.error:
-		result.fail(ERR_SCRIPT_FAILED, "Unable to make atlas texture from image", atlas_making_result)
-		return result
-	sprite_sheet.atlas = atlas_making_result.atlas
 
 	for unique_frame_index in unique_frames_count:
 		var unique_frame: _Common.FrameInfo = unique_frames[unique_frame_index]
 		unique_frame.sprite = sprite_sheet.sprites[unique_frame_index]
 
-	result.success(sprite_sheet, animation_library)
+	result.success(sprite_sheet_building_result.atlas_image, sprite_sheet, animation_library)
 	return result
 
 class CustomImageFormatLoaderExtension:
@@ -185,11 +179,11 @@ class CustomImageFormatLoaderExtension:
 		if file == null or file.get_open_error() == ERR_FILE_UNRECOGNIZED:
 			file = FileAccess.open(file_access.get_path(), FileAccess.READ)
 		if file == null:
-			push_error("Unable to open file with unknown error")
+			push_error("Failed to open file with unknown error")
 			return ERR_FILE_CANT_OPEN
 		var open_error: Error = file.get_open_error()
 		if open_error:
-			push_error("Unable to open file with error: %s \"%s\"" % [open_error, error_string(open_error)])
+			push_error("Failed to open file with error: %s \"%s\"" % [open_error, error_string(open_error)])
 			return ERR_FILE_CANT_OPEN
 
 		var first_line: String = file.get_line()

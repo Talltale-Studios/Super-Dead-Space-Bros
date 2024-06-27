@@ -35,5 +35,3 @@ func _get_x_input() -> float:
 
 func _get_direction() -> Vector2:
 	return Vector2(_get_x_input(), -1.0 if Input.is_action_just_pressed("jump") and state_machine.actor.has_jumped else 1.0)
-
-

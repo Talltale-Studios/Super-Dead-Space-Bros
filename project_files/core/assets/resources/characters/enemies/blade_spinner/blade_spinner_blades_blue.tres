@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dksodb3thguub"]
+
+[ext_resource type="Texture2D" uid="uid://d0m5i51lfokkl" path="res://core/assets/textures/characters/enemies/blade_spinner/b_spinner_blades.png" id="1_jkw1k"]
+
+[resource]
+atlas = ExtResource("1_jkw1k")
+region = Rect2(0, 80, 100, 20)

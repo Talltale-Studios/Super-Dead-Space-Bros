@@ -1,17 +1,17 @@
 [gd_scene load_steps=159 format=3 uid="uid://y4rbi5ibv6li"]
 
 [ext_resource type="Script" path="res://core/data/scripts/characters/player/player_controller.gd" id="1_vgxc6"]
-[ext_resource type="Texture2D" uid="uid://b6hgjlvycdob3" path="res://core/content/resources/characters/player/legs/legs.tres" id="2_ityqo"]
+[ext_resource type="Texture2D" uid="uid://b6hgjlvycdob3" path="res://core/assets/resources/characters/player/legs/player_legs_01_run.tres" id="2_ityqo"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/player_state_machine.gd" id="2_nbym7"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_stand_state.gd" id="3_qqj56"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_fall_state.gd" id="4_w0b5q"]
-[ext_resource type="Texture2D" path="res://core/content/resources/characters/player/weaponflash/weaponflash.tres" id="4_y15yd"]
+[ext_resource type="Texture2D" path="res://core/assets/resources/characters/player/weaponflash/weaponflash.tres" id="4_y15yd"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_jump_state.gd" id="5_dk60t"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_run_state.gd" id="6_sjclp"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_crouch_state.gd" id="7_oyvdc"]
 [ext_resource type="Script" path="res://core/data/classes/state_machines/characters/player/leg_states/leg_climb_state.gd" id="8_oihgp"]
 [ext_resource type="Script" path="res://core/data/classes/components/movement_component/player/player_movement_component.gd" id="9_0t0xf"]
-[ext_resource type="Texture2D" uid="uid://mfihf6k6xk2e" path="res://core/content/resources/characters/player/torso/aim_01.tres" id="10_yubrf"]
+[ext_resource type="Texture2D" uid="uid://mfihf6k6xk2e" path="res://core/assets/resources/characters/player/torso/player_torso_01_aim.tres" id="10_yubrf"]
 
 [sub_resource type="Animation" id="Animation_g8gem"]
 length = 0.001
@@ -4583,8 +4583,9 @@ movement_component = NodePath("GamePlayerMovementComponent")
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(6, -29, 5, -31, 3, -33, 1, -34, -1, -34, -3, -33, -5, -31, -6, -29, -6, 0, 6, 0)
 
-[node name="PlayerStateMachine" type="Node" parent="."]
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("2_nbym7")
+actor = NodePath("..")
 initial_state = NodePath("PlayerLegStandState")
 
 [node name="PlayerLegStandState" type="Node" parent="PlayerStateMachine"]
@@ -4619,7 +4620,7 @@ polygon = PackedVector2Array(6, -29, 5, -31, 3, -33, 1, -34, -1, -34, -3, -33, -
 texture_filter = 1
 position = Vector2(0, -23)
 texture = ExtResource("2_ityqo")
-hframes = 6
+hframes = 4
 
 [node name="TorsoSprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -4646,11 +4647,32 @@ libraries = {
 }
 
 [node name="LegsAnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gfha2")
-}
 tree_root = SubResource("60")
 anim_player = NodePath("../LegsAnimationPlayer")
+parameters/current_length = 0.1
+parameters/current_position = 0.0333068
+parameters/current_delta = 0.015582
+parameters/End/current_length = null
+parameters/End/current_position = null
+parameters/End/current_delta = null
+parameters/Start/current_length = 0.0
+parameters/Start/current_position = 0.0
+parameters/Start/current_delta = 0.0
+parameters/crouch/current_length = null
+parameters/crouch/current_position = null
+parameters/crouch/current_delta = null
+parameters/fall/current_length = null
+parameters/fall/current_position = null
+parameters/fall/current_delta = null
+parameters/jump/current_length = null
+parameters/jump/current_position = null
+parameters/jump/current_delta = null
+parameters/run/current_length = null
+parameters/run/current_position = null
+parameters/run/current_delta = null
+parameters/stand/current_length = 0.1
+parameters/stand/current_position = 0.0333068
+parameters/stand/current_delta = 0.015582
 
 [node name="TorsoAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -4668,11 +4690,23 @@ libraries = {
 }
 
 [node name="WeaponflashAnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_k484g")
-}
 tree_root = SubResource("140")
 anim_player = NodePath("../WeaponflashAnimationPlayer")
+parameters/current_length = 0.1
+parameters/current_position = 0.1
+parameters/current_delta = 0.0
+parameters/End/current_length = null
+parameters/End/current_position = null
+parameters/End/current_delta = null
+parameters/Start/current_length = 0.0
+parameters/Start/current_position = 0.0
+parameters/Start/current_delta = 0.0
+parameters/shoot/current_length = null
+parameters/shoot/current_position = null
+parameters/shoot/current_delta = null
+parameters/standby/current_length = 0.1
+parameters/standby/current_position = 0.1
+parameters/standby/current_delta = 0.0
 
 [node name="Timers" type="Node" parent="."]
 

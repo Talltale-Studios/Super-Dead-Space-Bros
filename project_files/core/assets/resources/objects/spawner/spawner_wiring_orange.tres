@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://doajd2ds77x7"]
+
+[ext_resource type="Texture2D" uid="uid://b5poq446ocdwe" path="res://core/assets/textures/objects/spawner/spawner_wiring.png" id="1_ho4oc"]
+
+[resource]
+atlas = ExtResource("1_ho4oc")
+region = Rect2(0, 32, 256, 32)

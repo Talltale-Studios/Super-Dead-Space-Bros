@@ -3,19 +3,19 @@ extends "standalone_image_format_loader_extension.gd"
 
 const _Common = preload("common.gd")
 
-static var command_building_rules_for_custom_image_loader_project_setting: _ProjectSetting = _ProjectSetting.new(
+static var command_building_rules_for_custom_image_loader_setting: _Setting = _Setting.new(
 	"command_building_rules_for_custom_image_loader", PackedStringArray(), TYPE_PACKED_STRING_ARRAY, PROPERTY_HINT_NONE)
 
 func _get_recognized_extensions() -> PackedStringArray:
-	var rules_by_extensions_result: _ProjectSetting.Result = command_building_rules_for_custom_image_loader_project_setting.get_value()
+	var rules_by_extensions_result: _Setting.GettingValueResult = command_building_rules_for_custom_image_loader_setting.get_value()
 	if rules_by_extensions_result.error:
-		push_error("Unable to get command building rules for custom image loader project setting")
+		push_error("Failed to get command building rules for custom image loader setting")
 		return PackedStringArray()
 	var extensions: PackedStringArray
 	for rule_string in rules_by_extensions_result.value:
 		var parsed_rule: Dictionary = _parse_rule(rule_string)
 		if parsed_rule.is_empty():
-			push_error("Unable to parse command building rule")
+			push_error("Failed to parse command building rule")
 			return PackedStringArray()
 		for extension in parsed_rule.extensions as PackedStringArray:
 			if extensions.has(extension):
@@ -24,8 +24,8 @@ func _get_recognized_extensions() -> PackedStringArray:
 			extensions.push_back(extension)
 	return extensions
 
-func get_project_settings() -> Array[_ProjectSetting]:
-	return [command_building_rules_for_custom_image_loader_project_setting]
+func get_settings() -> Array[_Setting]:
+	return [command_building_rules_for_custom_image_loader_setting]
 
 static var regex_middle_spaces: RegEx = RegEx.create_from_string("(?<=\\S)\\s(?>=\\S)")
 static func normalize_string(source: String) -> String:
@@ -34,7 +34,7 @@ static func normalize_string(source: String) -> String:
 func _parse_rule(rule_string: String) -> Dictionary:
 	var parts: PackedStringArray = rule_string.split(":", false, 1)
 	if parts.size() != 2:
-		push_error("Unable to find colon (:) delimiter in command building rule between file extensions and command template")
+		push_error("Failed to find colon (:) delimiter in command building rule between file extensions and command template")
 		return {}
 	var extensions: PackedStringArray
 	for extensions_splitted_by_spaces in normalize_string(parts[0]).split(" ", false):
@@ -58,21 +58,21 @@ func _load_image(
 	scale: float
 	) -> Error:
 
-	var temp_dir_path_result: _ProjectSetting.Result = _Common.common_temporary_files_directory_path_project_setting.get_value()
+	var temp_dir_path_result: _Setting.GettingValueResult = _Common.common_temporary_files_directory_path_setting.get_value()
 	if temp_dir_path_result.error:
-		push_error("Unable to get Temporary Files Directory Path to export image from source file: %s" % [temp_dir_path_result])
+		push_error("Failed to get Temporary Files Directory Path to export image from source file: %s" % [temp_dir_path_result])
 		return ERR_UNCONFIGURED
 
-	var rules_by_extensions_result: _ProjectSetting.Result = command_building_rules_for_custom_image_loader_project_setting.get_value()
+	var rules_by_extensions_result: _Setting.GettingValueResult = command_building_rules_for_custom_image_loader_setting.get_value()
 	if rules_by_extensions_result.error:
-		push_error("Unable to get command building rules for custom image loader project setting")
+		push_error("Failed to get command building rules for custom image loader setting")
 		return ERR_UNCONFIGURED
 
 	var command_templates_by_extensions: Dictionary
 	for rule_string in rules_by_extensions_result.value:
 		var parsed_rule: Dictionary = _parse_rule(rule_string)
 		if parsed_rule.is_empty():
-			push_error("Unable to parse command building rule")
+			push_error("Failed to parse command building rule")
 			return ERR_UNCONFIGURED
 		for extension in parsed_rule.extensions as PackedStringArray:
 			if command_templates_by_extensions.has(extension):
@@ -88,12 +88,12 @@ func _load_image(
 
 	var command_template: String = command_templates_by_extensions.get(extension, "") as String
 	if command_template.is_empty():
-		push_error("Unable to find command template for file extension: " + extension)
+		push_error("Failed to find command template for file extension: " + extension)
 		return ERR_UNCONFIGURED
 
 	var command_template_parts: PackedStringArray = _Common.split_words_with_quotes(command_template)
 	if command_template_parts.is_empty():
-		push_error("Unable to recognize command template parts for extension: %s" % [extension])
+		push_error("Failed to recognize command template parts for extension: %s" % [extension])
 		return ERR_UNCONFIGURED
 
 	for command_template_part_index in command_template_parts.size():
@@ -140,12 +140,12 @@ func _load_image(
 
 	var err: Error = image.load_png_from_buffer(FileAccess.get_file_as_bytes(global_output_path))
 	if err:
-		push_error("Unable to load temporary PNG file as image: %s" % [global_output_path])
+		push_error("Failed to load temporary PNG file as image: %s" % [global_output_path])
 		return err
 
 	err = DirAccess.remove_absolute(global_output_path)
 	if err:
-		push_warning("Unable to remove temporary file \"%s\". Continuing..." % [global_output_path])
+		push_warning("Failed to remove temporary file \"%s\". Continuing..." % [global_output_path])
 
 	return OK
 

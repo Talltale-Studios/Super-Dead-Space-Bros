@@ -7,12 +7,12 @@ func _init(editor_file_system: EditorFileSystem) -> void:
 	var recognized_extensions: PackedStringArray = ["piskel"]
 	super("Piskel", recognized_extensions, [
 		_Options.create_option(__ANIMATIONS_PARAMETERS_OPTION, PackedStringArray(),
-		PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT),
-	], editor_file_system, [
-	], CustomImageFormatLoaderExtension.new(recognized_extensions))
+		PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT)],
+		[],
+		CustomImageFormatLoaderExtension.new(recognized_extensions))
 
-func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dictionary) -> _Common.ExportResult:
-	var result: _Common.ExportResult = _Common.ExportResult.new()
+func _export(res_source_file_path: String, options: Dictionary) -> ExportResult:
+	var result: ExportResult = ExportResult.new()
 
 	var raw_animations_params_list: PackedStringArray = options[__ANIMATIONS_PARAMETERS_OPTION]
 	var animations_params_parsing_results: Array[AnimationParamsParsingResult]
@@ -28,7 +28,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 			AnimationOptions.FramesCount | AnimationOptions.Direction | AnimationOptions.RepeatCount,
 			animation_first_frame_index)
 		if animation_params_parsing_result.error:
-			result.fail(ERR_CANT_RESOLVE, "Unable to parse animation parameters", animation_params_parsing_result)
+			result.fail(ERR_CANT_RESOLVE, "Failed to parse animation parameters", animation_params_parsing_result)
 			return result
 		if unique_animations_names.has(animation_params_parsing_result.name):
 			result.fail(ERR_INVALID_DATA, "Duplicated animation name \"%s\" at index: %s" %
@@ -78,18 +78,12 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 
 	var sprite_sheet_builder: _SpriteSheetBuilderBase = _create_sprite_sheet_builder(options)
 
-	var sprite_sheet_building_result: _SpriteSheetBuilderBase.Result = \
+	var sprite_sheet_building_result: _SpriteSheetBuilderBase.SpriteSheetBuildingResult = \
 		sprite_sheet_builder.build_sprite_sheet(frames_images)
 	if sprite_sheet_building_result.error:
 		result.fail(ERR_BUG, "Sprite sheet building failed", sprite_sheet_building_result)
 		return result
 	var sprite_sheet: _Common.SpriteSheetInfo = sprite_sheet_building_result.sprite_sheet
-	var atlas_making_result: AtlasMaker.Result = atlas_maker \
-		.make_atlas(sprite_sheet_building_result.atlas_image)
-	if atlas_making_result.error:
-		result.fail(ERR_SCRIPT_FAILED, "Unable to make atlas texture from image", atlas_making_result)
-		return result
-	sprite_sheet.atlas = atlas_making_result.atlas
 
 	var animation_library: _Common.AnimationLibraryInfo = _Common.AnimationLibraryInfo.new()
 	var autoplay_animation_name: String = options[_Options.AUTOPLAY_ANIMATION_NAME].strip_edges()
@@ -122,7 +116,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	if not autoplay_animation_name.is_empty() and animation_library.autoplay_index < 0:
 		push_warning("Autoplay animation name not found: \"%s\". Continuing..." % [autoplay_animation_name])
 
-	result.success(sprite_sheet, animation_library)
+	result.success(sprite_sheet_building_result.atlas_image, sprite_sheet, animation_library)
 	return result
 
 class CustomImageFormatLoaderExtension:

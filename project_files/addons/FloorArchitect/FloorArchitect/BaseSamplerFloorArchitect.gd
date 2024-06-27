@@ -18,7 +18,7 @@ class_name BaseSamplerFloorArchitect extends BaseFloorArchitect
 @export var initial_position:Vector2i=Vector2i(-1,-1)
 @export_enum("Random","Deep","Wide") var sampling_mode:String="Random"
 
-func _plan_floor()->void:
+func plan_floor()->void:
 	sample_floor()
 	super()
 
@@ -48,7 +48,7 @@ func sample_floor()->void:
 				nextcells.push_back(pos+p)
 	pass
 
-## Virtual function for generating the maze that will be used to sample floor layouts.
+## "Virtual" function for generating the maze that will be used to sample floor layouts.
 ## Should be implemented in derived classes.
 func _generate_maze()->void:
 	pass

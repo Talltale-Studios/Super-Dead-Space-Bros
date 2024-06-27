@@ -3,23 +3,23 @@ extends "_.gd"
 
 const _XML = preload("../xml.gd")
 
-var __os_command_project_setting: _ProjectSetting = _ProjectSetting.new(
+var __os_command_setting: _Setting = _Setting.new(
 	"krita_command", "", TYPE_STRING, PROPERTY_HINT_NONE,
 	"", true, func(v: String): return v.is_empty())
 
-var __os_command_arguments_project_setting: _ProjectSetting = _ProjectSetting.new(
+var __os_command_arguments_setting: _Setting = _Setting.new(
 	"krita_command_arguments", PackedStringArray(), TYPE_PACKED_STRING_ARRAY, PROPERTY_HINT_NONE,
 	"", true, func(v: PackedStringArray): return false)
 
 func _init(editor_file_system: EditorFileSystem) -> void:
 	var recognized_extensions: PackedStringArray = ["kra", "krita"]
-	super("Krita", recognized_extensions, [], editor_file_system, [
-		__os_command_project_setting,
-		__os_command_arguments_project_setting,
+	super("Krita", recognized_extensions, [], [
+		__os_command_setting,
+		__os_command_arguments_setting,
 	], CustomImageFormatLoaderExtension.new(recognized_extensions))
 
-func __validate_image_name(image_name: String) -> _Common.Result:
-	var result: _Common.Result = _Common.Result.new()
+func __validate_image_name(image_name: String) -> _Result:
+	var result: _Result = _Result.new()
 	var image_name_with_underscored_invalid_characters: String = image_name.validate_filename()
 	var unsupported_characters: PackedStringArray
 	for character_index in image_name.length():
@@ -33,32 +33,39 @@ func __validate_image_name(image_name: String) -> _Common.Result:
 		result.fail(ERR_FILE_BAD_PATH, "There are unsupported characters in Krita Document Title: \"%s\"" % ["".join(unsupported_characters)])
 	return result
 
-func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dictionary) -> _Common.ExportResult:
-	var result: _Common.ExportResult = _Common.ExportResult.new()
+func _export(res_source_file_path: String, options: Dictionary) -> ExportResult:
+	var result: ExportResult = ExportResult.new()
 	var err: Error
 
-	var os_command_result: _ProjectSetting.Result = __os_command_project_setting.get_value()
+	var os_command_result: _Setting.GettingValueResult = __os_command_setting.get_value()
 	if os_command_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Krita Command to export spritesheet", os_command_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Krita Command to export spritesheet", os_command_result)
 		return result
 
-	var os_command_arguments_result: _ProjectSetting.Result = __os_command_arguments_project_setting.get_value()
+	var os_command_arguments_result: _Setting.GettingValueResult = __os_command_arguments_setting.get_value()
 	if os_command_arguments_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Krita Command Arguments to export spritesheet", os_command_arguments_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Krita Command Arguments to export spritesheet", os_command_arguments_result)
 		return result
 
-	var temp_dir_path_result: _ProjectSetting.Result = _Common.common_temporary_files_directory_path_project_setting.get_value()
+	var temp_dir_path_result: _Setting.GettingValueResult = _Common.common_temporary_files_directory_path_setting.get_value()
 	if temp_dir_path_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Temporary Files Directory Path to export spritesheet", temp_dir_path_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Temporary Files Directory Path to export spritesheet", temp_dir_path_result)
 		return result
-	var global_temp_dir_path: String = ProjectSettings.globalize_path(temp_dir_path_result.value.strip_edges())
+	var global_temp_dir_path: String = ProjectSettings.globalize_path(
+		temp_dir_path_result.value.strip_edges())
+	var unique_temp_dir_creation_result: _DirAccessExtensions.CreationResult = \
+		_DirAccessExtensions.create_directory_with_unique_name(global_temp_dir_path)
+	if unique_temp_dir_creation_result.error:
+		result.fail(ERR_QUERY_FAILED, "Failed to create unique temporary directory to export spritesheet", unique_temp_dir_creation_result)
+		return result
+	var unique_temp_dir_path: String = unique_temp_dir_creation_result.path
 
 	var global_source_file_path: String = ProjectSettings.globalize_path(res_source_file_path)
 
 	var zip_reader: ZIPReader = ZIPReader.new()
 	var zip_error: Error = zip_reader.open(global_source_file_path)
 	if zip_error:
-		result.fail(zip_error, "Unable to open Krita file \"%s\" as ZIP archive with error: %s (%s)" % [res_source_file_path, zip_error, error_string(zip_error)])
+		result.fail(zip_error, "Failed to open Krita file \"%s\" as ZIP archive with error: %s (%s)" % [res_source_file_path, zip_error, error_string(zip_error)])
 		return result
 
 	var files_names_in_zip: PackedStringArray = zip_reader.get_files()
@@ -71,7 +78,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	var image_xml_element: _XML.XMLNodeElement = maindoc_doc_xml_element.get_elements("IMAGE").front()
 	var image_name: String = image_xml_element.get_string("name")
 	var image_size: Vector2i = image_xml_element.get_vector2i("width", "height")
-	var image_name_validation_result: _Common.Result = __validate_image_name(image_name)
+	var image_name_validation_result: _Result = __validate_image_name(image_name)
 	if image_name_validation_result.error:
 		result.fail(ERR_INVALID_DATA,
 			"Krita Document Title have unsupported format",
@@ -104,8 +111,10 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	var total_animations_frames_count: int
 	var first_animations_frame_index: int = -1
 	var last_animations_frame_index: int = -1
-	var png_base_name: String = "img"
 	var global_temp_kra_path: String
+	var temp_file_base_name: String = "img"
+	var temp_kra_file_name: String = temp_file_base_name + ".kra"
+	var temp_png_file_name_pattern: String = temp_file_base_name + ".png"
 
 	var storyboard_index_file_name: String = "%s/storyboard/index.xml" % image_name
 	if storyboard_index_file_name in files_names_in_zip:
@@ -125,7 +134,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 				story_xml_element.get_int("duration-frame") + \
 				animation_framerate * story_xml_element.get_int("duration-second"))
 			if animation_params_parsing_result.error:
-				result.fail(ERR_CANT_RESOLVE, "Unable to parse animation parameters",
+				result.fail(ERR_CANT_RESOLVE, "Failed to parse animation parameters",
 					animation_params_parsing_result)
 				return result
 			if unique_animations_names.has(animation_params_parsing_result.name):
@@ -144,9 +153,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 		animation_range_xml_element.attributes["from"] = str(first_animations_frame_index)
 		animation_range_xml_element.attributes["to"] = str(last_animations_frame_index)
 
-		var temp_kra_base_name: String = "img"
-		var temp_kra_file_name: String = temp_kra_base_name + ".kra"
-		global_temp_kra_path = temp_dir_path_result.value.path_join(temp_kra_file_name)
+		global_temp_kra_path = unique_temp_dir_path.path_join(temp_kra_file_name)
 
 		animation_index_animation_metadata_range_xml_element.attributes["from"] = str(first_animations_frame_index)
 		animation_index_animation_metadata_range_xml_element.attributes["to"] = str(last_animations_frame_index)
@@ -180,20 +187,14 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 
 	zip_reader.close()
 
-	if not DirAccess.dir_exists_absolute(global_temp_dir_path):
-		err = DirAccess.make_dir_recursive_absolute(global_temp_dir_path)
-		if err:
-			result.fail(ERR_QUERY_FAILED, "Unable to create directory temporary files \"%s\" with error %s \"%s\"" %
-				[global_temp_dir_path, err, error_string(err)])
-			return result
-	var global_temp_png_path: String = global_temp_dir_path.path_join("temp.png")
+	var global_temp_png_path_pattern: String = unique_temp_dir_path.path_join(temp_png_file_name_pattern)
 
 	var command: String = os_command_result.value.strip_edges()
 	var arguments: PackedStringArray = \
 		os_command_arguments_result.value + \
 		PackedStringArray([
 			"--export-sequence",
-			"--export-filename", global_temp_png_path,
+			"--export-filename", global_temp_png_path_pattern,
 			global_temp_kra_path])
 
 	var output: Array
@@ -207,36 +208,24 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 			]) % [exit_code, command, "".join(arguments)])
 		return result
 
-	if global_temp_kra_path != global_source_file_path:
-		DirAccess.remove_absolute(global_temp_kra_path)
-		pass
-
 	var unique_frames_count: int = last_animations_frame_index + 1 # - first_stories_frame
 	var frames_images: Array[Image]
 	for image_idx in unique_frames_count:
-		var global_frame_png_path: String = temp_dir_path_result.value \
-			.path_join("%s%04d.png" % [png_base_name, image_idx])
+		var global_frame_png_path: String = unique_temp_dir_path \
+			.path_join("%s%04d.png" % [temp_file_base_name, image_idx])
 		if FileAccess.file_exists(global_frame_png_path):
 			var image: Image = Image.load_from_file(global_frame_png_path)
 			frames_images.push_back(image)
 		else:
 			frames_images.push_back(frames_images.back())
-		DirAccess.remove_absolute(global_frame_png_path)
 
 	var sprite_sheet_builder: _SpriteSheetBuilderBase = _create_sprite_sheet_builder(options)
 
-	var sprite_sheet_building_result: _SpriteSheetBuilderBase.Result = sprite_sheet_builder.build_sprite_sheet(frames_images)
+	var sprite_sheet_building_result: _SpriteSheetBuilderBase.SpriteSheetBuildingResult = sprite_sheet_builder.build_sprite_sheet(frames_images)
 	if sprite_sheet_building_result.error:
 		result.fail(ERR_BUG, "Sprite sheet building failed", sprite_sheet_building_result)
 		return result
 	var sprite_sheet: _Common.SpriteSheetInfo = sprite_sheet_building_result.sprite_sheet
-
-	var atlas_making_result: AtlasMaker.Result = atlas_maker \
-		.make_atlas(sprite_sheet_building_result.atlas_image)
-	if atlas_making_result.error:
-		result.fail(ERR_SCRIPT_FAILED, "Unable to make atlas texture from image", atlas_making_result)
-		return result
-	sprite_sheet.atlas = atlas_making_result.atlas
 
 	var animation_library: _Common.AnimationLibraryInfo = _Common.AnimationLibraryInfo.new()
 	var autoplay_animation_name: String = options[_Options.AUTOPLAY_ANIMATION_NAME].strip_edges()
@@ -270,7 +259,12 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	if not autoplay_animation_name.is_empty() and animation_library.autoplay_index < 0:
 		push_warning("Autoplay animation name not found: \"%s\". Continuing..." % [autoplay_animation_name])
 
-	result.success(sprite_sheet, animation_library)
+	if _DirAccessExtensions.remove_dir_recursive(unique_temp_dir_path).error:
+		push_warning(
+			"Failed to remove unique temporary directory: \"%s\"" %
+			[unique_temp_dir_path])
+
+	result.success(sprite_sheet_building_result.atlas_image, sprite_sheet, animation_library)
 	return result
 
 class CustomImageFormatLoaderExtension:

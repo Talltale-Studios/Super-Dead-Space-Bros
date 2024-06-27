@@ -56,29 +56,32 @@ func import_from_path(folderpath : String, insert_func : Callable, sort_by : Str
 	var rows := []
 	var dir := DirAccess.open(folderpath)
 	if dir == null: return []
-	dir.list_dir_begin()
 
-	editor_view.remembered_paths.clear()
-	var cur_dir_script : Script = null
+	var file_stack : Array[String] = []
+	var folder_stack : Array[String] = [folderpath]
 
-	var filepath = dir.get_next()
-	var res : Resource
+	while folder_stack.size() > 0:
+		folderpath = folder_stack.pop_back()
 
-	while filepath != "":
+		for x in DirAccess.get_files_at(folderpath):
+			file_stack.append(folderpath.path_join(x))
+
+		for x in DirAccess.get_directories_at(folderpath):
+			folder_stack.append(folderpath.path_join(x))
+
+	var loaded_res : Array[Resource] = []
+	var res : Resource = null
+	var cur_dir_types : Dictionary = {}
+	loaded_res.resize(file_stack.size())
+	for i in file_stack.size():
 		res = null
-		filepath = folderpath + filepath
-		if filepath.ends_with(".tres"):
-			res = load(filepath)
-			if !is_instance_valid(cur_dir_script):
-				editor_view.fill_property_data(res)
-				cur_dir_script = res.get_script()
-				if !(sort_by in res):
-					sort_by = "resource_path"
+		if file_stack[i].ends_with(".tres"):
+			res = load(file_stack[i])
+			loaded_res[i] = res
 
-			if res.get_script() == cur_dir_script:
-				insert_func.call(res, rows, sort_by, sort_reverse)
-		
-		editor_view.remembered_paths[filepath] = res
-		filepath = dir.get_next()
+	editor_view.fill_property_data_many(loaded_res)
+	for x in loaded_res:
+		if x == null: continue
+		insert_func.call(x, rows, sort_by, sort_reverse)
 
 	return rows

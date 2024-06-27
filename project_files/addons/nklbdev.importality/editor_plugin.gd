@@ -2,6 +2,8 @@
 extends EditorPlugin
 
 const ExporterBase = preload("export/_.gd")
+const _AtlasMaker = preload("atlas_maker.gd")
+
 const EXPORTERS_SCRIPTS: Array[GDScript] = [
 	preload("export/aseprite.gd"),
 	preload("export/krita.gd"),
@@ -32,12 +34,15 @@ var __editor_import_plugins: Array[EditorImportPlugin]
 var __image_format_loader_extensions: Array[ImageFormatLoaderExtension]
 
 func _enter_tree() -> void:
-	var editor_file_system: EditorFileSystem = get_editor_interface().get_resource_filesystem()
+	var editor_interface: EditorInterface = get_editor_interface()
+	var editor_file_system: EditorFileSystem = editor_interface.get_resource_filesystem()
+	var editor_settings: EditorSettings = editor_interface.get_editor_settings()
+
 	var exporters: Array[ExporterBase]
 	for Exporter in EXPORTERS_SCRIPTS:
 		var exporter: ExporterBase = Exporter.new(editor_file_system)
-		for setting in exporter.get_project_settings():
-			setting.register()
+		for setting in exporter.get_settings():
+			setting.register(editor_settings)
 		exporters.push_back(exporter)
 		var image_format_loader_extension: ImageFormatLoaderExtension = \
 			exporter.get_image_format_loader_extension()
@@ -47,17 +52,18 @@ func _enter_tree() -> void:
 	var importers: Array[ImporterBase]
 	for Importer in IMPORTERS_SCRIPTS:
 		importers.push_back(Importer.new())
+	var atlas_maker: _AtlasMaker = _AtlasMaker.new(editor_file_system)
 	for exporter in exporters:
 		for importer in importers:
 			var editor_import_plugin: EditorImportPlugin = \
-				CombinedEditorImportPlugin.new(exporter, importer)
+				CombinedEditorImportPlugin.new(exporter, importer, atlas_maker, editor_file_system)
 			__editor_import_plugins.push_back(editor_import_plugin)
 			add_import_plugin(editor_import_plugin)
 	for Extension in STANDALONE_IMAGE_FORMAT_LOADER_EXTENSIONS:
 		var image_format_loader_extension: StandaloneImageFormatLoaderExtension = \
 			Extension.new() as StandaloneImageFormatLoaderExtension
-		for setting in image_format_loader_extension.get_project_settings():
-			setting.register()
+		for setting in image_format_loader_extension.get_settings():
+			setting.register(editor_settings)
 		__image_format_loader_extensions.push_back(image_format_loader_extension)
 		image_format_loader_extension.add_format_loader()
 

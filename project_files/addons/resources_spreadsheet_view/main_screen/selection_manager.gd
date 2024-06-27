@@ -14,7 +14,7 @@ const EditorViewClass = preload("res://addons/resources_spreadsheet_view/editor_
 @onready var editor_view : EditorViewClass = get_parent()
 
 var edited_cells : Array = []
-var edited_cells_text : Array[String] = []
+var edited_cells_text : Array = []
 var edit_cursor_positions : Array[int] = []
 
 var all_cell_editors : Array = []
@@ -121,9 +121,9 @@ func select_cell(cell : Control):
 
 
 func select_cells(cells : Array):
-	var last_selectible = null
+	var last_selectible : Control = null
 	for x in cells:
-		if can_select_cell(x):
+		if x.mouse_filter != MOUSE_FILTER_IGNORE and can_select_cell(x):
 			_add_cell_to_selection(x)
 			last_selectible = x
 
@@ -133,7 +133,7 @@ func select_cells(cells : Array):
 
 func select_cells_to(cell : Control):
 	var column_index := get_cell_column(cell)
-	if column_index != get_cell_column(edited_cells[edited_cells.size() - 1]):
+	if edited_cells.size() == 0 or column_index != get_cell_column(edited_cells[edited_cells.size() - 1]):
 		return
 	
 	var row_start := get_cell_row(edited_cells[edited_cells.size() - 1]) - editor_view.first_row
@@ -144,8 +144,9 @@ func select_cells_to(cell : Control):
 
 	for i in range(row_start, row_end, edge_shift):
 		var cur_cell : Control = editor_view.node_table_root.get_child(i * editor_view.columns.size() + column_index)
-		if !cur_cell.visible:
+		if !cur_cell.visible or cur_cell.mouse_filter == MOUSE_FILTER_IGNORE:
 			# When search is active, some cells will be hidden.
+			# When showing several classes, empty cells will be non-selectable.
 			continue
 
 		column_editors[column_index].set_selected(cur_cell, true)
@@ -175,11 +176,11 @@ func can_select_cell(cell : Control) -> bool:
 	return !cell in edited_cells
 
 
-func get_cell_column(cell) -> int:
+func get_cell_column(cell : Control) -> int:
 	return cell.get_index() % editor_view.columns.size()
 
 
-func get_cell_row(cell) -> int:
+func get_cell_row(cell : Control) -> int:
 	return cell.get_index() / editor_view.columns.size() + editor_view.first_row
 
 
@@ -209,9 +210,10 @@ func _add_cell_to_selection(cell : Control):
 func _update_selected_cells_text():
 	if edited_cells_text.size() == 0:
 		return
-		
+
+	var column_dtype : int = editor_view.column_types[get_cell_column(edited_cells[0])]
 	for i in edited_cells.size():
-		edited_cells_text[i] = str(edited_cells[i].text)
+		edited_cells_text[i] = editor_view.try_convert(edited_cells[i].text, column_dtype)
 		edit_cursor_positions[i] = edited_cells_text[i].length()
 
 
@@ -245,5 +247,5 @@ func _on_inspector_property_edited(property : String):
 	values.resize(edited_cells.size())
 	values.fill(inspector_resource[property])
 
-	editor_view.call_deferred(&"set_edited_cells_values", values)
+	editor_view.set_edited_cells_values.call_deferred(values)
 	_try_open_docks(edited_cells[0])

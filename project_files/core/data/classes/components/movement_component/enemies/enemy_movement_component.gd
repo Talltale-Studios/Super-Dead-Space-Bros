@@ -1,4 +1,2 @@
 class_name GameEnemyMovementComponent
 extends GameMovementComponent
-
-

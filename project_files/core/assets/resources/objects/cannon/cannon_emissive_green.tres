@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bu7fhls2itdqy"]
+
+[ext_resource type="Texture2D" uid="uid://bydclth6fm4mm" path="res://core/assets/textures/objects/cannon/cannon_emissive.png" id="1_kcb2h"]
+
+[resource]
+atlas = ExtResource("1_kcb2h")
+region = Rect2(0, 0, 128, 32)

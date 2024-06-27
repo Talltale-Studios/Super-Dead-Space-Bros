@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxdotp6lv2mlp"]
 
 [ext_resource type="Script" path="res://core/data/scripts/projectiles/character_projectiles/player_projectiles/player_test_bullet.gd" id="1_qsv7k"]
-[ext_resource type="Texture2D" path="res://core/content/resources/effects/player_test_bullet.tres" id="2_xjxpu"]
+[ext_resource type="Texture2D" path="res://core/assets/resources/effects/player_test_bullet.tres" id="2_xjxpu"]
 
 [sub_resource type="Animation" id="2"]
 length = 0.001

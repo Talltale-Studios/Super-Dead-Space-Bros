@@ -18,16 +18,17 @@ resources_spreadsheet_view/clip_headers=false
 resources_spreadsheet_view/dupe_arrays=true
 resources_spreadsheet_view/context_menu_on_leftclick=false
 instance_dock/scenes=[]
+diagnostic_list/auto_refresh=true
 
 [application]
 
 config/name="Super Dead Space Mercs"
 config/description="Test"
 run/main_scene="res://core/data/scenes/worlds/test_world/test_scene.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.3")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="res://core/content/icons/default_icon.png"
+config/icon="res://core/assets/icons/default_icon.png"
 
 [autoload]
 
@@ -50,7 +51,7 @@ project/assembly_name="Super Dead Space Mercs"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg", "res://addons/diagnosticlist/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/godot_gameplay_systems/plugin.cfg", "res://addons/godot_style/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/nv.file_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/BurstParticles2D/plugin.cfg", "res://addons/InstanceDock/plugin.cfg", "res://addons/QuickPluginManager/plugin.cfg", "res://addons/diagnosticlist/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/godot_gameplay_systems/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/nv.file_system/plugin.cfg", "res://addons/super_spector/plugin.cfg")
 
 [filesystem]
 
@@ -65,22 +66,22 @@ common/drop_mouse_on_gui_input_disabled=true
 
 left={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":97,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
 ]
 }
 right={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":100,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
 ]
 }
 up={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":119,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
 ]
 }
 down={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":115,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
 ]
 }
 shoot={
@@ -90,7 +91,7 @@ shoot={
 }
 jump={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":32,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
 

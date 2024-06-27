@@ -3,11 +3,11 @@ extends "_.gd"
 
 const _XML = preload("../xml.gd")
 
-var __os_command_project_setting: _ProjectSetting = _ProjectSetting.new(
+var __os_command_setting: _Setting = _Setting.new(
 	"pencil2d_command", "", TYPE_STRING, PROPERTY_HINT_NONE,
 	"", true, func(v: String): return v.is_empty())
 
-var __os_command_arguments_project_setting: _ProjectSetting = _ProjectSetting.new(
+var __os_command_arguments_setting: _Setting = _Setting.new(
 	"pencil2d_command_arguments", PackedStringArray(), TYPE_PACKED_STRING_ARRAY, PROPERTY_HINT_NONE,
 	"", true, func(v: PackedStringArray): return false)
 
@@ -17,40 +17,47 @@ func _init(editor_file_system: EditorFileSystem) -> void:
 	var recognized_extensions: PackedStringArray = ["pclx"]
 	super("Pencil2D", recognized_extensions, [
 		_Options.create_option(__ANIMATIONS_PARAMETERS_OPTION, PackedStringArray(),
-		PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT),
-	], editor_file_system,
-	[ __os_command_project_setting, __os_command_arguments_project_setting ],
+		PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT)],
+	[ __os_command_setting, __os_command_arguments_setting ],
 	CustomImageFormatLoaderExtension.new(
 		recognized_extensions,
-		__os_command_project_setting,
-		__os_command_arguments_project_setting,
-		_Common.common_temporary_files_directory_path_project_setting))
+		__os_command_setting,
+		__os_command_arguments_setting,
+		_Common.common_temporary_files_directory_path_setting))
 
-func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dictionary) -> _Common.ExportResult:
-	var result: _Common.ExportResult = _Common.ExportResult.new()
+func _export(res_source_file_path: String, options: Dictionary) -> ExportResult:
+	var result: ExportResult = ExportResult.new()
 	var err: Error
 
-	var os_command_result: _ProjectSetting.Result = __os_command_project_setting.get_value()
+	var os_command_result: _Setting.GettingValueResult = __os_command_setting.get_value()
 	if os_command_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Pencil2D Command to export spritesheet", os_command_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Pencil2D Command to export spritesheet", os_command_result)
 		return result
 
-	var os_command_arguments_result: _ProjectSetting.Result = __os_command_arguments_project_setting.get_value()
+	var os_command_arguments_result: _Setting.GettingValueResult = __os_command_arguments_setting.get_value()
 	if os_command_arguments_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Pencil2D Command Arguments to export spritesheet", os_command_arguments_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Pencil2D Command Arguments to export spritesheet", os_command_arguments_result)
 		return result
 
-	var temp_dir_path_result: _ProjectSetting.Result = _Common.common_temporary_files_directory_path_project_setting.get_value()
+	var temp_dir_path_result: _Setting.GettingValueResult = _Common.common_temporary_files_directory_path_setting.get_value()
 	if temp_dir_path_result.error:
-		result.fail(ERR_UNCONFIGURED, "Unable to get Temporary Files Directory Path to export spritesheet", temp_dir_path_result)
+		result.fail(ERR_UNCONFIGURED, "Failed to get Temporary Files Directory Path to export spritesheet", temp_dir_path_result)
 		return result
+	var global_temp_dir_path: String = ProjectSettings.globalize_path(
+		temp_dir_path_result.value.strip_edges())
+	var unique_temp_dir_creation_result: _DirAccessExtensions.CreationResult = \
+		_DirAccessExtensions.create_directory_with_unique_name(global_temp_dir_path)
+	if unique_temp_dir_creation_result.error:
+		result.fail(ERR_QUERY_FAILED, "Failed to create unique temporary directory to export spritesheet", unique_temp_dir_creation_result)
+		return result
+	var unique_temp_dir_path: String = unique_temp_dir_creation_result.path
 
 	var global_source_file_path: String = ProjectSettings.globalize_path(res_source_file_path)
 
 	var zip_reader: ZIPReader = ZIPReader.new()
 	var zip_error: Error = zip_reader.open(global_source_file_path)
 	if zip_error:
-		result.fail(zip_error, "Unable to open Pencil2D file \"%s\" as ZIP archive with error: %s (%s)" % [res_source_file_path, zip_error, error_string(zip_error)])
+		result.fail(zip_error, "Failed to open Pencil2D file \"%s\" as ZIP archive with error: %s (%s)" % [res_source_file_path, zip_error, error_string(zip_error)])
 		return result
 	var buffer: PackedByteArray = zip_reader.read_file("main.xml")
 	var main_xml_root: _XML.XMLNodeRoot = _XML.parse_buffer(buffer)
@@ -75,7 +82,7 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 			AnimationOptions.FramesCount | AnimationOptions.Direction | AnimationOptions.RepeatCount,
 			animation_first_frame_index)
 		if animation_params_parsing_result.error:
-			result.fail(ERR_CANT_RESOLVE, "Unable to parse animation parameters", animation_params_parsing_result)
+			result.fail(ERR_CANT_RESOLVE, "Failed to parse animation parameters", animation_params_parsing_result)
 			return result
 		if unique_animations_names.has(animation_params_parsing_result.name):
 			result.fail(ERR_INVALID_DATA, "Duplicated animation name \"%s\" at index: %s" %
@@ -94,14 +101,8 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	# --end <frame> The last frame you want to include in the exported movie. Can also be last or last-sound to automatically use the last frame containing animation or sound respectively
 	# --transparency Render transparency when possible
 	# input Path to input pencil file
-	var global_temp_dir_path: String = ProjectSettings.globalize_path(temp_dir_path_result.value.strip_edges())
-	if not DirAccess.dir_exists_absolute(global_temp_dir_path):
-		err = DirAccess.make_dir_recursive_absolute(global_temp_dir_path)
-		if err:
-			result.fail(ERR_UNCONFIGURED, "Unable to create directory for temporary files \"%s\" with error %s \"%s\"" %
-				[global_temp_dir_path, err, error_string(err)])
 	var png_base_name: String = "temp"
-	var global_temp_png_path: String = temp_dir_path_result.value.path_join("%s.png" % png_base_name)
+	var global_temp_png_path: String = unique_temp_dir_path.path_join("%s.png" % png_base_name)
 
 	var command: String = os_command_result.value.strip_edges()
 	var arguments: PackedStringArray = \
@@ -126,26 +127,17 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 
 	var frames_images: Array[Image]
 	for image_idx in unique_frames_count:
-		var global_frame_png_path: String = temp_dir_path_result.value \
+		var global_frame_png_path: String = unique_temp_dir_path \
 			.path_join("%s%04d.png" % [png_base_name, image_idx + 1])
 		frames_images.push_back(Image.load_from_file(global_frame_png_path))
-		var remove_frame_file_error: Error = DirAccess.remove_absolute(global_frame_png_path)
-		if remove_frame_file_error: push_error("Unable to remove temp file: \"%s\" with error: %s %s, continuing..." %
-			[global_frame_png_path, remove_frame_file_error, error_string(remove_frame_file_error)])
 
 	var sprite_sheet_builder: _SpriteSheetBuilderBase = _create_sprite_sheet_builder(options)
 
-	var sprite_sheet_building_result: _SpriteSheetBuilderBase.Result = sprite_sheet_builder.build_sprite_sheet(frames_images)
+	var sprite_sheet_building_result: _SpriteSheetBuilderBase.SpriteSheetBuildingResult = sprite_sheet_builder.build_sprite_sheet(frames_images)
 	if sprite_sheet_building_result.error:
 		result.fail(ERR_BUG, "Sprite sheet building failed", sprite_sheet_building_result)
 		return result
 	var sprite_sheet: _Common.SpriteSheetInfo = sprite_sheet_building_result.sprite_sheet
-	var atlas_making_result: AtlasMaker.Result = atlas_maker \
-		.make_atlas(sprite_sheet_building_result.atlas_image)
-	if atlas_making_result.error:
-		result.fail(ERR_SCRIPT_FAILED, "Unable to make atlas texture from image", atlas_making_result)
-		return result
-	sprite_sheet.atlas = atlas_making_result.atlas
 
 	var animation_library: _Common.AnimationLibraryInfo = _Common.AnimationLibraryInfo.new()
 	var autoplay_animation_name: String = options[_Options.AUTOPLAY_ANIMATION_NAME].strip_edges()
@@ -178,26 +170,31 @@ func _export(res_source_file_path: String, atlas_maker: AtlasMaker, options: Dic
 	if not autoplay_animation_name.is_empty() and animation_library.autoplay_index < 0:
 		push_warning("Autoplay animation name not found: \"%s\". Continuing..." % [autoplay_animation_name])
 
-	result.success(sprite_sheet, animation_library)
+	if _DirAccessExtensions.remove_dir_recursive(unique_temp_dir_path).error:
+		push_warning(
+			"Failed to remove unique temporary directory: \"%s\"" %
+			[unique_temp_dir_path])
+
+	result.success(sprite_sheet_building_result.atlas_image, sprite_sheet, animation_library)
 	return result
 
 class CustomImageFormatLoaderExtension:
 	extends ImageFormatLoaderExtension
 
 	var __recognized_extensions: PackedStringArray
-	var __os_command_project_setting: _ProjectSetting
-	var __os_command_arguments_project_setting: _ProjectSetting
-	var __common_temporary_files_directory_path_project_setting: _ProjectSetting
+	var __os_command_setting: _Setting
+	var __os_command_arguments_setting: _Setting
+	var __common_temporary_files_directory_path_setting: _Setting
 
 	func _init(recognized_extensions: PackedStringArray,
-		os_command_project_setting: _ProjectSetting,
-		os_command_arguments_project_setting: _ProjectSetting,
-		common_temporary_files_directory_path: _ProjectSetting,
+		os_command_setting: _Setting,
+		os_command_arguments_setting: _Setting,
+		common_temporary_files_directory_path: _Setting,
 		) -> void:
 		__recognized_extensions = recognized_extensions
-		__os_command_project_setting = os_command_project_setting
-		__os_command_arguments_project_setting = os_command_arguments_project_setting
-		__common_temporary_files_directory_path_project_setting = common_temporary_files_directory_path
+		__os_command_setting = os_command_setting
+		__os_command_arguments_setting = os_command_arguments_setting
+		__common_temporary_files_directory_path_setting = common_temporary_files_directory_path
 
 	func _get_recognized_extensions() -> PackedStringArray:
 		return __recognized_extensions
@@ -205,31 +202,33 @@ class CustomImageFormatLoaderExtension:
 	func _load_image(image: Image, file_access: FileAccess, flags: int, scale: float) -> Error:
 		var err: Error
 
-		var os_command_result: _ProjectSetting.Result = __os_command_project_setting.get_value()
+		var os_command_result: _Setting.GettingValueResult = __os_command_setting.get_value()
 		if os_command_result.error:
 			push_error(os_command_result.error_description)
 			return os_command_result.error
 
-		var os_command_arguments_result: _ProjectSetting.Result = __os_command_arguments_project_setting.get_value()
+		var os_command_arguments_result: _Setting.GettingValueResult = __os_command_arguments_setting.get_value()
 		if os_command_arguments_result.error:
 			push_error(os_command_arguments_result.error_description)
 			return os_command_arguments_result.error
 
-		var temp_dir_path_result: _ProjectSetting.Result = __common_temporary_files_directory_path_project_setting.get_value()
+		var temp_dir_path_result: _Setting.GettingValueResult = _Common.common_temporary_files_directory_path_setting.get_value()
 		if temp_dir_path_result.error:
-			push_error(temp_dir_path_result.error_description)
+			push_error("Failed to get Temporary Files Directory Path to export spritesheet")
 			return temp_dir_path_result.error
+		var global_temp_dir_path: String = ProjectSettings.globalize_path(
+			temp_dir_path_result.value.strip_edges())
+		var unique_temp_dir_creation_result: _DirAccessExtensions.CreationResult = \
+			_DirAccessExtensions.create_directory_with_unique_name(global_temp_dir_path)
+		if unique_temp_dir_creation_result.error:
+			push_error("Failed to create unique temporary directory to export spritesheet")
+			return unique_temp_dir_creation_result.error
+		var unique_temp_dir_path: String = unique_temp_dir_creation_result.path
 
 		var global_source_file_path: String = ProjectSettings.globalize_path(file_access.get_path())
-		var global_temp_dir_path: String = ProjectSettings.globalize_path(temp_dir_path_result.value.strip_edges())
-		if not DirAccess.dir_exists_absolute(global_temp_dir_path):
-			err = DirAccess.make_dir_recursive_absolute(global_temp_dir_path)
-			if err:
-				push_error("Unable to create directory for temporary files \"%s\" with error %s \"%s\"" %
-					[global_temp_dir_path, err, error_string(err)])
-				return ERR_QUERY_FAILED
-		var png_base_name: String = "img"
-		var global_temp_png_path: String = temp_dir_path_result.value.path_join("%s.png" % png_base_name)
+
+		const png_base_name: String = "img"
+		var global_temp_png_path: String = unique_temp_dir_path.path_join("%s.png" % png_base_name)
 
 		var command: String = os_command_result.value.strip_edges()
 		var arguments: PackedStringArray = \
@@ -252,11 +251,17 @@ class CustomImageFormatLoaderExtension:
 				]) % [exit_code, command, "".join(arguments)])
 			return ERR_QUERY_FAILED
 
-		var global_frame_png_path: String = temp_dir_path_result.value \
+		var global_frame_png_path: String = unique_temp_dir_path \
 			.path_join("%s0001.png" % [png_base_name])
 		err = image.load_png_from_buffer(FileAccess.get_file_as_bytes(global_frame_png_path))
 		if err:
 			push_error("An error occurred while image loading")
 			return err
+
+		if _DirAccessExtensions.remove_dir_recursive(unique_temp_dir_path).error:
+			push_warning(
+				"Failed to remove unique temporary directory: \"%s\"" %
+				[unique_temp_dir_path])
+
 		return OK
 
